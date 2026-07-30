@@ -1,6 +1,3 @@
-Perfetto! Eccolo:
-
-yaml
 backend:
   name: github
   repo: carughimichele/ilComasco
