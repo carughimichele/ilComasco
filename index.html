@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ilComasco — Portale dei tifosi del Calcio Como 1907</title>
+<meta name="description" content="ilComasco: il portale indipendente dei tifosi Lariani. Notizie, calciomercato, calendario, classifica e rosa. Sito non ufficiale.">
+<meta name="theme-color" content="#062f63">
+<meta property="og:title" content="ilComasco — Portale dei tifosi Lariani">
+<meta property="og:description" content="Il punto di riferimento indipendente per i tifosi azzurri.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --azzurro:#0a4da2;--azzurro-chiaro:#2e86ff;--azzurro-scuro:#062f63;
+    --lago:#12b5c9;--live:#e03131;--ok:#2f9e44;
+    --bg:#eef4fc;--bg2:#ffffff;--card:#ffffff;--ink:#0b1220;--ink-soft:#5b6b82;
+    --border:#e4edfa;--nav:rgba(6,47,99,.96);--footer:#0b1220;
+    --shadow:0 18px 45px rgba(6,47,99,.14);--radius:18px;
+  }
+  [data-theme="dark"]{
+    --bg:#0a1526;--bg2:#0f1e36;--card:#12233f;--ink:#eaf2ff;--ink-soft:#93a7c6;
+    --border:#1d3355;--nav:rgba(4,15,32,.96);--footer:#04081a;
+    --shadow:0 18px 45px rgba(0,0,0,.5);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;overflow-x:hidden;transition:background .4s,color .4s}
+  h1,h2,h3{line-height:1.14;font-weight:800;letter-spacing:-.02em}
+  a{text-decoration:none;color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+  section{padding:64px 0}
+  .sec-head{margin-bottom:30px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px}
+  .sec-head .tag{color:var(--lago);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem}
+  .sec-head h2{font-size:clamp(1.7rem,3.5vw,2.5rem);margin-top:8px;color:var(--ink)}
+
+  /* ===== NAV + LOGO ===== */
+  header.nav{position:fixed;inset:0 0 auto 0;z-index:120;display:flex;align-items:center;justify-content:space-between;
+    padding:15px 30px;background:transparent;transition:.35s}
+  header.nav.scrolled{background:var(--nav);backdrop-filter:blur(12px);box-shadow:0 6px 24px rgba(0,0,0,.25);padding:10px 30px}
+  .brand{display:flex;align-items:center;gap:11px;color:#fff;font-weight:800;font-size:1.2rem;letter-spacing:-.01em}
+  .brand b{font-weight:900;color:#fff}
+  .brand .il{opacity:.85;font-weight:600}
+  .logo{width:40px;height:40px;flex-shrink:0;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+  .herologo{width:100%;max-width:680px;margin:2px 0 18px;animation:fadeUp .8s .05s both}
+  .herologo svg{width:100%;height:auto;display:block}
+  @media(max-width:900px){.herologo{max-width:460px}}
+  .navwrap{display:flex;align-items:center;gap:20px}
+  .navlinks{display:flex;gap:20px}
+  .navlinks a{color:#eaf2ff;font-weight:600;font-size:.9rem;opacity:.9;transition:.2s}
+  .navlinks a:hover{opacity:1;color:var(--lago)}
+  .icon-btn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:.25s}
+  .icon-btn:hover{background:#fff;color:var(--azzurro)}
+  .menu-btn{display:none}
+
+  .mobile-menu{position:fixed;inset:0;z-index:115;background:linear-gradient(160deg,var(--azzurro-scuro),var(--azzurro));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transform:translateY(-100%);transition:.4s cubic-bezier(.2,.8,.2,1)}
+  .mobile-menu.open{transform:none}
+  .mobile-menu a{color:#fff;font-size:1.5rem;font-weight:800}
+  .mobile-menu a:hover{color:var(--lago)}
+
+  /* ===== HERO / SFONDO ===== */
+  .hero{min-height:100vh;display:flex;align-items:center;color:#fff;position:relative;overflow:hidden;padding:120px 0 100px}
+  /* ======= SFONDO A ROTAZIONE (slideshow) — per cambiare foto, modifica gli URL nelle .slide qui sotto ======= */
+  .hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+  .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.02);animation:slides 21s ease-in-out infinite}
+  .slide:nth-child(1){background-image:url('https://images.unsplash.com/photo-1667375152478-5c4d62eb9ecb?auto=format&fit=crop&w=2000&q=80');animation-delay:0s}
+  .slide:nth-child(2){background-image:url('https://images.unsplash.com/photo-1758551314785-451ea7fff42c?auto=format&fit=crop&w=2000&q=80');animation-delay:7s}
+  .slide:nth-child(3){background-image:url('https://images.unsplash.com/photo-1614632537190-23e4146777db?auto=format&fit=crop&w=2000&q=80');animation-delay:14s}
+  @keyframes slides{0%{opacity:0}3%{opacity:1}30%{opacity:1}34%{opacity:0}100%{opacity:0}}
+  .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(160deg,rgba(3,20,45,.84),rgba(6,47,99,.6) 45%,rgba(10,77,162,.5)),linear-gradient(180deg,transparent 42%,rgba(4,15,32,.88))}
+  .grain{position:absolute;inset:0;z-index:1;opacity:.05;
+    background-image:radial-gradient(#fff 1px,transparent 1px);background-size:22px 22px}
+  .hero-content{z-index:3;max-width:770px}
+  .kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:7px 16px;border-radius:100px;font-weight:700;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;animation:fadeUp .8s both}
+  .hero h1{font-size:clamp(2.6rem,6.6vw,4.8rem);margin-bottom:16px;animation:fadeUp .8s .1s both}
+  .hero h1 span{background:linear-gradient(90deg,#fff,var(--lago));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .hero p.lead{font-size:1.22rem;opacity:.92;max-width:560px;margin-bottom:32px;animation:fadeUp .8s .2s both}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  .cta{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .8s .3s both}
+  .btn{padding:14px 30px;border-radius:100px;font-weight:800;cursor:pointer;border:0;transition:.25s;display:inline-block;font-size:1rem}
+  .btn-primary{background:#fff;color:var(--azzurro)}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,.3)}
+  .btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6)}
+  .btn-ghost:hover{background:#fff;color:var(--azzurro)}
+
+  .countdown{margin-top:44px;display:flex;align-items:center;gap:26px;flex-wrap:wrap;animation:fadeUp .8s .4s both}
+  .cd-info .lbl{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;opacity:.85;display:flex;align-items:center;gap:8px}
+  .cd-info .lbl .dot{width:9px;height:9px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(224,49,49,.7);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(224,49,49,.7)}70%{box-shadow:0 0 0 12px rgba(224,49,49,0)}100%{box-shadow:0 0 0 0 rgba(224,49,49,0)}}
+  .cd-info .match{font-weight:900;font-size:1.35rem;margin-top:4px}
+  .cd-info .venue{font-size:.85rem;opacity:.85}
+  .cd-timer{display:flex;gap:10px}
+  .cd-cell{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:12px 8px;min-width:66px;text-align:center;backdrop-filter:blur(6px)}
+  .cd-cell .n{font-size:1.9rem;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+  .cd-cell .u{font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;opacity:.8;margin-top:5px}
+
+  .strip{background:var(--azzurro-scuro);color:#fff}
+  .strip .wrap{display:flex;justify-content:center;gap:50px;padding:26px 22px;flex-wrap:wrap;text-align:center}
+  .strip .s .n{font-size:1.6rem;font-weight:900;background:linear-gradient(90deg,#fff,var(--lago));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .strip .s .l{font-size:.78rem;opacity:.8;letter-spacing:.06em;text-transform:uppercase}
+
+  .grid{display:grid;gap:22px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:0 8px 24px rgba(6,47,99,.08);border:1px solid var(--border);overflow:hidden;transition:.3s;display:block}
+  .card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+
+  .empty{border:2px dashed var(--border);background:var(--bg2);border-radius:var(--radius);padding:46px 24px;text-align:center;color:var(--ink-soft)}
+  .empty .ico{font-size:2.4rem;margin-bottom:10px;opacity:.6}
+  .empty h4{color:var(--ink);font-size:1.1rem;margin-bottom:6px}
+  .empty code{background:var(--bg);padding:2px 7px;border-radius:6px;font-size:.85rem;color:var(--azzurro)}
+
+  .news-item{display:flex;gap:16px;padding:16px;align-items:center}
+  .news-item .thumb{width:82px;height:82px;border-radius:12px;flex-shrink:0;background:linear-gradient(150deg,var(--azzurro-chiaro),var(--azzurro))}
+  .news-item h4{font-size:1.05rem;color:var(--ink);margin-bottom:4px}
+  .news-item .date{font-size:.78rem;color:var(--ink-soft)}
+
+  /* calciomercato */
+  .mk{padding:20px;position:relative}
+  .mk .badge{display:inline-block;font-size:.68rem;font-weight:800;padding:4px 11px;border-radius:100px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+  .mk .badge.in{background:rgba(47,158,68,.14);color:var(--ok)}
+  .mk .badge.out{background:rgba(224,49,49,.12);color:var(--live)}
+  .mk .badge.rumor{background:rgba(46,134,255,.14);color:var(--azzurro)}
+  .mk h4{font-size:1.15rem;color:var(--ink);margin-bottom:4px}
+  .mk .detail{color:var(--ink-soft);font-size:.9rem}
+  .mk .date{color:var(--ink-soft);font-size:.78rem;margin-top:10px}
+
+  .fix{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;box-shadow:0 6px 16px rgba(6,47,99,.05)}
+  .fix .comp{font-size:.72rem;color:var(--lago);font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+  .fix .match{font-weight:800;color:var(--ink)}
+  .fix .date{font-size:.85rem;color:var(--ink-soft);text-align:right}
+  .mini{background:var(--card);border-radius:var(--radius);box-shadow:0 8px 24px rgba(6,47,99,.08);border:1px solid var(--border);overflow:hidden}
+  .mini table{width:100%;border-collapse:collapse;font-size:.92rem}
+  .mini th,.mini td{padding:11px 14px;text-align:left;color:var(--ink)}
+  .mini thead{background:var(--azzurro-scuro);color:#fff;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}
+  .mini td.pts{font-weight:800;color:var(--azzurro)}
+  .mini tr.us{background:linear-gradient(90deg,rgba(46,134,255,.16),transparent);font-weight:800}
+  .mini tr:not(:last-child) td{border-bottom:1px solid var(--border)}
+
+  .player{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:0 8px 22px rgba(6,47,99,.08);border:1px solid var(--border);transition:.3s}
+  .player:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .player .top{background:linear-gradient(160deg,var(--azzurro-chiaro),var(--azzurro));height:100px;position:relative}
+  .player .avatar{width:72px;height:72px;border-radius:50%;background:var(--card);border:4px solid var(--card);position:absolute;bottom:-36px;left:22px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.4rem;color:var(--azzurro)}
+  .player .body{padding:48px 22px 22px}
+  .player .body h3{font-size:1.15rem;color:var(--ink)}
+  .player .body .pos{color:var(--ink-soft);font-size:.86rem}
+
+  /* Segui il Como */
+  .follow{background:linear-gradient(135deg,var(--azzurro-scuro),var(--azzurro));color:#fff;text-align:center}
+  .follow h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:14px;color:#fff}
+  .follow p{opacity:.9;max-width:560px;margin:0 auto 28px;font-size:1.08rem}
+  .official{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .official a{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);padding:14px 26px;border-radius:100px;font-weight:700;transition:.25s;color:#fff;display:inline-flex;align-items:center;gap:8px}
+  .official a:hover{background:#fff;color:var(--azzurro);transform:translateY(-3px)}
+  .official .note{width:100%;font-size:.78rem;opacity:.75;margin-top:8px}
+
+  footer{background:var(--footer);color:#9fb2cc;padding:44px 22px 30px;font-size:.9rem}
+  footer .cols{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.1)}
+  footer h4{color:#fff;font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+  footer a{display:block;color:#9fb2cc;margin-bottom:8px;transition:.2s}
+  footer a:hover{color:var(--lago)}
+  footer .bottom{max-width:1180px;margin:22px auto 0;text-align:center}
+  footer strong{color:#fff}
+  .disclaimer{background:rgba(224,49,49,.1);border:1px solid rgba(224,49,49,.28);color:#ffb3b3;border-radius:12px;padding:14px 18px;font-size:.82rem;max-width:1180px;margin:22px auto 0}
+
+  .reveal{opacity:0;transform:translateY(34px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.on{opacity:1;transform:none}
+  #toTop{position:fixed;bottom:22px;right:22px;width:48px;height:48px;border-radius:50%;background:var(--azzurro);color:#fff;border:0;font-size:1.3rem;cursor:pointer;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.3s;z-index:90}
+  #toTop.show{opacity:1;pointer-events:auto}
+  #toTop:hover{background:var(--azzurro-chiaro);transform:translateY(-3px)}
+
+  #cookie{position:fixed;bottom:18px;left:18px;right:18px;max-width:680px;margin:0 auto;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:16px;padding:20px 22px;z-index:200;display:none}
+  #cookie p{font-size:.9rem;color:var(--ink-soft);margin-bottom:14px}
+  #cookie .row{display:flex;gap:10px;flex-wrap:wrap}
+  #cookie button{padding:11px 22px;border-radius:100px;font-weight:800;border:0;cursor:pointer}
+  #cookie .ok{background:var(--azzurro);color:#fff}
+  #cookie .no{background:var(--bg);color:var(--ink)}
+
+  @media(max-width:900px){
+    .navlinks{display:none}
+    .menu-btn{display:flex}
+    .g3,.g2{grid-template-columns:1fr}
+    .strip .wrap{gap:30px}
+    footer .cols{grid-template-columns:1fr}
+    .cd-cell{min-width:58px}
+  }
+
+   .player img.avatar{object-fit:cover}
+  .player.clickable{cursor:pointer}
+  .player .hint{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:700;color:var(--lago);margin-top:8px}
+  .player .hint .chev{transition:transform .3s}
+  .player.open .hint .chev{transform:rotate(180deg)}
+  .player .bio{max-height:0;overflow:hidden;opacity:0;margin-top:0;font-size:.9rem;color:var(--ink-soft);transition:max-height .35s ease,opacity .3s ease,margin-top .3s ease}
+  .player.open .bio{max-height:400px;opacity:1;margin-top:12px}
+
+/* ===== GISCUS STYLING ===== */
+.giscus-frame {
+  width: 100% !important;
+  border-radius: var(--radius) !important;
+}
+
+[data-theme="light"] .giscus {
+  --color-prettylights-syntax-comment: var(--ink-soft);
+  --color-prettylights-syntax-constant: var(--azzurro);
+  --color-prettylights-syntax-entity: var(--lago);
+  --color-prettylights-syntax-storage-modifier-import: var(--azzurro);
+  --color-Canvas-inset-border: var(--border);
+  --color-Popover-border: var(--border);
+  --color-Avatar-bg: var(--bg);
+  --color-Button-border: var(--border);
+  --color-ActionListItem-inlineDivider-bg: var(--border);
+  --color-ActionList-itemDivider-dividerRow-bg: var(--border);
+  --color-Label-border: var(--border);
+  --color-Label-text-link: var(--azzurro);
+  --color-Textarea-border: var(--border);
+  --color-CheckboxOrRadio-border-experimental_Video-border: var(--border);
+  --control-bgColor-emphasis: var(--bg);
+  --color-Btn-text: var(--ink);
+  --color-Btn-bg: var(--bg);
+  --color-Btn-border: var(--border);
+  --color-Btn-shadow: none;
+  --color-Btn-inset: none;
+  --color-Btn-hoverBg: var(--azzurro-chiaro);
+  --color-Btn-hoverText: #fff;
+  --color-Btn-selectedBg: var(--azzurro);
+  --color-Btn-focusBg: var(--bg);
+  --color-ActionListItem-default-text: var(--ink);
+  --color-ActionListItem-default-hoverBg: var(--bg);
+  --color-ActionListItem-default-selectedBg: var(--bg);
+  --color-ActionListItem-default-selectedText: var(--azzurro);
+  --color-ActionListItem-default-descriptionText: var(--ink-soft);
+  --color-ActionListItem-default-descriptionHoverText: var(--ink-soft);
+  --color-ActionListItem-danger-hoverBg: rgba(224,49,49,.1);
+  --color-ActionListItemCheckbox-selectedBg: var(--bg);
+  --color-Tooltip-bg: var(--ink);
+  --color-Tooltip-text: #fff;
+}
+
+[data-theme="dark"] .giscus {
+  --color-prettylights-syntax-comment: var(--ink-soft);
+  --color-prettylights-syntax-constant: var(--lago);
+  --color-prettylights-syntax-entity: var(--lago);
+  --color-prettylights-syntax-storage-modifier-import: var(--lago);
+  --color-Canvas-inset-border: var(--border);
+  --color-Popover-border: var(--border);
+  --color-Avatar-bg: var(--bg2);
+  --color-Button-border: var(--border);
+  --color-ActionListItem-inlineDivider-bg: var(--border);
+  --color-ActionList-itemDivider-dividerRow-bg: var(--border);
+  --color-Label-border: var(--border);
+  --color-Label-text-link: var(--lago);
+  --color-Textarea-border: var(--border);
+  --color-CheckboxOrRadio-border-experimental_Video-border: var(--border);
+  --control-bgColor-emphasis: var(--bg2);
+  --color-Btn-text: var(--ink);
+  --color-Btn-bg: var(--bg2);
+  --color-Btn-border: var(--border);
+  --color-Btn-shadow: none;
+  --color-Btn-inset: none;
+  --color-Btn-hoverBg: var(--lago);
+  --color-Btn-hoverText: #fff;
+  --color-Btn-selectedBg: var(--azzurro);
+   --color-Btn-focusBg: var(--bg2);
+  --color-ActionListItem-default-text: var(--ink);
+  --color-ActionListItem-default-hoverBg: var(--bg2);
+  --color-ActionListItem-default-selectedBg: var(--bg2);
+  --color-ActionListItem-default-selectedText: var(--lago);
+  --color-ActionListItem-default-descriptionText: var(--ink-soft);
+  --color-ActionListItem-default-descriptionHoverText: var(--ink-soft);
+  --color-ActionListItem-danger-hoverBg: rgba(224,49,49,.1);
+  --color-ActionListItemCheckbox-selectedBg: var(--bg2);
+  --color-Tooltip-bg: var(--ink);
+  --color-Tooltip-text: #fff;
+}
+
+.giscus-frame {
+   border-radius: var(--radius) !important;
+  border: 1px solid var(--border) !important;
+}
+
+</style>
+<script async src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a href="index.html" class="brand">
+    <svg class="logo" viewBox="0 0 230 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs><linearGradient id="navlg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset="1" stop-color="#12b5c9"/></linearGradient></defs>
+      <g fill="none" stroke="url(#navlg)" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M128 132 L150 180 L168 228" stroke-width="21"/>
+        <path d="M128 132 L92 148 L50 130" stroke-width="21"/>
+        <path d="M150 60 L128 132" stroke-width="23"/>
+        <path d="M150 74 L185 64 L206 44" stroke-width="14"/>
+        <path d="M150 80 L119 112" stroke-width="14"/>
+      </g>
+      <circle cx="158" cy="44" r="18" fill="url(#navlg)"/>
+    </svg>
+    <span><span class="il">il</span><b>Comasco</b></span>
+  </a>
+  <div class="navwrap">
+    <nav class="navlinks">
+      <a href="#news">Notizie</a><a href="#mercato">Calciomercato</a><a href="#calendario">Calendario</a><a href="#classifica">Classifica</a><a href="#eroi">La Squadra</a><a href="#segui">Segui il Como</a>
+    </nav>
+    <button class="icon-btn" id="theme" title="Cambia tema" aria-label="Cambia tema">🌙</button>
+    <button class="icon-btn menu-btn" id="burger" title="Menu" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="#news">Notizie</a><a href="#mercato">Calciomercato</a><a href="#calendario">Calendario</a><a href="#classifica">Classifica</a><a href="#eroi">I nostri eroi</a><a href="#segui">Segui il Como</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"><div class="slide"></div><div class="slide"></div><div class="slide"></div></div>
+  <div class="hero-overlay"></div>
+  <div class="grain"></div>
+  <div class="wrap hero-content">
+    <span class="kicker">🏔️ Serie A · Sul Lago di Como</span>
+    <div class="herologo" aria-label="ilComasco — Portale dei tifosi lariani">
+      <svg viewBox="0 0 680 196" role="img" xmlns="http://www.w3.org/2000/svg">
+        <title>ilComasco — Portale dei tifosi lariani</title>
+        <defs><linearGradient id="hlg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset="1" stop-color="#12b5c9"/></linearGradient></defs>
+        <g transform="translate(6,20) scale(0.6)">
+          <g id="hKick">
+            <path d="M128 132 L150 180 L168 228" fill="none" stroke="url(#hlg)" stroke-width="21" stroke-linecap="round" stroke-linejoin="round"/>
+            <g id="hLeg" style="transform-origin:128px 132px"><path d="M128 132 L92 148 L50 130" fill="none" stroke="url(#hlg)" stroke-width="21" stroke-linecap="round" stroke-linejoin="round"/></g>
+            <path d="M150 60 L128 132" fill="none" stroke="url(#hlg)" stroke-width="23" stroke-linecap="round"/>
+            <path d="M150 74 L185 64 L206 44" fill="none" stroke="url(#hlg)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M150 80 L119 112" fill="none" stroke="url(#hlg)" stroke-width="14" stroke-linecap="round"/>
+            <circle cx="158" cy="44" r="18" fill="url(#hlg)"/>
+          </g>
+          <g id="hCele" style="opacity:0">
+            <g id="hHop">
+              <path d="M128 150 L150 196 L160 238" fill="none" stroke="url(#hlg)" stroke-width="21" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M128 150 L106 196 L96 238" fill="none" stroke="url(#hlg)" stroke-width="21" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M128 60 L128 150" fill="none" stroke="url(#hlg)" stroke-width="24" stroke-linecap="round"/>
+              <path d="M128 80 L166 66 L190 48" fill="none" stroke="url(#hlg)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M128 80 L90 66 L66 48" fill="none" stroke="url(#hlg)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="128" cy="40" r="18" fill="url(#hlg)"/>
+            </g>
+          </g>
+        </g>
+        <text id="hRef" x="286" y="120" font-family="Segoe UI, Arial, sans-serif" font-size="52" font-weight="800" fill="#12b5c9" opacity="0" aria-hidden="true">ilComasco</text>
+        <text x="286" y="120" font-family="Segoe UI, Arial, sans-serif" font-size="52" font-weight="800" fill="#ffffff">il<tspan fill="#8fd8ff">Comasc</tspan></text>
+        <text id="hO" x="0" y="0" font-family="Segoe UI, Arial, sans-serif" font-size="52" font-weight="800" fill="#8fd8ff" style="will-change:transform;opacity:0">o</text>
+        <text x="289" y="150" font-family="Segoe UI, Arial, sans-serif" font-size="14" letter-spacing="3" fill="#cfe4ff">Portale dei tifosi lariani</text>
+      </svg>
+    </div>
+    <script>
+    (function(){
+      var oEl=document.getElementById('hO'), kick=document.getElementById('hKick'),
+          cele=document.getElementById('hCele'), leg=document.getElementById('hLeg'), hop=document.getElementById('hHop');
+      if(!oEl) return;
+      var ox=520, oy=120;
+      function measure(){ try{ var r=document.getElementById('hRef'); var pt=r.getStartPositionOfChar(r.textContent.length-1); ox=pt.x; oy=pt.y; }catch(e){} }
+      measure(); if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(measure); }
+      var CYCLE=10000, ACTION=4200, start=null;
+      function easeOut(t){ return 1-Math.pow(1-t,3); }
+      function lerp(a,b,t){ return a+(b-a)*t; }
+      function qbez(a,c,b,e){ var m=1-e; return m*m*a+2*m*e*c+e*e*b; }
+      function ball(p){ var x,y,op=1;
+        if(p<0.04){ x=28; y=142; op=p/0.04; }
+        else if(p<0.13){ var f=(p-0.04)/0.09; x=28+16*f; y=142-2*f; }
+        else if(p<0.40){ var e=easeOut((p-0.13)/0.27); x=qbez(44,300,ox,e); y=qbez(140,182,oy,e); }
+        else { x=ox; y=oy; }
+        oEl.style.opacity=op; oEl.style.transform='translate('+x.toFixed(2)+'px,'+y.toFixed(2)+'px)'; }
+      function kickOp(p){ if(p<0.40)return 1; if(p<0.44)return 1-(p-0.40)/0.04; if(p<0.78)return 0; if(p<0.82)return (p-0.78)/0.04; return 1; }
+      function legRot(p){ if(p<0.07)return 14; if(p<0.13)return lerp(14,-26,(p-0.07)/0.06); if(p<0.40)return lerp(-26,-24,(p-0.13)/0.27); if(p<0.82)return lerp(-24,14,(p-0.40)/0.42); return 14; }
+      function hopY(p){ if(p<=0.44||p>=0.82)return 0; var q=(p-0.44)/0.38; return -Math.sin(q*Math.PI)*22; }
+      function frame(ts){ if(start===null)start=ts; var cyc=(ts-start)%CYCLE; var p=Math.min(cyc/ACTION,1);
+        ball(p); var ko=kickOp(p); kick.style.opacity=ko; cele.style.opacity=1-ko;
+        leg.style.transform='rotate('+legRot(p).toFixed(2)+'deg)'; hop.style.transform='translateY('+hopY(p).toFixed(2)+'px)';
+        requestAnimationFrame(frame); }
+      requestAnimationFrame(frame);
+    })();
+    </script>
+    <p class="lead">Il punto di riferimento dei tifosi Lariani. </p>
+    <div class="cta">
+      <a href="#news" class="btn btn-primary">Entra nel portale</a>
+      <a href="#segui" class="btn btn-ghost">Segui il Como</a>
+    </div>
+
+    <div class="countdown" id="countdown">
+      <div class="cd-info">
+        <div class="lbl"><span class="dot"></span> <span id="cd-comp">Prossima partita</span></div>
+        <div class="match" id="cd-match">—</div>
+        <div class="venue" id="cd-venue"></div>
+      </div>
+      <div class="cd-timer">
+        <div class="cd-cell"><div class="n" id="cd-d">--</div><div class="u">Giorni</div></div>
+        <div class="cd-cell"><div class="n" id="cd-h">--</div><div class="u">Ore</div></div>
+        <div class="cd-cell"><div class="n" id="cd-m">--</div><div class="u">Min</div></div>
+        <div class="cd-cell"><div class="n" id="cd-s">--</div><div class="u">Sec</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTITY STRIP -->
+<section class="strip" style="padding:0">
+  <div class="wrap">
+    <div class="s"><div class="n">1907</div><div class="l">Anno di fondazione</div></div>
+    <div class="s"><div class="n">💙</div><div class="l">Semm Cumasch</div></div>
+    <div class="s"><div class="n">Sinigaglia</div><div class="l">La nostra casa</div></div>
+  </div>
+</section>
+
+<!-- NOTIZIE -->
+<section id="news">
+  <div class="wrap">
+    <div class="sec-head reveal"><div><div class="tag">Aggiornamenti</div><h2>Ultime notizie</h2></div></div>
+    <div class="grid reveal" id="newsGrid"></div>
+  </div>
+</section>
+
+<!-- CALCIOMERCATO -->
+<section id="mercato" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="sec-head reveal"><div><div class="tag">Entrate · Uscite · Voci</div><h2>Calciomercato</h2></div></div>
+    <div class="grid g3 reveal" id="mkGrid"></div>
+  </div>
+</section>
+
+<!-- CALENDARIO -->
+<section id="calendario">
+  <div class="wrap">
+    <div class="sec-head reveal"><div><div class="tag">Prossimi impegni</div><h2>Calendario</h2></div></div>
+    <div class="grid reveal" id="fixGrid"></div>
+  </div>
+</section>
+
+<!-- CLASSIFICA -->
+<section id="classifica" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="sec-head reveal"><div><div class="tag">Serie A</div><h2>Classifica</h2></div></div>
+    <div class="reveal" id="tableWrap"></div>
+  </div>
+</section>
+
+<!-- LA PRIMA SQUADRA -->
+<section id="eroi">
+  <div class="wrap">
+    <div class="sec-head reveal"><div><div class="tag">La rosa Lariana</div><h2>I Nostri Eroi</h2></div></div>
+    <div class="grid g3 reveal" id="squadGrid"></div>
+  </div>
+</section>
+
+<!-- SEGUI IL COMO -->
+<section class="follow" id="segui">
+  <div class="wrap">
+    <h2 class="reveal">Segui il Como</h2>
+    <p class="reveal">Vai ai canali <strong>ufficiali</strong> del club per news, biglietti e contenuti esclusivi.</p>
+    <div class="official reveal">
+      <a href="https://comofootball.com/it/" target="_blank" rel="noopener noreferrer">🌐 Sito ufficiale</a>
+      <a href="https://comofootball.com/it/latest-news/" target="_blank" rel="noopener noreferrer">📰 News ufficiali</a>
+      <a href="https://www.instagram.com/comofootball/" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+      <a href="https://comofootball.com/it/" target="_blank" rel="noopener noreferrer">🎟️ Biglietti</a>
+      <div class="note">Link ai canali ufficiali del Calcio Como 1907. ilComasco è un sito indipendente, non gestito dal club.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FORUM TIFOSI -->
+<section id="forum" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="sec-head reveal"><div><div class="tag">Comunità</div><h2>🗣️ Forum Tifosi</h2></div></div>
+    <div class="reveal" style="background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:30px;box-shadow:0 8px 24px rgba(6,47,99,.08)">
+      <!-- GISCUS QUI -->
+      <div id="disqus_thread"></div>
+      <script src="https://giscus.app/client.js"
+          data-repo="carughimichele/ilComasco"
+          data-repo-id="R_kgDOToBMJA"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOToBMJM4DCS1_"
+          data-mapping="url"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="preferred_color_scheme"
+          data-lang="it"
+          crossorigin="anonymous"
+          async>
+      </script>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="cols">
+    <div><h4>ilComasco</h4><p style="max-width:340px">Il portale indipendente dei tifosi del Calcio Como 1907. Fatto dai tifosi, per i tifosi.</p></div>
+    <div><h4>Sezioni</h4><a href="#news">Notizie</a><a href="#mercato">Calciomercato</a><a href="#calendario">Calendario</a><a href="#classifica">Classifica</a><a href="#eroi">I nostri eroi</a></div>
+    <div><h4>Legale</h4><a href="privacy.html">Privacy Policy</a><a href="cookie-policy.html">Cookie Policy</a><a href="privacy.html#disclaimer">Disclaimer</a></div>
+  </div>
+  <div class="disclaimer">⚠️ Sito non ufficiale. ilComasco è un progetto indipendente realizzato da tifosi e non è affiliato, associato, autorizzato o approvato dal Como 1907 S.r.l. I marchi, i loghi e gli stemmi del club appartengono ai rispettivi proprietari.</div>
+  <div class="bottom"><p><strong>ilComasco</strong> © <span id="year"></span> — Forza Como sempre 💙</p><p style="opacity:.6;font-size:.78rem;margin-top:6px">Foto di sfondo: Stadio Sinigaglia · <a href="https://commons.wikimedia.org/wiki/File:StadioSinigaglia3bWiki.JPG" target="_blank" rel="noopener noreferrer" style="color:#9fb2cc;text-decoration:underline">Wikimedia Commons</a> — verifica autore e licenza per completare l'attribuzione.</p></div>
+</footer>
+
+<button id="toTop" title="Torna su" aria-label="Torna su">↑</button>
+
+<div id="cookie">
+  <p>Usiamo cookie tecnici necessari al funzionamento del sito e, previo tuo consenso, cookie di analisi. Dettagli nella <a href="cookie-policy.html" style="color:var(--azzurro);font-weight:700">Cookie Policy</a>.</p>
+  <div class="row"><button class="ok" onclick="setCookie('all')">Accetta tutti</button><button class="no" onclick="setCookie('essential')">Solo essenziali</button></div>
+</div>
+
+<script>
+/* =====================================================================
+   ⚙️  CONTENUTI — MODIFICA SOLO QUESTA SEZIONE PER AGGIORNARE IL SITO
+   Aggiungi elementi dentro le liste. Se una lista è vuota, il sito
+   mostra automaticamente un messaggio "ancora nessun contenuto".
+   ===================================================================== */
+
+// Prossima partita (per il countdown). Data ISO: AAAA-MM-GGThh:mm
+const NEXT_MATCH = {
+  competition: "Serie A",
+  match: "Udinese — Como",
+  venue: "🏟️ Bluenergy Stadium · Udine",
+  dateISO: "2026-08-22T18:30"
+};
+
+// NOTIZIE — es: { cat:"Match", title:"Titolo", date:"1 set 2026", url:"articolo.html" }
+const NEWS = [];
+
+// CALCIOMERCATO — type: "in" (entrata) | "out" (uscita) | "rumor" (voce)
+// es: { type:"in", player:"Nome Cognome", detail:"dal Club X · prestito", date:"5 ago 2026" }
+const MERCATO = [];
+
+// CALENDARIO — es: { comp:"Serie A", match:"Como — Juventus", date:"Sab 30 ago · 20:45", where:"Casa" }
+const FIXTURES = [
+  { comp:"Serie A", match:"Udinese — Como",     date:"Sab 22 ago · 18:30", where:"Trasferta" },
+  { comp:"Serie A", match:"Napoli — Como",      date:"Dom 30 ago · 18:30", where:"Trasferta" },
+  { comp:"Serie A", match:"Genoa — Como",       date:"Ven 4 set · 20:45",  where:"Trasferta" },
+  //{ comp:"Serie A", match:"Como — Parma",       date:"Dom 13 set · 15:00", where:"Casa" },
+  //{ comp:"Serie A", match:"Frosinone — Como",   date:"Dom 20 set · 15:00", where:"Trasferta" },
+  //{ comp:"Serie A", match:"Como — Roma",        date:"Dom 11 ott · 15:00", where:"Casa" },
+  //{ comp:"Serie A", match:"Fiorentina — Como",  date:"Dom 18 ott · 15:00", where:"Trasferta" },
+  //{ comp:"Serie A", match:"Como — Sassuolo",    date:"Dom 25 ott · 15:00", where:"Casa" },
+];
+
+// CLASSIFICA — es: { pos:1, team:"Como 1907", pts:0, us:true }
+const STANDINGS = [];
+
+// I NOSTRI EROI (rosa) — es: { name:"Nome Cognome", role:"Attaccante", number:"NC" }
+
+const FLAGS = {
+  it:"https://flagcdn.com/w320/it.png", // Italia
+  fr:"https://flagcdn.com/w320/fr.png", // Francia
+  es:"https://flagcdn.com/w320/es.png", // Spagna
+  de:"https://flagcdn.com/w320/de.png", // Germania
+  be:"https://flagcdn.com/w320/be.png", // Belgio
+  nl:"https://flagcdn.com/w320/nl.png", // Paesi Bassi
+  se:"https://flagcdn.com/w320/se.png", // Svezia
+  gr:"https://flagcdn.com/w320/gr.png", // Grecia
+  hr:"https://flagcdn.com/w320/hr.png", // Croazia
+  ar:"https://flagcdn.com/w320/ar.png", // Argentina
+  br:"https://flagcdn.com/w320/br.png", // Brasile
+  sn:"https://flagcdn.com/w320/sn.png", // Senegal
+};
+
+const SQUAD = [
+  { name:"Jean Butez",            role:"Portiere",    number:"1",     bandiera:FLAGS.fr, 
+  bio:"Arrivato a gennaio 2025, Jean si è preso la titolarità da subito mostrando sicurezza tra i pali e una spiccata abilità con i piedi, perfetto per il gioco di Fàbregas. Titolare insostituibile, non ha saltato un minuto nella stagione appena trascorsa ed ha vinto la classifica dei clean sheet mantenendo la porta inviolata in ben 19 occasioni. Un vero e proprio muro, il regista occulto del Como, una certezza assoluta! 🧱🧤 " },
+  { name:"Mauro Vigorito",        role:"Portiere",    number:"22",    bandiera:FLAGS.it, 
+  bio:"Arrivato a Como nel 2021, quando la squadra lottava ancora per ritagliarsi uno spazio importante in Serie B, è rimasto anno dopo anno diventando una figura fondamentale dello spogliatoio. Sempre pronto quando chiamato in causa, rappresenta esperienza, professionalità e senso di appartenenza. Uno di quei giocatori che magari si vedono poco in campo, ma che tengono unito il gruppo ogni giorno. 🧤"},
+  { name:"Noel Törnqvist",        role:"Portiere",    number:"21",    bandiera:FLAGS.se,
+  bio:"Portiere moderno, fisicamente dominante e dotato di ottimi riflessi. Arrivato per raccogliere l'eredità del futuro tra i pali biancoblù, abbina presenza, personalità e margini di crescita enormi. Il Como ha visto in lui uno dei portieri più promettenti del panorama europeo: il futuro è nelle sue mani. 🫎"},
+  //{ name:"Diego Carlos",          role:"Difensore",   number:"34",    bandiera:FLAGS.it,
+  //bio:"Da scrivere"},
+  { name:"Marc Oliver Kempf",     role:"Difensore",   number:"2",     bandiera:FLAGS.de,
+  bio:"L'esperienza internazionale al servizio del Como. Difensore mancino, elegante e aggressivo quando serve, porta leadership e tranquillità a tutto il reparto arretrato. Uno di quei centrali che non hanno bisogno di interventi spettacolari per dominare una partita: basta la loro presenza. 🛡️"},
+  { name:"Edoardo Goldaniga",     role:"Difensore",   number:"5",     bandiera:FLAGS.it,
+  bio:"Tra i protagonisti della scalata dalla Serie B alla Serie A, è diventato uno dei simboli della continuità del progetto Como. Esperienza, leadership e spirito di sacrificio al servizio della squadra. Un veterano che non tradisce mai. 🗿"},
+  { name:"Jacobo Ramón",          role:"Difensore",   number:"14",    bandiera:FLAGS.es,
+  bio:"Giovanissimo ma già con personalità da veterano. Elegante nell'impostazione e solido nei duelli, rappresenta il futuro della retroguardia biancoblù. Un talento dal potenziale enorme. 🏰"},
+  { name:"Álex Valle",            role:"Difensore",   number:"3",     bandiera:FLAGS.es,
+  bio:"Terzino moderno, sempre pronto a spingere e accompagnare l'azione offensiva. Tecnica, corsa e personalità lo rendono una pedina perfetta per il calcio offensivo di Fàbregas. 🏃‍♂️"},
+  { name:"Ivan Smolčić",          role:"Difensore",   number:"28",    bandiera:FLAGS.hr,
+  bio:"Terzino di sostanza, intensità e sacrificio. Arrivato dalla Croazia con la reputazione di guerriero della fascia, ha portato energia e affidabilità al reparto difensivo. Sempre disponibile per i compagni e pronto a macinare chilometri, è il classico giocatore che i tifosi imparano ad amare partita dopo partita. 🚂"},
+  { name:"Ignace Van Der Brempt", role:"Difensore",   number:"77",    bandiera:FLAGS.nl,
+  bio:"Energia allo stato puro. Corre avanti e indietro senza mai fermarsi, attacca, difende e dà sempre tutto per la squadra. Uno di quei giocatori che ogni allenatore sogna di avere. ⚡"},
+  { name:"Nicolás Paz",           role:"Centrocampista",  number:"10",  bandiera:FLAGS.ar,
+  bio:"Il talento che ha fatto innamorare tutta la Serie A. Scuola Real Madrid, ha illuminato il Sinigaglia con giocate, assist e gol da campione. Eleganza argentina, personalità da veterano e una capacità unica di decidere le partite. Quando il pallone passa dai suoi piedi, tutto diventa possibile. ✨"},
+  { name:"Maxence Caqueret",      role:"Centrocampista",  number:"6",   bandiera:FLAGS.fr, 
+  bio:"Arrivato nel mercato invernale del 2025 dal Lione, Caqueret ha portato qualità, intensità e una mentalità da grande squadra. Instancabile in mezzo al campo, è diventato subito il motore della manovra di Fàbregas grazie alla sua capacità di recuperare palloni, dettare i tempi e dare equilibrio alla squadra. Sempre nel vivo del gioco, abbina tecnica raffinata e sacrificio, facendo sembrare semplici anche le giocate più difficili: magico Max! 🎩🔵⚪️"},
+  { name:"Máximo Perrone",        role:"Centrocampista",  number:"23",  bandiera:FLAGS.ar,
+  bio:"Arrivato in prestito dal Manchester City, è diventato rapidamente il metronomo della squadra che lo ha subito riscattato. Sempre disponibile in impostazione, intelligente in fase difensiva e impeccabile nella gestione del possesso. Il calcio di Fàbregas passa inevitabilmente dai suoi piedi. 🎼⚽"},
+  { name:"Martin Baturina",       role:"Centrocampista",  number:"20",  bandiera:FLAGS.hr,
+  bio:"Uno dei colpi più prestigiosi della nuova era del Como. Considerato da anni uno dei talenti più puri del calcio croato, abbina una tecnica raffinata a una visione di gioco fuori dal comune. Può inventare una giocata in qualsiasi momento: talento allo stato puro. 💎🎻"},
+  { name:"Lucas Da Cunha",        role:"Centrocampista",  number:"33",  bandiera:FLAGS.fr,
+  bio:"Per tanti 'Il Sindaco', per noi semplicmente il capolavoro di Fàbregas: arrivato nel 2023, quando il Como era ancora in Serie B, veniva impiegato principalmente da esterno offensivo. Cesc ne ha intuito il potenziale e lo ha trasformato nel fulcro del centrocampo biancoblù, esaltandone visione di gioco, tecnica e intelligenza tattica. Oggi è il capitano della squadra, il leader silenzioso che detta i tempi della manovra e uno dei grandi simboli della crescita del Como. 🫡💙🤍 "},
+  { name:"Álvaro Morata",         role:"Attaccante",    number:"7",   bandiera:FLAGS.es,
+  bio:"Campione d'Europa, uomo Champions League e leader naturale. Ha scelto Como per sposare un progetto ambizioso e portare la sua esperienza al servizio del gruppo. Gol, movimenti intelligenti e mentalità vincente: un riferimento dentro e fuori dal campo. 🦁"},
+  { name:"Anastasios Douvikas",   role:"Attaccante",    number:"11",  bandiera:FLAGS.gr,
+  bio:"L'attaccante che vive per il gol. Sempre pronto ad attaccare la profondità e a farsi trovare nel posto giusto al momento giusto. Lavora per la squadra e non smette mai di lottare. Un vero finalizzatore. 🎯"},
+  { name:"Nicolas Kühn",          role:"Attaccante",    number:"19",  bandiera:FLAGS.de,
+  bio:"Velocità, dribbling e coraggio. Ama puntare l'uomo, attaccare gli spazi e mettere continuamente in difficoltà le difese avversarie. È uno di quei giocatori imprevedibili che possono cambiare l'inerzia di una partita con una singola accelerazione. Elettrico. 🌪️"},
+  { name:"Assane Diao",           role:"Attaccante",    number:"38",  bandiera:FLAGS.sn,
+  bio:"Velocità, coraggio e fame. Arrivato giovanissimo, ha dimostrato subito di poter fare la differenza nell'uno contro uno. Ogni accelerazione può trasformarsi in un'occasione da gol. Un diamante ancora da rifinire, ma già devastante. 🚀"},
+  { name:"Jayden Addai",          role:"Attaccante",    number:"42",  bandiera:FLAGS.nl,
+  bio:"Classe 2005, uno dei prospetti più interessanti del calcio olandese. Giovane, sfrontato e pieno di talento, rappresenta perfettamente la filosofia del Como: investire sui migliori giovani e permettere loro di crescere senza paura. ✨"},
+  { name:"Jesús Rodríguez",       role:"Attaccante",    number:"17",  bandiera:FLAGS.es,
+  bio:"Estro, fantasia e sfrontatezza. Ama ricevere palla per attaccare l'uomo, creare superiorità numerica e inventare giocate imprevedibili. Uno di quei giocatori che fanno alzare il pubblico in piedi ogni volta che toccano il pallone. 🌪️"},
+];
+
+/* ===================================================================== */
+
+const store = {
+  get(k){try{return localStorage.getItem(k)}catch(e){return null}},
+  set(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+};
+
+// tema
+const themeBtn=document.getElementById('theme');
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);themeBtn.textContent=t==='dark'?'☀️':'🌙'}
+applyTheme(store.get('theme')||'light');
+themeBtn.addEventListener('click',()=>{const t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';applyTheme(t);store.set('theme',t)});
+
+// nav + mobile
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+const burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
+burger.addEventListener('click',()=>mm.classList.toggle('open'));
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mm.classList.remove('open')));
+
+// back to top + anno
+const toTop=document.getElementById('toTop');
+window.addEventListener('scroll',()=>toTop.classList.toggle('show',window.scrollY>600));
+toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+document.getElementById('year').textContent=new Date().getFullYear();
+
+function emptyState(titolo,lista){
+  return `<div class="empty"><div class="ico">📝</div><h4>${titolo}</h4><p>Aggiungi contenuti modificando la lista <code>${lista}</code> nel codice.</p></div>`;
+}
+
+// NOTIZIE
+(function(){const el=document.getElementById('newsGrid');
+  if(!NEWS.length){el.innerHTML=emptyState('Ancora nessuna notizia','NEWS');return}
+  el.innerHTML=NEWS.map(n=>`<a class="card news-item" href="${n.url||'#'}"><div class="thumb"></div><div><h4>${n.title||''}</h4><div class="date">${[n.date,n.cat].filter(Boolean).join(' · ')}</div></div></a>`).join('');
+})();
+
+// CALCIOMERCATO
+(function(){const el=document.getElementById('mkGrid');
+  if(!MERCATO.length){el.classList.remove('g3');el.innerHTML=emptyState('Nessun movimento di mercato','MERCATO');return}
+  const lab={in:'Entrata',out:'Uscita',rumor:'Voce'};
+  el.innerHTML=MERCATO.map(m=>`<div class="card mk"><span class="badge ${m.type||'rumor'}">${lab[m.type]||'Voce'}</span><h4>${m.player||''}</h4><div class="detail">${m.detail||''}</div><div class="date">${m.date||''}</div></div>`).join('');
+})();
+
+// CALENDARIO
+(function(){const el=document.getElementById('fixGrid');
+  if(!FIXTURES.length){el.innerHTML=emptyState('Nessuna partita in calendario','FIXTURES');return}
+  el.innerHTML=FIXTURES.map(f=>`<div class="fix"><div><div class="comp">${f.comp||''}</div><div class="match">${f.match||''}</div></div><div class="date">${f.date||''}${f.where?'<br><span style="background:var(--bg);color:var(--azzurro);font-weight:800;font-size:.72rem;padding:5px 12px;border-radius:100px;display:inline-block;margin-top:4px">'+f.where+'</span>':''}</div></div>`).join('');
+})();
+
+// CLASSIFICA
+(function(){const el=document.getElementById('tableWrap');
+  if(!STANDINGS.length){el.innerHTML=emptyState('Classifica non ancora inserita','STANDINGS');return}
+  el.innerHTML=`<div class="mini"><table><thead><tr><th>#</th><th>Squadra</th><th>Pt</th></tr></thead><tbody>`+
+    STANDINGS.map(r=>`<tr class="${r.us?'us':''}"><td>${r.pos}</td><td>${r.team}</td><td class="pts">${r.pts}</td></tr>`).join('')+`</tbody></table></div>`;
+})();
+
+// I NOSTRI EROI
+(function(){const el=document.getElementById('squadGrid');
+  if(!SQUAD.length){el.classList.remove('g3');el.innerHTML=emptyState('Rosa non ancora inserita','SQUAD');return}
+  el.classList.add('grid','g3');
+  el.innerHTML=SQUAD.map(p=>{
+    const hasPanel = p.bio!==undefined;
+    const topStyle = p.bandiera ? ` style="background-image:url('${p.bandiera}');background-size:cover;background-position:center"` : '';
+    return `<div class="player${hasPanel?' clickable':''}"${hasPanel?' onclick="this.classList.toggle(\'open\')"':''}>
+      <div class="top"${topStyle}><div class="avatar">${p.initials||''}</div></div>
+      <div class="body">
+        <h3>${p.name||''}</h3>
+        <div class="pos">${p.role||''}</div>
+        ${hasPanel?`<span class="hint">Scheda <span class="chev">▾</span></span><div class="bio">${p.bio||''}</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+})();
+
+// COUNTDOWN
+(function(){
+  document.getElementById('cd-comp').textContent=NEXT_MATCH.competition||'Prossima partita';
+  document.getElementById('cd-match').textContent=NEXT_MATCH.match||'—';
+  document.getElementById('cd-venue').textContent=NEXT_MATCH.venue||'';
+  const target=new Date(NEXT_MATCH.dateISO).getTime();
+  const p=n=>String(n).padStart(2,'0');
+  function tick(){
+    const diff=target-Date.now();
+    if(isNaN(target)){return}
+    if(diff<=0){document.getElementById('cd-match').textContent='⚽ Si gioca! Forza Como';['cd-d','cd-h','cd-m','cd-s'].forEach(i=>document.getElementById(i).textContent='00');return}
+    const d=Math.floor(diff/86400000),h=Math.floor(diff/3600000%24),m=Math.floor(diff/60000%60),s=Math.floor(diff/1000%60);
+    document.getElementById('cd-d').textContent=p(d);document.getElementById('cd-h').textContent=p(h);
+    document.getElementById('cd-m').textContent=p(m);document.getElementById('cd-s').textContent=p(s);
+  }
+  tick();setInterval(tick,1000);
+})();
+
+// reveal
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// cookie
+function setCookie(v){store.set('cookie',v);document.getElementById('cookie').style.display='none'}
+window.addEventListener('load',()=>{if(!store.get('cookie'))document.getElementById('cookie').style.display='block'});
+</script>
+
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => location.reload());
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
