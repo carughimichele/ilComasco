@@ -9,25 +9,45 @@ media_folder: images
 public_folder: /images
 
 collections:
-  - name: "notizie"
-    label: "Notizie"
-    folder: "_posts/notizie"
+  - name: notizie
+    label: Notizie
+    folder: _posts/notizie
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Titolo", name: "title", widget: "string"}
-      - {label: "Data", name: "date", widget: "datetime"}
-      - {label: "Categoria", name: "category", widget: "string", default: "Calcio"}
-      - {label: "Contenuto", name: "body", widget: "markdown"}
-       
-    - name: "mercato"
-    label: "Calciomercato"
-    folder: "_posts/mercato"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - {label: "Giocatore", name: "player", widget: "string"}
-      - {label: "Tipo", name: "type", widget: "select", options: ["in", "out", "rumor"]}
-      - {label: "Dettagli", name: "detail", widget: "string"}
-      - {label: "Data", name: "date", widget: "datetime"}
+      - label: Titolo
+        name: title
+        widget: string
+      - label: Data
+        name: date
+        widget: datetime
+      - label: Categoria
+        name: category
+        widget: string
+        default: Calcio
+      - label: Contenuto
+        name: body
+        widget: markdown
 
+  - name: mercato
+    label: Calciomercato
+    folder: _posts/mercato
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - label: Giocatore
+        name: player
+        widget: string
+      - label: Tipo
+        name: type
+        widget: select
+        options:
+          - in
+          - out
+          - rumor
+      - label: Dettagli
+        name: detail
+        widget: string
+      - label: Data
+        name: date
+        widget: datetime
