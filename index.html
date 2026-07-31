@@ -298,6 +298,26 @@
 .news-card .date{color:var(--ink-soft);font-size:.8rem}
 .news-card .read{color:var(--lago);font-weight:800;font-size:.8rem}
 .news-card:hover .read{text-decoration:underline}
+
+/* ===== CLASSIFICHE ===== */
+  .tbls{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:820px){.tbls{grid-template-columns:1fr}}
+  .tbl{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 24px rgba(6,47,99,.08);overflow:hidden}
+  .tbl .cap{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 18px;background:linear-gradient(90deg,var(--azzurro-scuro),var(--azzurro));color:#fff}
+  .tbl .cap h3{font-size:1rem}
+  .tbl .cap .md{font-size:.67rem;text-transform:uppercase;letter-spacing:.1em;opacity:.85;white-space:nowrap}
+  .tbl table{width:100%;border-collapse:collapse;font-size:.9rem}
+  .tbl th{background:var(--bg);color:var(--ink-soft);font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;padding:9px 8px;text-align:right}
+  .tbl th:nth-child(1){text-align:center;width:36px}
+  .tbl th:nth-child(2){text-align:left}
+  .tbl th:last-child,.tbl td.pts{padding-right:16px}
+  .tbl td{padding:10px 8px;text-align:right;border-top:1px solid var(--border);color:var(--ink);font-variant-numeric:tabular-nums}
+  .tbl td:nth-child(1){text-align:center;color:var(--ink-soft);font-weight:800}
+  .tbl td:nth-child(2){text-align:left;font-weight:600}
+  .tbl td.pts{font-weight:900;color:var(--azzurro)}
+  .tbl tr.us td{background:linear-gradient(90deg,rgba(46,134,255,.16),transparent);font-weight:800}
+  .tbl tr.us td:nth-child(1){color:var(--azzurro)}
+  .tbl tr.gap td{text-align:center;color:var(--ink-soft);letter-spacing:.35em;padding:5px 0;font-size:.68rem}
   
 </style>
 <script async src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -359,7 +379,7 @@
   <div class="hero-overlay"></div>
   <div class="grain"></div>
   <div class="wrap hero-content">
-    <span class="kicker">🏔️ Serie A · Sul Lago di Como</span>
+    <span class="kicker">🏔️ Serie A e Champions League· Sul Lago di Como</span>
     <div class="herologo" aria-label="ilComasco — Portale dei tifosi lariani">
       <svg viewBox="0 0 680 196" role="img" xmlns="http://www.w3.org/2000/svg">
         <title>ilComasco — Portale dei tifosi lariani</title>
@@ -476,7 +496,7 @@
 <!-- CLASSIFICA -->
 <section id="classifica" style="background:var(--bg2)">
   <div class="wrap">
-    <div class="sec-head reveal"><div><div class="tag">Serie A</div><h2>Classifica</h2></div></div>
+    <div class="sec-head reveal"><div><div class="tag">Serie A · Champions League </div><h2>Classifica</h2></div></div>
     <div class="reveal" id="tableWrap"></div>
   </div>
 </section>
@@ -583,8 +603,44 @@ const FIXTURES = [
   //{ comp:"Serie A", match:"Como — Sassuolo",    date:"Dom 25 ott · 15:00", where:"Casa" },
 ];
 
-// CLASSIFICA — es: { pos:1, team:"Como 1907", pts:0, us:true }
-const STANDINGS = [];
+// CLASSIFICHE (lette da data/standings.json)
+(function(){
+  const el=document.getElementById('tableWrap');
+  const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const isUs=n=>/como/i.test(n||'');
+  const TOP={SA:6,CL:8};
+
+  function reduce(rows,code){
+    const top=TOP[code]||6;
+    const out=rows.slice(0,top);
+    const i=rows.findIndex(r=>isUs(r.team));
+    if(i>=top){
+      out.push({gap:true});
+      rows.slice(i-1,i+2).forEach(r=>out.push(r));
+    }
+    return out;
+  }
+
+  function card(c){
+    const rows=reduce(c.table||[],c.code);
+    if(!rows.length) return '';
+    const body=rows.map(r=> r.gap
+      ? '<tr class="gap"><td colspan="5">•••</td></tr>'
+      : `<tr class="${isUs(r.team)?'us':''}"><td>${r.pos}</td><td>${esc(r.team)}</td><td>${r.g}</td><td>${r.dr>0?'+':''}${r.dr}</td><td class="pts">${r.pts}</td></tr>`
+    ).join('');
+    return `<div class="tbl">
+      <div class="cap"><h3>${esc(c.label)}</h3>${c.matchday?`<span class="md">Giornata ${c.matchday}</span>`:''}</div>
+      <table><thead><tr><th>#</th><th>Squadra</th><th>G</th><th>DR</th><th>Pt</th></tr></thead><tbody>${body}</tbody></table>
+    </div>`;
+  }
+
+  fetch('/data/standings.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{
+    const cards=(d.competitions||[]).map(card).filter(Boolean).join('');
+    if(!cards){el.innerHTML=emptyState('Classifiche non ancora disponibili','data/standings.json');return}
+    const when=d.updated?new Date(d.updated).toLocaleString('it-IT',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'';
+    el.innerHTML=`<div class="tbls">${cards}</div><p style="text-align:center;color:var(--ink-soft);font-size:.76rem;margin-top:16px">${when?'Aggiornato il '+when+' · ':''}Dati <a href="https://www.football-data.org" target="_blank" rel="noopener noreferrer" style="color:var(--ink-soft);text-decoration:underline">football-data.org</a></p>`;
+  }).catch(()=>{el.innerHTML=emptyState('Classifiche non disponibili','data/standings.json')});
+})();
 
 // I NOSTRI EROI (rosa) — es: { name:"Nome Cognome", role:"Attaccante", number:"NC" }
 
