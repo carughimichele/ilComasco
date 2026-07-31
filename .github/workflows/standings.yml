@@ -22,5 +22,11 @@ jobs:
           git config user.name "ilComasco bot"
           git config user.email "actions@github.com"
           git add data/standings.json
-          git diff --staged --quiet || git commit -m "Aggiorna classifiche"
+          git diff --staged --quiet && echo "Nessuna modifica" && exit 0
+          git commit -m "Aggiorna classifiche"
+          for i in 1 2 3; do
+            git push && exit 0
+            echo "Push respinto, riprovo ($i)"
+            git pull --rebase --autostash
+          done
           git push
