@@ -334,6 +334,20 @@
   .tbl .lg i.z1{background:#2f9e44}
   .tbl .lg i.z2{background:#f59f00}
   .tbl .lg i.z3{background:var(--live)}
+
+/* ===== ROSA A 5 COLONNE ===== */
+  .g5{grid-template-columns:repeat(5,1fr);gap:16px}
+  @media(max-width:1100px){.g5{grid-template-columns:repeat(4,1fr)}}
+  @media(max-width:900px){.g5{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:680px){.g5{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:430px){.g5{grid-template-columns:1fr}}
+  .g5 .player .top{height:78px}
+  .g5 .player .avatar{width:56px;height:56px;bottom:-28px;left:16px;font-size:1.05rem;border-width:3px}
+  .g5 .player .body{padding:38px 16px 18px}
+  .g5 .player .body h3{font-size:1rem;line-height:1.25}
+  .g5 .player .body .pos{font-size:.78rem}
+  .g5 .player .hint{font-size:.68rem}
+  .g5 .player .bio{font-size:.85rem}  
   
 </style>
 <script async src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -521,7 +535,7 @@
 <section id="eroi">
   <div class="wrap">
     <div class="sec-head reveal"><div><div class="tag">La rosa Lariana</div><h2>I Nostri Eroi</h2></div></div>
-    <div class="grid g3 reveal" id="squadGrid"></div>
+    <div class="grid g5 reveal" id="squadGrid"></div>
   </div>
 </section>
 
@@ -833,8 +847,8 @@ function emptyState(titolo,lista){
 
 // I NOSTRI EROI
 (function(){const el=document.getElementById('squadGrid');
-  if(!SQUAD.length){el.classList.remove('g3');el.innerHTML=emptyState('Rosa non ancora inserita','SQUAD');return}
-  el.classList.add('grid','g3');
+  if(!SQUAD.length){el.classList.remove('g5');el.innerHTML=emptyState('Rosa non ancora inserita','SQUAD');return}
+  el.classList.add('grid','g5');
   el.innerHTML=SQUAD.map(p=>{
     const hasPanel = p.bio!==undefined;
     const topStyle = p.bandiera ? ` style="background-image:url('${p.bandiera}');background-size:cover;background-position:center"` : '';
