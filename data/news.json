@@ -1,1 +1,12 @@
-{ "news": [] }
+{
+  "news": [
+    {
+      "cat": "Como",
+      "slug": "nasce-ilcomasco",
+      "title": "Nasce ilComasco, Il Portale dei tifosi Lariani.",
+      "date": "2026-08-01",
+      "summary": "Da oggi i tifosi Lariani hanno una casa online: notizie, mercato, calendario e tanto altro.",
+      "body": "ilComasco nasce da un'idea semplice: dare ai tifosi biancoblu un posto dove trovare tutto in un colpo solo.\n\nNon siamo il club: siamo tifosi come te. Commenta, discuti, portaci le tue idee. Forza Como sempre."
+    }
+  ]
+}
