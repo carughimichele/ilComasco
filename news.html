@@ -15,7 +15,7 @@
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;transition:background .4s,color .4s}
   a{color:inherit;text-decoration:none}
-  h1,h2{line-height:1.15;font-weight:800;letter-spacing:-.02em}
+  h1,h2,h3{line-height:1.15;font-weight:800;letter-spacing:-.02em}
   .nav{background:var(--azzurro-scuro);padding:13px 0}
   .nav .in{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between}
   .brand{display:flex;align-items:center;gap:10px;color:#fff;font-size:1.15rem;font-weight:800}
@@ -34,7 +34,16 @@
   .art .date{color:var(--ink-soft);font-size:.85rem;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--border)}
   .art p{font-size:1.07rem;line-height:1.78;margin-bottom:18px;max-width:66ch}
   .art p:first-of-type{font-size:1.18rem;line-height:1.65}
-  .art p:last-child{margin-bottom:0} 
+  .art p:last-child{margin-bottom:0}
+  .art a{color:var(--azzurro);font-weight:700;text-decoration:underline}
+  .art strong{font-weight:800}
+  .art h2{font-size:1.32rem;margin:34px 0 12px;letter-spacing:-.01em}
+  .art h3{font-size:1.12rem;margin:26px 0 10px;color:var(--azzurro)}
+  .art h2:first-child,.art h3:first-child{margin-top:0}
+  .art ul,.art ol{max-width:66ch;margin:0 0 18px 22px}
+  .art li{font-size:1.07rem;line-height:1.72;margin-bottom:7px;padding-left:4px}
+  .art ul li::marker{color:var(--lago)}
+  .art ol li::marker{color:var(--azzurro);font-weight:800}
   .comments{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 24px rgba(6,47,99,.08);padding:28px 30px;margin:26px 0 60px}
   .comments h2{font-size:1.1rem;margin-bottom:4px}
   .comments .sub{color:var(--ink-soft);font-size:.88rem;margin-bottom:18px}
@@ -100,13 +109,37 @@
 
 (function(){
   var id=new URLSearchParams(location.search).get('id');
+
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
   function fmt(d){var x=new Date(d);return isNaN(x)?esc(d):x.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'})}
+
+  function rich(t){return esc(t)
+    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+    .replace(/(^|[^*])\*([^*]+)\*/g,'$1<em>$2</em>')
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');}
+
+  function render(t){
+    var out='',list=null;
+    String(t||'').split(/\r?\n/).forEach(function(line){
+      var s=line.trim();
+      if(!s){if(list){out+='</'+list+'>';list=null}return}
+      var ul=s.match(/^[-*]\s+(.*)$/), ol=s.match(/^\d+[.)]\s+(.*)$/), h=s.match(/^(#{2,3})\s+(.*)$/);
+      if(ul){if(list!=='ul'){if(list)out+='</'+list+'>';out+='<ul>';list='ul'}out+='<li>'+rich(ul[1])+'</li>';return}
+      if(ol){if(list!=='ol'){if(list)out+='</'+list+'>';out+='<ol>';list='ol'}out+='<li>'+rich(ol[1])+'</li>';return}
+      if(list){out+='</'+list+'>';list=null}
+      if(h){var lv=h[1].length===2?'h2':'h3';out+='<'+lv+'>'+rich(h[2])+'</'+lv+'>';return}
+      out+='<p>'+rich(s)+'</p>';
+    });
+    if(list)out+='</'+list+'>';
+    return out;
+  }
+
   fetch('/data/news.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(data){
     var n=(data.news||[]).filter(function(x){return x.slug===id})[0];
     if(!n){
       document.getElementById('title').textContent='Notizia non trovata';
-      document.getElementById('body').innerHTML='<p>Il link potrebbe essere sbagliato o la notizia è stata rimossa. Torna alle <a href="index.html#news" style="color:var(--azzurro);font-weight:700">ultime notizie</a>.</p>';
+      document.getElementById('body').innerHTML='<p>Il link potrebbe essere sbagliato o la notizia è stata rimossa. Torna alle <a href="index.html#news">ultime notizie</a>.</p>';
       return;
     }
     document.title=n.title+' — ilComasco';
@@ -115,8 +148,9 @@
     document.getElementById('kicker').innerHTML='<span class="kicker">'+esc(n.cat||'Como')+'</span>';
     document.getElementById('title').textContent=n.title;
     document.getElementById('date').textContent=fmt(n.date);
-    document.getElementById('body').innerHTML=String(n.body||n.summary||'').split(/\n+/).filter(Boolean).map(function(p){return '<p>'+esc(p)+'</p>'}).join('');
+    document.getElementById('body').innerHTML=render(n.body||n.summary||'');
     document.getElementById('commentsBox').style.display='block';
+
     var dark=document.documentElement.getAttribute('data-theme')==='dark';
     var s=document.createElement('script');
     s.src='https://giscus.app/client.js';
