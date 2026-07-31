@@ -7,45 +7,40 @@ media_folder: images
 public_folder: /images
 
 collections:
-  - name: notizie
-    label: Notizie
-    folder: _posts/notizie
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - label: Titolo
-        name: title
-        widget: string
-      - label: Data
-        name: date
-        widget: datetime
-      - label: Categoria
-        name: category
-        widget: string
-        default: Calcio
-      - label: Contenuto
-        name: body
-        widget: markdown
-
-  - name: mercato
-    label: Calciomercato
-    folder: _posts/mercato
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - label: Giocatore
-        name: player
-        widget: string
-      - label: Tipo
-        name: type
-        widget: select
-        options:
-          - in
-          - out
-          - rumor
-      - label: Dettagli
-        name: detail
-        widget: string
-      - label: Data
-        name: date
-        widget: datetime
+  - name: contenuti
+    label: Contenuti
+    files:
+      - name: news
+        label: Notizie
+        file: data/news.json
+        format: json
+        fields:
+          - label: Notizie
+            name: news
+            widget: list
+            label_singular: Notizia
+            summary: "{{fields.title}}"
+            fields:
+              - label: Indirizzo (non cambiarlo dopo)
+                name: slug
+                widget: string
+                hint: "solo minuscole e trattini, es. nasce-ilcomasco"
+              - label: Titolo
+                name: title
+                widget: string
+              - label: Categoria
+                name: cat
+                widget: string
+                default: Como
+              - label: Data
+                name: date
+                widget: datetime
+                date_format: "DD/MM/YYYY"
+                time_format: false
+                format: "YYYY-MM-DD"
+              - label: Sommario (1 riga)
+                name: summary
+                widget: text
+              - label: Testo completo
+                name: body
+                widget: text
