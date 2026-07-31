@@ -354,7 +354,6 @@
   .squad-sec:last-child{margin-bottom:0}
   .squad-sec .hd{display:flex;align-items:center;gap:12px;margin-bottom:1px}
   .squad-sec .hd h3{font-size:1rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);white-space:nowrap}
-  .squad-sec .hd .n{background:var(--azzurro);color:#fff;font-size:.68rem;font-weight:800;padding:3px 10px;border-radius:100px}
   .squad-sec .hd .ln{flex:1;height:1px;background:var(--border)}
   .squad-sec{margin-bottom:14px !important}
   .squad-sec .hd{margin:0 0 12px !important}
@@ -423,7 +422,7 @@
   <div class="hero-overlay"></div>
   <div class="grain"></div>
   <div class="wrap hero-content">
-    <span class="kicker">🏔️ Serie A e Champions League· Sul Lago di Como</span>
+    <span class="kicker">⚽ Serie A e Champions League · Sul Lago di Como 🌊</span>
     <div class="herologo" aria-label="ilComasco — Portale dei tifosi lariani">
       <svg viewBox="0 0 680 196" role="img" xmlns="http://www.w3.org/2000/svg">
         <title>ilComasco — Portale dei tifosi lariani</title>
@@ -892,8 +891,7 @@ function emptyState(titolo,lista){
 
   el.innerHTML=GROUPS.filter(g=>buckets[g.key]&&buckets[g.key].length).map(g=>
     `<section class="squad-sec">
-      <div class="hd"><h3>${g.icon} ${g.label}</h3><span class="n">${buckets[g.key].length}</span><span class="ln"></span></div>
-      <div class="grid g5">${buckets[g.key].map(card).join('')}</div>
+    <div class="hd"><h3>${g.icon} ${g.label}</h3><span class="ln"></span></div>      <div class="grid g5">${buckets[g.key].map(card).join('')}</div>
     </section>`).join('');
 })();
 
