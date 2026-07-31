@@ -3,7 +3,7 @@ backend:
   repo: carughimichele/ilComasco
   branch: main
   auth_type: implicit
-  app_id: 06fa2a5cc88e1ae56fb7
+  app_id: Ov23lioljUC0xrtMvJ0g
 
 media_folder: images
 public_folder: /images
