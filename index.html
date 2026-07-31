@@ -348,6 +348,14 @@
   .g5 .player .body .pos{font-size:.78rem}
   .g5 .player .hint{font-size:.68rem}
   .g5 .player .bio{font-size:.85rem}  
+
+/* ===== REPARTI ROSA ===== */
+  .squad-sec{margin-bottom:38px}
+  .squad-sec:last-child{margin-bottom:0}
+  .squad-sec .hd{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .squad-sec .hd h3{font-size:1rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);white-space:nowrap}
+  .squad-sec .hd .n{background:var(--azzurro);color:#fff;font-size:.68rem;font-weight:800;padding:3px 10px;border-radius:100px}
+  .squad-sec .hd .ln{flex:1;height:1px;background:var(--border)}
   
 </style>
 <script async src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -720,8 +728,46 @@ const FIXTURES = [
   }).catch(()=>{el.innerHTML=emptyState('Classifiche non disponibili','data/standings.json')});
 })();
 
-// I NOSTRI EROI (rosa) — es: { name:"Nome Cognome", role:"Attaccante", number:"NC" }
+// I NOSTRI EROI (divisi per reparto)
+(function(){
+  const el=document.getElementById('squadGrid');
+  el.classList.remove('grid','g5');
+  if(!SQUAD.length){el.innerHTML=emptyState('Rosa non ancora inserita','SQUAD');return}
 
+  const GROUPS=[
+    {key:'por',label:'Portieri',       icon:'🧤',match:/portiere|estremo/i},
+    {key:'dif',label:'Difensori',      icon:'🛡️',match:/difensore|terzino|libero|centrale/i},
+    {key:'cen',label:'Centrocampisti', icon:'🎼',match:/centrocampista|mezzala|mediano|trequartista|regista|esterno/i},
+    {key:'att',label:'Attaccanti',     icon:'⚽',match:/attaccante|punta|ala/i},
+    {key:'alt',label:'Altri',          icon:'👥',match:/.*/}
+  ];
+
+  const buckets={};
+  SQUAD.forEach(p=>{
+    const g=GROUPS.find(g=>g.match.test(p.role||''))||GROUPS[GROUPS.length-1];
+    (buckets[g.key]=buckets[g.key]||[]).push(p);
+  });
+
+  function card(p){
+    const hasPanel=p.bio!==undefined;
+    const topStyle=p.bandiera?` style="background-image:url('${p.bandiera}');background-size:cover;background-position:center"`:'';
+    return `<div class="player${hasPanel?' clickable':''}"${hasPanel?' onclick="this.classList.toggle(\'open\')"':''}>
+      <div class="top"${topStyle}><div class="avatar">${p.number||p.initials||''}</div></div>
+      <div class="body">
+        <h3>${p.name||''}</h3>
+        <div class="pos">${p.role||''}</div>
+        ${hasPanel?`<span class="hint">Scheda <span class="chev">▾</span></span><div class="bio">${p.bio||''}</div>`:''}
+      </div>
+    </div>`;
+  }
+
+  el.innerHTML=GROUPS.filter(g=>buckets[g.key]&&buckets[g.key].length).map(g=>
+    `<section class="squad-sec">
+      <div class="hd"><h3>${g.icon} ${g.label}</h3><span class="n">${buckets[g.key].length}</span><span class="ln"></span></div>
+      <div class="grid g5">${buckets[g.key].map(card).join('')}</div>
+    </section>`).join('');
+})();
+  
 const FLAGS = {
   it:"https://flagcdn.com/w320/it.png", // Italia
   fr:"https://flagcdn.com/w320/fr.png", // Francia
