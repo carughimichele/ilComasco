@@ -40,7 +40,7 @@ collections:
                 format: "YYYY-MM-DD"
               - label: Sommario (1 riga)
                 name: summary
-                widget: text
+                widget: markdown
               - label: Testo completo
                 name: body
-                widget: text
+                widget: markdown
