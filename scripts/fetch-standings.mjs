@@ -33,13 +33,14 @@ async function fetchOne(c) {
   } else {
     rows.sort((a, b) => a.pos - b.pos);
   }
-return {
+  return {
     code: c.code,
     label: c.label,
     matchday: j.season?.currentMatchday ?? null,
     season: { start: j.season?.startDate ?? null, end: j.season?.endDate ?? null },
     table: rows
-  };}
+  };
+}
 
 const previous = existsSync(OUT) ? JSON.parse(readFileSync(OUT, 'utf8')) : { competitions: [] };
 const out = { updated: new Date().toISOString(), competitions: [] };
