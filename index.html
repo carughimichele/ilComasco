@@ -286,6 +286,19 @@
   border: 1px solid var(--border) !important;
 }
 
+/* ===== CARD NOTIZIE ===== */
+.news-card{display:flex;flex-direction:column;height:100%}
+.news-card .cover{height:118px;flex-shrink:0;position:relative;background:linear-gradient(150deg,var(--azzurro-chiaro),var(--azzurro))}
+.news-card .cover::after{content:"";position:absolute;inset:0;opacity:.16;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:16px 16px}
+.news-card .badge{position:absolute;left:16px;bottom:13px;z-index:2;background:rgba(255,255,255,.93);color:var(--azzurro);font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:100px}
+.news-card .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px;flex:1}
+.news-card h4{font-size:1.12rem;line-height:1.32;color:var(--ink)}
+.news-card p{color:var(--ink-soft);font-size:.93rem;margin:0}
+.news-card .foot{margin-top:auto;padding-top:14px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
+.news-card .date{color:var(--ink-soft);font-size:.8rem}
+.news-card .read{color:var(--lago);font-weight:800;font-size:.8rem}
+.news-card:hover .read{text-decoration:underline}
+  
 </style>
 <script async src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
@@ -673,7 +686,15 @@ function emptyState(titolo,lista){
   fetch('/data/news.json',{cache:'no-store'}).then(r=>r.json()).then(data=>{
     const list=(data.news||[]).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date)));
     if(!list.length){el.innerHTML=emptyState('Ancora nessuna notizia','data/news.json');return}
-    el.innerHTML=list.map(n=>`<a class="card news-item" href="news.html?id=${encodeURIComponent(n.slug||'')}"><div class="thumb"></div><div><h4>${esc(n.title)}</h4><div class="date">${fmt(n.date)}${n.cat?' · '+esc(n.cat):''}</div></div></a>`).join('');
+    el.classList.add('g3');
+    el.innerHTML=list.map(n=>`<a class="card news-card" href="news.html?id=${encodeURIComponent(n.slug||'')}">
+      <div class="cover"><span class="badge">${esc(n.cat||'Como')}</span></div>
+      <div class="body">
+        <h4>${esc(n.title)}</h4>
+        <p>${esc(n.summary||'')}</p>
+        <div class="foot"><span class="date">${fmt(n.date)}</span><span class="read">Leggi →</span></div>
+      </div>
+    </a>`).join('');
   }).catch(()=>{el.innerHTML=emptyState('Notizie non disponibili','data/news.json')});
 })();
 
