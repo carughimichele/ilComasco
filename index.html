@@ -728,45 +728,8 @@ const FIXTURES = [
   }).catch(()=>{el.innerHTML=emptyState('Classifiche non disponibili','data/standings.json')});
 })();
 
-// I NOSTRI EROI (divisi per reparto)
-(function(){
-  const el=document.getElementById('squadGrid');
-  el.classList.remove('grid','g5');
-  if(!SQUAD.length){el.innerHTML=emptyState('Rosa non ancora inserita','SQUAD');return}
 
-  const GROUPS=[
-    {key:'por',label:'Portieri',       icon:'🧤',match:/portiere|estremo/i},
-    {key:'dif',label:'Difensori',      icon:'🛡️',match:/difensore|terzino|libero|centrale/i},
-    {key:'cen',label:'Centrocampisti', icon:'🎼',match:/centrocampista|mezzala|mediano|trequartista|regista|esterno/i},
-    {key:'att',label:'Attaccanti',     icon:'⚽',match:/attaccante|punta|ala/i},
-    {key:'alt',label:'Altri',          icon:'👥',match:/.*/}
-  ];
 
-  const buckets={};
-  SQUAD.forEach(p=>{
-    const g=GROUPS.find(g=>g.match.test(p.role||''))||GROUPS[GROUPS.length-1];
-    (buckets[g.key]=buckets[g.key]||[]).push(p);
-  });
-
-  function card(p){
-    const hasPanel=p.bio!==undefined;
-    const topStyle=p.bandiera?` style="background-image:url('${p.bandiera}');background-size:cover;background-position:center"`:'';
-    return `<div class="player${hasPanel?' clickable':''}"${hasPanel?' onclick="this.classList.toggle(\'open\')"':''}>
-      <div class="top"${topStyle}><div class="avatar">${p.number||p.initials||''}</div></div>
-      <div class="body">
-        <h3>${p.name||''}</h3>
-        <div class="pos">${p.role||''}</div>
-        ${hasPanel?`<span class="hint">Scheda <span class="chev">▾</span></span><div class="bio">${p.bio||''}</div>`:''}
-      </div>
-    </div>`;
-  }
-
-  el.innerHTML=GROUPS.filter(g=>buckets[g.key]&&buckets[g.key].length).map(g=>
-    `<section class="squad-sec">
-      <div class="hd"><h3>${g.icon} ${g.label}</h3><span class="n">${buckets[g.key].length}</span><span class="ln"></span></div>
-      <div class="grid g5">${buckets[g.key].map(card).join('')}</div>
-    </section>`).join('');
-})();
   
 const FLAGS = {
   it:"https://flagcdn.com/w320/it.png", // Italia
@@ -891,22 +854,44 @@ function emptyState(titolo,lista){
   el.innerHTML=FIXTURES.map(f=>`<div class="fix"><div><div class="comp">${f.comp||''}</div><div class="match">${f.match||''}</div></div><div class="date">${f.date||''}${f.where?'<br><span style="background:var(--bg);color:var(--azzurro);font-weight:800;font-size:.72rem;padding:5px 12px;border-radius:100px;display:inline-block;margin-top:4px">'+f.where+'</span>':''}</div></div>`).join('');
 })();
 
-// I NOSTRI EROI
-(function(){const el=document.getElementById('squadGrid');
-  if(!SQUAD.length){el.classList.remove('g5');el.innerHTML=emptyState('Rosa non ancora inserita','SQUAD');return}
-  el.classList.add('grid','g5');
-  el.innerHTML=SQUAD.map(p=>{
-    const hasPanel = p.bio!==undefined;
-    const topStyle = p.bandiera ? ` style="background-image:url('${p.bandiera}');background-size:cover;background-position:center"` : '';
+// I NOSTRI EROI (divisi per reparto)
+(function(){
+  const el=document.getElementById('squadGrid');
+  el.classList.remove('grid','g5');
+  if(!SQUAD.length){el.innerHTML=emptyState('Rosa non ancora inserita','SQUAD');return}
+
+  const GROUPS=[
+    {key:'por',label:'Portieri',       icon:'🧤',match:/portiere|estremo/i},
+    {key:'dif',label:'Difensori',      icon:'🛡️',match:/difensore|terzino|libero|centrale/i},
+    {key:'cen',label:'Centrocampisti', icon:'🎼',match:/centrocampista|mezzala|mediano|trequartista|regista|esterno/i},
+    {key:'att',label:'Attaccanti',     icon:'⚽',match:/attaccante|punta|ala/i},
+    {key:'alt',label:'Altri',          icon:'👥',match:/.*/}
+  ];
+
+  const buckets={};
+  SQUAD.forEach(p=>{
+    const g=GROUPS.find(g=>g.match.test(p.role||''))||GROUPS[GROUPS.length-1];
+    (buckets[g.key]=buckets[g.key]||[]).push(p);
+  });
+
+  function card(p){
+    const hasPanel=p.bio!==undefined;
+    const topStyle=p.bandiera?` style="background-image:url('${p.bandiera}');background-size:cover;background-position:center"`:'';
     return `<div class="player${hasPanel?' clickable':''}"${hasPanel?' onclick="this.classList.toggle(\'open\')"':''}>
-      <div class="top"${topStyle}><div class="avatar">${p.initials||''}</div></div>
+      <div class="top"${topStyle}><div class="avatar">${p.number||p.initials||''}</div></div>
       <div class="body">
         <h3>${p.name||''}</h3>
         <div class="pos">${p.role||''}</div>
         ${hasPanel?`<span class="hint">Scheda <span class="chev">▾</span></span><div class="bio">${p.bio||''}</div>`:''}
       </div>
     </div>`;
-  }).join('');
+  }
+
+  el.innerHTML=GROUPS.filter(g=>buckets[g.key]&&buckets[g.key].length).map(g=>
+    `<section class="squad-sec">
+      <div class="hd"><h3>${g.icon} ${g.label}</h3><span class="n">${buckets[g.key].length}</span><span class="ln"></span></div>
+      <div class="grid g5">${buckets[g.key].map(card).join('')}</div>
+    </section>`).join('');
 })();
 
 // COUNTDOWN
