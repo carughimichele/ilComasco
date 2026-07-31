@@ -7,62 +7,134 @@
 <meta name="description" id="metaDesc" content="Notizie sul Calcio Como 1907 da ilComasco.">
 <meta name="theme-color" content="#062f63">
 <style>
-:root{--azzurro:#0a4da2;--azzurro-scuro:#062f63;--lago:#12b5c9;--bg:#eef4fc;--card:#fff;--ink:#0b1220;--ink-soft:#5b6b82;--border:#e4edfa;--radius:18px}
-[data-theme="dark"]{--bg:#0a1526;--card:#12233f;--ink:#eaf2ff;--ink-soft:#93a7c6;--border:#1d3355}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
-.topbar{background:var(--azzurro-scuro);padding:16px 22px}
-.topbar a{color:#fff;font-weight:800;text-decoration:none;font-size:1.1rem}
-.wrap{max-width:760px;margin:0 auto;padding:40px 22px 70px}
-.back{display:inline-block;color:var(--azzurro);font-weight:700;text-decoration:none;font-size:.9rem;margin-bottom:22px}
-.meta{color:var(--lago);font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.75rem}
-h1{font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.15;letter-spacing:-.02em;margin:10px 0 6px}
-.date{color:var(--ink-soft);font-size:.9rem;margin-bottom:26px}
-.body p{margin-bottom:16px;font-size:1.07rem}
-.comments{margin-top:56px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:26px}
-.comments h2{font-size:1.15rem;margin-bottom:18px}
+  :root{--azzurro:#0a4da2;--azzurro-chiaro:#2e86ff;--azzurro-scuro:#062f63;--lago:#12b5c9;
+    --bg:#eef4fc;--card:#fff;--ink:#0b1220;--ink-soft:#5b6b82;--border:#e4edfa;--footer:#0b1220;
+    --shadow:0 18px 45px rgba(6,47,99,.14);--radius:18px}
+  [data-theme="dark"]{--bg:#0a1526;--card:#12233f;--ink:#eaf2ff;--ink-soft:#93a7c6;
+    --border:#1d3355;--footer:#04081a;--shadow:0 18px 45px rgba(0,0,0,.5)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;transition:background .4s,color .4s}
+  a{color:inherit;text-decoration:none}
+  h1,h2{line-height:1.15;font-weight:800;letter-spacing:-.02em}
+  .nav{background:var(--azzurro-scuro);padding:13px 0}
+  .nav .in{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px;color:#fff;font-size:1.15rem;font-weight:800}
+  .brand .il{opacity:.85;font-weight:600}
+  .brand svg{width:34px;height:34px}
+  .icon-btn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.25s}
+  .icon-btn:hover{background:#fff;color:var(--azzurro)}
+  .head{background:linear-gradient(160deg,var(--azzurro-scuro),var(--azzurro));color:#fff;padding:48px 0 60px;position:relative;overflow:hidden}
+  .head::after{content:"";position:absolute;inset:0;opacity:.05;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:22px 22px}
+  .head .in{max-width:760px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+  .back{display:inline-block;font-size:.85rem;font-weight:700;opacity:.85;margin-bottom:18px}
+  .back:hover{opacity:1;color:var(--lago)}
+  .kicker{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:5px 14px;border-radius:100px;font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+  .head h1{font-size:clamp(1.8rem,4.6vw,2.7rem);margin:16px 0 10px}
+  .head .date{font-size:.9rem;opacity:.85}
+  .sheet{max-width:760px;margin:-34px auto 0;padding:0 22px}
+  .art{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:38px 34px}
+  .art p{font-size:1.07rem;margin-bottom:18px}
+  .art p:first-child{font-size:1.18rem}
+  .art p:last-child{margin-bottom:0}
+  .comments{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 24px rgba(6,47,99,.08);padding:28px 30px;margin:26px 0 60px}
+  .comments h2{font-size:1.1rem;margin-bottom:4px}
+  .comments .sub{color:var(--ink-soft);font-size:.88rem;margin-bottom:18px}
+  footer{background:var(--footer);color:#9fb2cc;text-align:center;padding:30px 22px;font-size:.85rem}
+  footer strong{color:#fff}
+  footer .disc{max-width:760px;margin:10px auto 0;font-size:.74rem;opacity:.65}
+  @media(max-width:640px){.art{padding:26px 20px}.comments{padding:22px 18px}}
 </style>
 </head>
 <body>
-<div class="topbar"><a href="index.html">← ilComasco</a></div>
-<div class="wrap">
-  <a class="back" href="index.html#news">Tutte le notizie</a>
-  <div id="article">Caricamento…</div>
+<header class="nav"><div class="in">
+  <a class="brand" href="index.html">
+    <svg viewBox="0 0 230 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset="1" stop-color="#12b5c9"/></linearGradient></defs>
+      <g fill="none" stroke="url(#lg)" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M128 132 L150 180 L168 228" stroke-width="21"/>
+        <path d="M128 132 L92 148 L50 130" stroke-width="21"/>
+        <path d="M150 60 L128 132" stroke-width="23"/>
+        <path d="M150 74 L185 64 L206 44" stroke-width="14"/>
+        <path d="M150 80 L119 112" stroke-width="14"/>
+      </g>
+      <circle cx="158" cy="44" r="18" fill="url(#lg)"/>
+    </svg>
+    <span><span class="il">il</span>Comasco</span>
+  </a>
+  <button class="icon-btn" id="theme" aria-label="Cambia tema">🌙</button>
+</div></header>
+
+<section class="head"><div class="in">
+  <a class="back" href="index.html#news">← Tutte le notizie</a>
+  <div id="kicker"></div>
+  <h1 id="title">Caricamento…</h1>
+  <div class="date" id="date"></div>
+</div></section>
+
+<div class="sheet">
+  <article class="art" id="body"></article>
   <div class="comments" id="commentsBox" style="display:none">
-    <h2>💬 Commenta questa notizia</h2>
+    <h2>💬 Dì la tua</h2>
+    <div class="sub">Commenta questa notizia con il tuo account GitHub.</div>
     <div id="giscus"></div>
   </div>
 </div>
+
+<footer>
+  <p><strong>ilComasco</strong> — Forza Como sempre 💙</p>
+  <p class="disc">Sito non ufficiale, realizzato da tifosi. Non affiliato al Como 1907 S.r.l.</p>
+</footer>
+
 <script>
-try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}
-var id=new URLSearchParams(location.search).get('id');
-function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-function fmt(d){var x=new Date(d);return isNaN(x)?esc(d):x.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'})}
-fetch('/data/news.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(data){
-  var box=document.getElementById('article');
-  var n=(data.news||[]).filter(function(x){return x.slug===id})[0];
-  if(!n){box.innerHTML='<h1>Notizia non trovata</h1><p>Torna alla <a href="index.html#news">home</a>.</p>';return}
-  document.title=n.title+' — ilComasco';
-  var m=document.getElementById('metaDesc');
-  if(m)m.setAttribute('content',String(n.summary||n.title).slice(0,155));
-  var paras=String(n.body||n.summary||'').split(/\n+/).filter(Boolean).map(function(p){return '<p>'+esc(p)+'</p>'}).join('');
-  box.innerHTML='<div class="meta">'+esc(n.cat||'Como')+'</div><h1>'+esc(n.title)+'</h1><div class="date">'+fmt(n.date)+'</div><div class="body">'+paras+'</div>';
-  document.getElementById('commentsBox').style.display='block';
-  var s=document.createElement('script');
-  s.src='https://giscus.app/client.js';
-  s.setAttribute('data-repo','carughimichele/ilComasco');
-  s.setAttribute('data-repo-id','R_kgDOToBMJA');
-  s.setAttribute('data-category','Announcements');
-  s.setAttribute('data-category-id','DIC_kwDOToBMJM4DCS1_');
-  s.setAttribute('data-mapping','specific');
-  s.setAttribute('data-term','news-'+n.slug);
-  s.setAttribute('data-reactions-enabled','1');
-  s.setAttribute('data-input-position','bottom');
-  s.setAttribute('data-theme','preferred_color_scheme');
-  s.setAttribute('data-lang','it');
-  s.crossOrigin='anonymous';s.async=true;
-  document.getElementById('giscus').appendChild(s);
-}).catch(function(){document.getElementById('article').innerHTML='<h1>Errore di caricamento</h1>'});
+(function(){
+  var btn=document.getElementById('theme');
+  function apply(t){document.documentElement.setAttribute('data-theme',t);btn.textContent=t==='dark'?'☀️':'🌙'}
+  var saved='light';try{saved=localStorage.getItem('theme')||'light'}catch(e){}
+  apply(saved);
+  btn.addEventListener('click',function(){
+    var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+    apply(t);try{localStorage.setItem('theme',t)}catch(e){}
+  });
+})();
+
+(function(){
+  var id=new URLSearchParams(location.search).get('id');
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function fmt(d){var x=new Date(d);return isNaN(x)?esc(d):x.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'})}
+  fetch('/data/news.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(data){
+    var n=(data.news||[]).filter(function(x){return x.slug===id})[0];
+    if(!n){
+      document.getElementById('title').textContent='Notizia non trovata';
+      document.getElementById('body').innerHTML='<p>Il link potrebbe essere sbagliato o la notizia è stata rimossa. Torna alle <a href="index.html#news" style="color:var(--azzurro);font-weight:700">ultime notizie</a>.</p>';
+      return;
+    }
+    document.title=n.title+' — ilComasco';
+    var m=document.getElementById('metaDesc');
+    if(m)m.setAttribute('content',String(n.summary||n.title).slice(0,155));
+    document.getElementById('kicker').innerHTML='<span class="kicker">'+esc(n.cat||'Como')+'</span>';
+    document.getElementById('title').textContent=n.title;
+    document.getElementById('date').textContent=fmt(n.date);
+    document.getElementById('body').innerHTML=String(n.body||n.summary||'').split(/\n+/).filter(Boolean).map(function(p){return '<p>'+esc(p)+'</p>'}).join('');
+    document.getElementById('commentsBox').style.display='block';
+    var dark=document.documentElement.getAttribute('data-theme')==='dark';
+    var s=document.createElement('script');
+    s.src='https://giscus.app/client.js';
+    s.setAttribute('data-repo','carughimichele/ilComasco');
+    s.setAttribute('data-repo-id','R_kgDOToBMJA');
+    s.setAttribute('data-category','Announcements');
+    s.setAttribute('data-category-id','DIC_kwDOToBMJM4DCS1_');
+    s.setAttribute('data-mapping','specific');
+    s.setAttribute('data-term','news-'+n.slug);
+    s.setAttribute('data-reactions-enabled','1');
+    s.setAttribute('data-input-position','bottom');
+    s.setAttribute('data-theme',dark?'dark':'light');
+    s.setAttribute('data-lang','it');
+    s.crossOrigin='anonymous';s.async=true;
+    document.getElementById('giscus').appendChild(s);
+  }).catch(function(){
+    document.getElementById('title').textContent='Errore di caricamento';
+  });
+})();
 </script>
 </body>
 </html>
