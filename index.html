@@ -548,13 +548,7 @@ const NEXT_MATCH = {
   venue: "🏟️ Bluenergy Stadium · Udine",
   dateISO: "2026-08-22T18:30"
 };
-
-// NOTIZIE — es: { cat:"Match", title:"Titolo", date:"1 set 2026", url:"articolo.html" }
-  
-const NEWS = [
-     { cat:"Como", title:"Nasce ilComasco! 🎉 Il portale dei tifosi Lariani è online.", date:"1 ago 2026", url:"#news" }
-   ];
-  
+   
 // CALCIOMERCATO — type: "in" (entrata) | "out" (uscita) | "rumor" (voce)
 // es: { type:"in", player:"Nome Cognome", detail:"dal Club X · prestito", date:"5 ago 2026" }
   
@@ -671,10 +665,16 @@ function emptyState(titolo,lista){
   return `<div class="empty"><div class="ico">📝</div><h4>${titolo}</h4><p>Aggiungi contenuti modificando la lista <code>${lista}</code> nel codice.</p></div>`;
 }
 
-// NOTIZIE
-(function(){const el=document.getElementById('newsGrid');
-  if(!NEWS.length){el.innerHTML=emptyState('Ancora nessuna notizia','NEWS');return}
-  el.innerHTML=NEWS.map(n=>`<a class="card news-item" href="${n.url||'#'}"><div class="thumb"></div><div><h4>${n.title||''}</h4><div class="date">${[n.date,n.cat].filter(Boolean).join(' · ')}</div></div></a>`).join('');
+// NOTIZIE (lette da data/news.json)
+(function(){
+  const el=document.getElementById('newsGrid');
+  const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const fmt=d=>{const x=new Date(d);return isNaN(x)?esc(d):x.toLocaleDateString('it-IT',{day:'numeric',month:'short',year:'numeric'})};
+  fetch('/data/news.json',{cache:'no-store'}).then(r=>r.json()).then(data=>{
+    const list=(data.news||[]).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+    if(!list.length){el.innerHTML=emptyState('Ancora nessuna notizia','data/news.json');return}
+    el.innerHTML=list.map(n=>`<a class="card news-item" href="news.html?id=${encodeURIComponent(n.slug||'')}"><div class="thumb"></div><div><h4>${esc(n.title)}</h4><div class="date">${fmt(n.date)}${n.cat?' · '+esc(n.cat):''}</div></div></a>`).join('');
+  }).catch(()=>{el.innerHTML=emptyState('Notizie non disponibili','data/news.json')});
 })();
 
 // CALCIOMERCATO
