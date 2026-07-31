@@ -591,8 +591,6 @@ const MERCATO = [
   { type:"rumor", player:"Nome Cognome", detail:"interessamento da Club Z", date:"25 lug 2026" }
 ];
 
-  const STANDINGS = [];
-
 // CALENDARIO — es: { comp:"Serie A", match:"Como — Juventus", date:"Sab 30 ago · 20:45", where:"Casa" }
 const FIXTURES = [
   { comp:"Serie A", match:"Udinese — Como",     date:"Sab 22 ago · 18:30", where:"Trasferta" },
@@ -767,13 +765,6 @@ function emptyState(titolo,lista){
 (function(){const el=document.getElementById('fixGrid');
   if(!FIXTURES.length){el.innerHTML=emptyState('Nessuna partita in calendario','FIXTURES');return}
   el.innerHTML=FIXTURES.map(f=>`<div class="fix"><div><div class="comp">${f.comp||''}</div><div class="match">${f.match||''}</div></div><div class="date">${f.date||''}${f.where?'<br><span style="background:var(--bg);color:var(--azzurro);font-weight:800;font-size:.72rem;padding:5px 12px;border-radius:100px;display:inline-block;margin-top:4px">'+f.where+'</span>':''}</div></div>`).join('');
-})();
-
-// CLASSIFICA
-(function(){const el=document.getElementById('tableWrap');
-  if(!STANDINGS.length){el.innerHTML=emptyState('Classifica non ancora inserita','STANDINGS');return}
-  el.innerHTML=`<div class="mini"><table><thead><tr><th>#</th><th>Squadra</th><th>Pt</th></tr></thead><tbody>`+
-    STANDINGS.map(r=>`<tr class="${r.us?'us':''}"><td>${r.pos}</td><td>${r.team}</td><td class="pts">${r.pts}</td></tr>`).join('')+`</tbody></table></div>`;
 })();
 
 // I NOSTRI EROI
