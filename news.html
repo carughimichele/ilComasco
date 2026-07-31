@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notizia — ilComasco</title>
+<meta name="description" id="metaDesc" content="Notizie sul Calcio Como 1907 da ilComasco.">
+<meta name="theme-color" content="#062f63">
+<style>
+:root{--azzurro:#0a4da2;--azzurro-scuro:#062f63;--lago:#12b5c9;--bg:#eef4fc;--card:#fff;--ink:#0b1220;--ink-soft:#5b6b82;--border:#e4edfa;--radius:18px}
+[data-theme="dark"]{--bg:#0a1526;--card:#12233f;--ink:#eaf2ff;--ink-soft:#93a7c6;--border:#1d3355}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+.topbar{background:var(--azzurro-scuro);padding:16px 22px}
+.topbar a{color:#fff;font-weight:800;text-decoration:none;font-size:1.1rem}
+.wrap{max-width:760px;margin:0 auto;padding:40px 22px 70px}
+.back{display:inline-block;color:var(--azzurro);font-weight:700;text-decoration:none;font-size:.9rem;margin-bottom:22px}
+.meta{color:var(--lago);font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.75rem}
+h1{font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.15;letter-spacing:-.02em;margin:10px 0 6px}
+.date{color:var(--ink-soft);font-size:.9rem;margin-bottom:26px}
+.body p{margin-bottom:16px;font-size:1.07rem}
+.comments{margin-top:56px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:26px}
+.comments h2{font-size:1.15rem;margin-bottom:18px}
+</style>
+</head>
+<body>
+<div class="topbar"><a href="index.html">← ilComasco</a></div>
+<div class="wrap">
+  <a class="back" href="index.html#news">Tutte le notizie</a>
+  <div id="article">Caricamento…</div>
+  <div class="comments" id="commentsBox" style="display:none">
+    <h2>💬 Commenta questa notizia</h2>
+    <div id="giscus"></div>
+  </div>
+</div>
+<script>
+try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}
+var id=new URLSearchParams(location.search).get('id');
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function fmt(d){var x=new Date(d);return isNaN(x)?esc(d):x.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'})}
+fetch('/data/news.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(data){
+  var box=document.getElementById('article');
+  var n=(data.news||[]).filter(function(x){return x.slug===id})[0];
+  if(!n){box.innerHTML='<h1>Notizia non trovata</h1><p>Torna alla <a href="index.html#news">home</a>.</p>';return}
+  document.title=n.title+' — ilComasco';
+  var m=document.getElementById('metaDesc');
+  if(m)m.setAttribute('content',String(n.summary||n.title).slice(0,155));
+  var paras=String(n.body||n.summary||'').split(/\n+/).filter(Boolean).map(function(p){return '<p>'+esc(p)+'</p>'}).join('');
+  box.innerHTML='<div class="meta">'+esc(n.cat||'Como')+'</div><h1>'+esc(n.title)+'</h1><div class="date">'+fmt(n.date)+'</div><div class="body">'+paras+'</div>';
+  document.getElementById('commentsBox').style.display='block';
+  var s=document.createElement('script');
+  s.src='https://giscus.app/client.js';
+  s.setAttribute('data-repo','carughimichele/ilComasco');
+  s.setAttribute('data-repo-id','R_kgDOToBMJA');
+  s.setAttribute('data-category','Announcements');
+  s.setAttribute('data-category-id','DIC_kwDOToBMJM4DCS1_');
+  s.setAttribute('data-mapping','specific');
+  s.setAttribute('data-term','news-'+n.slug);
+  s.setAttribute('data-reactions-enabled','1');
+  s.setAttribute('data-input-position','bottom');
+  s.setAttribute('data-theme','preferred_color_scheme');
+  s.setAttribute('data-lang','it');
+  s.crossOrigin='anonymous';s.async=true;
+  document.getElementById('giscus').appendChild(s);
+}).catch(function(){document.getElementById('article').innerHTML='<h1>Errore di caricamento</h1>'});
+</script>
+</body>
+</html>
