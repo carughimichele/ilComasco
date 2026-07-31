@@ -629,9 +629,8 @@ const FIXTURES = [
   function zone(code,pos,total){
     if(code==='SA'){
       if(pos<=4) return {cls:'z1',lbl:'Champions League'};
-      if(pos<=6) return {cls:'z2',lbl:'Europa League'};
-      if(pos<=7) return {cls:'z3',lbl:'Conference League'};
-      if(pos>total-3) return {cls:'z4',lbl:'Retrocessione'};
+      if(pos<=7) return {cls:'z2',lbl:'Europa/Conference League'};
+      if(pos>total-3) return {cls:'z3',lbl:'Retrocessione'};
       return null;
     }
     if(code==='CL'){
