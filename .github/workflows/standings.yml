@@ -1,0 +1,29 @@
+name: Aggiorna classifiche
+
+on:
+  schedule:
+    - cron: '20 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Scarica classifiche
+        env:
+          FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
+        run: node scripts/fetch-standings.mjs
+      - name: Salva
+        run: |
+          git config user.name "ilComasco bot"
+          git config user.email "actions@github.com"
+          git add data/standings.json
+          git diff --staged --quiet || git commit -m "Aggiorna classifiche"
+          git push
