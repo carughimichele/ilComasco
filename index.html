@@ -624,29 +624,71 @@ const FIXTURES = [
   const el=document.getElementById('tableWrap');
   const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const isUs=n=>/como/i.test(n||'');
-  const TOP={SA:6,CL:8};
+  const TOP=8;
 
-  function reduce(rows,code){
-    const top=TOP[code]||6;
-    const out=rows.slice(0,top);
-    const i=rows.findIndex(r=>isUs(r.team));
-    if(i>=top){
-      out.push({gap:true});
-      rows.slice(i-1,i+2).forEach(r=>out.push(r));
+  function zone(code,pos,total){
+    if(code==='SA'){
+      if(pos<=4) return {cls:'z1',lbl:'Champions League'};
+      if(pos<=6) return {cls:'z2',lbl:'Europa League'};
+      if(pos>total-3) return {cls:'z3',lbl:'Retrocessione'};
+      return null;
     }
-    return out;
+    if(code==='CL'){
+      if(pos<=8) return {cls:'z1',lbl:'Ottavi diretti'};
+      if(pos<=24) return {cls:'z2',lbl:'Spareggi'};
+      return {cls:'z3',lbl:'Eliminate'};
+    }
+    return null;
   }
 
+  function legend(code,total){
+    const seen=[],out=[];
+    for(let p=1;p<=total;p++){
+      const z=zone(code,p,total);
+      if(z&&seen.indexOf(z.cls)<0){seen.push(z.cls);out.push(z)}
+    }
+    return out.map(z=>`<span class="lg"><i class="${z.cls}"></i>${esc(z.lbl)}</span>`).join('');
+  }
+
+  function seasonLabel(s){
+    if(!s||!s.start) return '';
+    const a=new Date(s.start), b=new Date(s.end||s.start);
+    if(isNaN(a)) return '';
+    const y1=a.getFullYear(), y2=isNaN(b)?y1:b.getFullYear();
+    return y1===y2?String(y1):y1+'/'+String(y2).slice(-2);
+  }
+  const ended=s=>!!(s&&s.end&&new Date(s.end)<new Date());
+
   function card(c){
-    const rows=reduce(c.table||[],c.code);
-    if(!rows.length) return '';
-    const body=rows.map(r=> r.gap
-      ? '<tr class="gap"><td colspan="5">•••</td></tr>'
-      : `<tr class="${isUs(r.team)?'us':''}"><td>${r.pos}</td><td>${esc(r.team)}</td><td>${r.g}</td><td>${r.dr>0?'+':''}${r.dr}</td><td class="pts">${r.pts}</td></tr>`
-    ).join('');
+    const rows=c.table||[];
+    const total=rows.length;
+    if(!total) return '';
+    const iUs=rows.findIndex(r=>isUs(r.team));
+    const keep={};
+    for(let i=0;i<Math.min(TOP,total);i++) keep[i]=1;
+    if(iUs>=TOP){[iUs-1,iUs,iUs+1].forEach(i=>{if(i>=0&&i<total)keep[i]=1})}
+    const firstExtra=iUs>=0?Math.max(TOP,iUs-1):-1;
+    const jump=iUs>=TOP&&firstExtra>TOP;
+
+    let body='';
+    rows.forEach((r,i)=>{
+      if(jump&&i===firstExtra) body+='<tr class="gap"><td colspan="5">•••</td></tr>';
+      const z=zone(c.code,r.pos,total);
+      const cls=[keep[i]?'':'x',isUs(r.team)?'us':'',z?z.cls:''].filter(Boolean).join(' ');
+      const logo=r.crest?`<img class="cr" src="${esc(r.crest)}" alt="" loading="lazy">`:'<span class="cr"></span>';
+      body+=`<tr class="${cls}"><td class="p">${r.pos}</td><td class="tm">${logo}${esc(r.team)}</td><td>${r.g}</td><td>${r.dr>0?'+':''}${r.dr}</td><td class="pts">${r.pts}</td></tr>`;
+    });
+
+    const sl=seasonLabel(c.season), over=ended(c.season);
+    const note=over?`<div class="note">Classifica finale della stagione ${esc(sl)}. Quella della nuova stagione sarà disponibile a breve.</div>`:'';
+    const head=(!over&&c.matchday)?`<span class="md">Giornata ${c.matchday}</span>`:(sl?`<span class="md">${esc(sl)}</span>`:'');
+
     return `<div class="tbl">
-      <div class="cap"><h3>${esc(c.label)}</h3>${c.matchday?`<span class="md">Giornata ${c.matchday}</span>`:''}</div>
+      <div class="cap"><h3>${esc(c.label)}</h3>${head}</div>
+      ${note}
       <table><thead><tr><th>#</th><th>Squadra</th><th>G</th><th>DR</th><th>Pt</th></tr></thead><tbody>${body}</tbody></table>
+      ${total>TOP?'<button class="more" type="button">Mostra tutta la classifica</button>':''}
+      <div class="leg">${legend(c.code,total)}</div>
     </div>`;
   }
 
@@ -655,6 +697,12 @@ const FIXTURES = [
     if(!cards){el.innerHTML=emptyState('Classifiche non ancora disponibili','data/standings.json');return}
     const when=d.updated?new Date(d.updated).toLocaleString('it-IT',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'';
     el.innerHTML=`<div class="tbls">${cards}</div><p style="text-align:center;color:var(--ink-soft);font-size:.76rem;margin-top:16px">${when?'Aggiornato il '+when+' · ':''}Dati <a href="https://www.football-data.org" target="_blank" rel="noopener noreferrer" style="color:var(--ink-soft);text-decoration:underline">football-data.org</a></p>`;
+    el.querySelectorAll('.more').forEach(b=>{
+      b.addEventListener('click',function(){
+        const t=b.closest('.tbl');
+        b.textContent=t.classList.toggle('open')?'Mostra meno':'Mostra tutta la classifica';
+      });
+    });
   }).catch(()=>{el.innerHTML=emptyState('Classifiche non disponibili','data/standings.json')});
 })();
 
