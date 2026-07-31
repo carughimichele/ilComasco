@@ -2,6 +2,7 @@ backend:
   name: github
   repo: carughimichele/ilComasco
   branch: main
+  base_url: https://ilcomasco-oauth.vercel.app
 media_folder: images
 public_folder: /images
 
