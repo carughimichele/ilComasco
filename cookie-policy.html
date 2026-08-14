@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     COOKIE POLICY — ilComasco
+     Contatto pubblicato: indirizzo composto via JavaScript nel blocco
+     window.ILC_MAIL in fondo al file (per non esporlo agli spam bot).
+     ID Google Analytics: si imposta in js/consent.js
+     Ultimo aggiornamento del testo: 14 agosto 2026
+     ============================================================ -->
+<html lang="it" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookie Policy — ilComasco</title>
+<meta name="description" content="Quali cookie e quali dati locali usa ilComasco: nessun cookie proprio, nessuno strumento di analisi o profilazione. Come gestire il consenso.">
+<meta name="theme-color" content="#062f63">
+<link rel="canonical" href="https://il-comasco.vercel.app/cookie-policy.html">
+<style>
+  :root{--azzurro:#0a4da2;--azzurro-chiaro:#2e86ff;--azzurro-scuro:#062f63;--lago:#12b5c9;--ok:#2f9e44;
+    --bg:#eef4fc;--card:#fff;--ink:#0b1220;--ink-soft:#5b6b82;--border:#e4edfa;--footer:#0b1220;
+    --shadow:0 18px 45px rgba(6,47,99,.14);--radius:18px}
+  [data-theme="dark"]{--bg:#0a1526;--card:#12233f;--ink:#eaf2ff;--ink-soft:#93a7c6;
+    --border:#1d3355;--footer:#04081a;--shadow:0 18px 45px rgba(0,0,0,.5)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;transition:background .4s,color .4s}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{line-height:1.15;font-weight:800;letter-spacing:-.02em}
+  .nav{background:var(--azzurro-scuro);padding:13px 0}
+  .nav .in{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px;color:#fff;font-size:1.15rem;font-weight:800}
+  .brand .il{opacity:.85;font-weight:600}
+  .brand svg{width:34px;height:34px}
+  .icon-btn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.25s}
+  .icon-btn:hover{background:#fff;color:var(--azzurro)}
+  .strip{background:linear-gradient(90deg,var(--azzurro-scuro),var(--azzurro));color:#fff;padding:11px 0}
+  .strip .in{max-width:900px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .back{font-size:.82rem;font-weight:700;opacity:.9}
+  .back:hover{opacity:1;color:var(--lago)}
+  .kicker{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:4px 13px;border-radius:100px;font-size:.66rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+  .sheet{max-width:900px;margin:34px auto 0;padding:0 22px}
+  .art{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:40px 44px 44px;margin-bottom:26px}
+  .art h1{font-size:clamp(1.55rem,3.4vw,2.05rem);margin-bottom:10px}
+  .art .upd{color:var(--ink-soft);font-size:.85rem;padding-bottom:20px;margin-bottom:26px;border-bottom:1px solid var(--border)}
+  .art p{font-size:1.03rem;line-height:1.78;margin-bottom:16px;max-width:70ch}
+  .art h2{font-size:1.22rem;margin:36px 0 12px;padding-top:4px}
+  .art h2:first-of-type{margin-top:0}
+  .art h3{font-size:1.04rem;margin:24px 0 8px;color:var(--azzurro)}
+  .art a{color:var(--azzurro);font-weight:700;text-decoration:underline}
+  .art ul,.art ol{max-width:70ch;margin:0 0 18px 22px}
+  .art li{font-size:1.03rem;line-height:1.72;margin-bottom:8px;padding-left:4px}
+  .art ul li::marker{color:var(--lago)}
+  .art ol li::marker{color:var(--azzurro);font-weight:800}
+  .art strong{font-weight:800}
+  .tw{overflow-x:auto;margin:0 0 22px;border:1px solid var(--border);border-radius:14px}
+  table.dt{width:100%;border-collapse:collapse;font-size:.88rem;min-width:600px}
+  table.dt th{background:var(--azzurro-scuro);color:#fff;text-align:left;font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;padding:11px 14px;font-weight:800}
+  table.dt td{padding:11px 14px;border-top:1px solid var(--border);vertical-align:top;line-height:1.55}
+  table.dt tr:nth-child(even) td{background:rgba(46,134,255,.045)}
+  table.dt td:first-child{font-weight:700}
+  .box{border-left:4px solid var(--lago);background:rgba(18,181,201,.08);border-radius:0 12px 12px 0;padding:16px 20px;margin:0 0 22px}
+  .box p{margin:0;font-size:.96rem;max-width:none}
+  .box.ok{border-left-color:var(--ok);background:rgba(47,158,68,.09)}
+  /* pannello consenso */
+  .panel{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:22px;margin:0 0 22px}
+  .panel .state{font-size:.9rem;color:var(--ink-soft);margin-bottom:14px}
+  .panel .state b{color:var(--ink)}
+  .panel .row{display:flex;gap:10px;flex-wrap:wrap}
+  .panel button{padding:11px 22px;border-radius:100px;font-weight:800;border:0;cursor:pointer;font-family:inherit;font-size:.9rem;transition:.2s}
+  .panel .re{background:var(--azzurro);color:#fff}
+  .panel .re:hover{background:var(--azzurro-chiaro)}
+  .panel .clr{background:var(--card);color:var(--ink);border:1px solid var(--border)}
+  .panel .clr:hover{border-color:var(--azzurro)}
+  .panel .done{color:var(--ok);font-weight:700;font-size:.88rem;margin-top:12px;display:none}
+  footer{background:var(--footer);color:#9fb2cc;text-align:center;padding:30px 22px;font-size:.85rem}
+  footer strong{color:#fff}
+  footer a{color:#9fb2cc;text-decoration:underline}
+  footer a:hover{color:var(--lago)}
+  footer .disc{max-width:760px;margin:10px auto 0;font-size:.74rem;opacity:.65}
+  @media(max-width:640px){.art{padding:26px 20px}}
+  @media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}html{scroll-behavior:auto}}
+  :focus-visible{outline:3px solid var(--lago);outline-offset:2px;border-radius:4px}
+</style>
+</head>
+<body>
+<header class="nav"><div class="in">
+  <a class="brand" href="index.html">
+    <svg viewBox="0 0 230 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset="1" stop-color="#12b5c9"/></linearGradient></defs>
+      <g fill="none" stroke="url(#lg)" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M128 132 L150 180 L168 228" stroke-width="21"/>
+        <path d="M128 132 L92 148 L50 130" stroke-width="21"/>
+        <path d="M150 60 L128 132" stroke-width="23"/>
+        <path d="M150 74 L185 64 L206 44" stroke-width="14"/>
+        <path d="M150 80 L119 112" stroke-width="14"/>
+      </g>
+      <circle cx="158" cy="44" r="18" fill="url(#lg)"/>
+    </svg>
+    <span><span class="il">il</span>Comasco</span>
+  </a>
+  <button class="icon-btn" id="theme" aria-label="Cambia tema">🌙</button>
+</div></header>
+
+<section class="strip"><div class="in">
+  <a class="back" href="index.html">← Torna al portale</a>
+  <span class="kicker">Informazioni legali</span>
+</div></section>
+
+<div class="sheet">
+  <article class="art">
+    <h1>Cookie Policy</h1>
+    <div class="upd">Ultimo aggiornamento: 14 agosto 2026</div>
+
+    <div class="box ok">
+      <p><strong>La versione corta:</strong> ilComasco non ospita pubblicità e non profila nessuno. Salva due preferenze nel tuo browser e, <em>solo se lo accetti</em>, usa Google Analytics per contare le visite. Se rifiuti, nessun cookie analitico viene installato e il sito funziona esattamente come prima.</p>
+    </div>
+
+    <h2>1. Cosa sono cookie e memoria locale</h2>
+    <p>Un <strong>cookie</strong> è un piccolo file che un sito salva nel browser e che viene rinviato al server a ogni visita successiva. La <strong>memoria locale</strong> (<em>localStorage</em>) fa una cosa simile, ma i dati restano sul dispositivo e non viaggiano verso nessun server. Entrambe le tecnologie rientrano nelle stesse regole europee, quindi le trattiamo qui allo stesso modo.</p>
+    <p>Le regole distinguono gli strumenti <em>tecnici</em>, necessari a far funzionare il sito o a eseguire una tua richiesta, da quelli <em>non necessari</em> (statistica, profilazione, pubblicità), che richiedono il tuo consenso preventivo.</p>
+
+    <h2>2. Cosa usa ilComasco</h2>
+    <h3>Memoria locale — tecnica</h3>
+    <div class="tw">
+      <table class="dt">
+        <thead><tr><th>Nome</th><th>Tipo</th><th>Finalità</th><th>Durata</th></tr></thead>
+        <tbody>
+          <tr><td>theme</td><td>Tecnico / preferenza</td><td>Ricorda se hai scelto il tema chiaro o scuro, così non devi rimetterlo a ogni visita</td><td>Fino a cancellazione manuale</td></tr>
+          <tr><td>cookie</td><td>Tecnico</td><td>Ricorda la scelta fatta sul banner, così non ti viene riproposto ogni volta</td><td>Fino a cancellazione manuale</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Entrambe contengono un valore di poche lettere, non un identificatore che ti riguardi, e non vengono trasmesse a noi né a terzi.</p>
+
+    <h3>Cookie di analisi — solo dopo il tuo consenso</h3>
+    <p>Se scegli <em>Accetta tutti</em>, il sito carica Google Analytics 4, che installa questi cookie:</p>
+    <div class="tw">
+      <table class="dt">
+        <thead><tr><th>Nome</th><th>Titolare</th><th>Finalità</th><th>Durata</th></tr></thead>
+        <tbody>
+          <tr><td>_ga</td><td>Google</td><td>Distinguere un visitatore ricorrente da uno nuovo, tramite un identificativo casuale</td><td>2 anni</td></tr>
+          <tr><td>_ga_&lt;ID&gt;</td><td>Google</td><td>Mantenere lo stato della sessione di navigazione</td><td>2 anni</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Sono cookie di terza parte con finalità di sola statistica aggregata. Non attiviamo la pubblicità personalizzata né i <em>Google signals</em>, e l'indirizzo IP viene troncato prima di essere registrato.</p>
+    <div class="box">
+      <p><strong>Se rifiuti, non succede nulla di nascosto:</strong> lo script di Analytics non viene nemmeno scaricato dal browser, quindi non esiste alcun cookie da bloccare. Non usiamo tecniche di rilevamento alternative come il <em>fingerprinting</em>.</p>
+    </div>
+
+    <h3>Pubblicità e profilazione</h3>
+    <p><strong>Nessuna.</strong> Nessun banner, nessun pixel pubblicitario, nessun pulsante social che segua la tua navigazione, nessuna vendita di dati.</p>
+
+    <h3>Contenuti caricati da terze parti</h3>
+    <p>Per mostrarti immagini, stemmi e commenti il tuo browser contatta direttamente alcuni servizi esterni. Nel farlo, quei servizi vedono il tuo indirizzo IP e possono impostare cookie propri, sui quali non abbiamo controllo:</p>
+    <div class="tw">
+      <table class="dt">
+        <thead><tr><th>Servizio</th><th>Cosa carica</th><th>Cookie</th><th>Informativa</th></tr></thead>
+        <tbody>
+          <tr><td>Giscus / GitHub</td><td>Forum e commenti sotto le notizie</td><td>Sì, se hai una sessione GitHub attiva o accedi per commentare</td><td><a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">Informativa GitHub</a></td></tr>
+          <tr><td>Google Analytics</td><td>Statistiche di lettura</td><td>Sì, ma solo dopo il tuo consenso</td><td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Informativa Google</a></td></tr>
+          <tr><td>Vercel</td><td>Hosting del sito</td><td>Solo tecnici, legati all'erogazione delle pagine</td><td><a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Informativa Vercel</a></td></tr>
+          <tr><td>Unsplash</td><td>Immagini di sfondo della homepage</td><td>No, solo richiesta dell'immagine</td><td><a href="https://unsplash.com/privacy" target="_blank" rel="noopener noreferrer">Informativa Unsplash</a></td></tr>
+          <tr><td>flagcdn.com</td><td>Bandiere nelle schede giocatori</td><td>No, solo richiesta dell'immagine</td><td><a href="https://flagcdn.com" target="_blank" rel="noopener noreferrer">flagcdn.com</a></td></tr>
+          <tr><td>football-data.org</td><td>Stemmi delle squadre nelle classifiche</td><td>No, solo richiesta dell'immagine</td><td><a href="https://www.football-data.org" target="_blank" rel="noopener noreferrer">football-data.org</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="gestire">3. Gestire la tua scelta</h2>
+    <p>Da qui puoi accettare, rifiutare o revocare in qualsiasi momento, senza dover motivare la scelta. Revocando il consenso i cookie di Analytics già presenti vengono eliminati subito. L'operazione riguarda solo il browser che stai usando adesso.</p>
+    <div class="panel">
+      <div class="state" id="state">Verifica in corso…</div>
+      <div class="row">
+        <button type="button" class="re"  id="acc">Accetta le statistiche</button>
+        <button type="button" class="clr" id="rej">Rifiuta e cancella i cookie</button>
+        <button type="button" class="clr" id="clr">Azzera tutte le preferenze</button>
+      </div>
+      <div class="done" id="done"></div>
+    </div>
+
+    <h2>4. Gestire cookie e dati dal browser</h2>
+    <p>Indipendentemente da questo sito, il browser ti permette di bloccare o eliminare cookie e dati locali. Le voci si trovano di norma sotto <em>Impostazioni → Privacy e sicurezza</em>:</p>
+    <ul>
+      <li><strong>Chrome:</strong> Privacy e sicurezza → Cookie e altri dati dei siti</li>
+      <li><strong>Firefox:</strong> Privacy e sicurezza → Cookie e dati dei siti web</li>
+      <li><strong>Safari:</strong> Preferenze → Privacy → Gestisci dati dei siti web</li>
+      <li><strong>Edge:</strong> Cookie e autorizzazioni sito → Gestisci ed elimina cookie</li>
+    </ul>
+    <p>Bloccando tutto, il sito continua a funzionare: perderai soltanto la memoria del tema scelto e i commenti potrebbero non caricarsi. In alternativa, Google mette a disposizione un <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">componente aggiuntivo del browser</a> per disattivare Analytics su tutti i siti.</p>
+
+    <h2>5. Contatti</h2>
+    <p>Per domande su questa pagina scrivi a <span class="mail"></span>. Il trattamento dei dati personali è descritto nella <a href="privacy.html">Privacy Policy</a>, insieme ai diritti che puoi esercitare.</p>
+  </article>
+</div>
+
+<footer>
+  <p><strong>ilComasco</strong> — Forza Como sempre 💙</p>
+  <p style="margin-top:8px"><a href="index.html">Home</a> · <a href="privacy.html">Privacy Policy</a> · <a href="privacy.html#disclaimer">Disclaimer</a></p>
+  <p class="disc">Sito non ufficiale, realizzato da tifosi. Non affiliato al Como 1907 S.r.l.</p>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('theme');
+  function apply(t){document.documentElement.setAttribute('data-theme',t);btn.textContent=t==='dark'?'☀️':'🌙'}
+  var saved='light';try{saved=localStorage.getItem('theme')||'light'}catch(e){}
+  apply(saved);
+  btn.addEventListener('click',function(){
+    var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+    apply(t);try{localStorage.setItem('theme',t)}catch(e){}
+  });
+})();
+
+(function(){
+  var state=document.getElementById('state'), done=document.getElementById('done');
+  function refresh(){
+    var c=null; try{c=localStorage.getItem('cookie')}catch(e){}
+    var t=null; try{t=localStorage.getItem('theme')}catch(e){}
+    var lbl=c==='all'?'<b>statistiche accettate</b>':(c==='essential'?'<b>solo essenziali</b>':'<b>nessuna scelta registrata</b>');
+    state.innerHTML='Consenso attuale: '+lbl+'. Tema salvato: <b>'+(t||'nessuno')+'</b>.';
+  }
+  function say(m){done.textContent=m;done.style.display='block'}
+  refresh();
+  document.getElementById('acc').addEventListener('click',function(){
+    if(window.ilcConsent) window.ilcConsent.accept();
+    refresh(); say('Consenso registrato. Le statistiche sono attive da questa visita.');
+  });
+  document.getElementById('rej').addEventListener('click',function(){
+    if(window.ilcConsent) window.ilcConsent.reject();
+    refresh(); say('Consenso revocato e cookie di Analytics eliminati.');
+  });
+  document.getElementById('clr').addEventListener('click',function(){
+    if(window.ilcConsent) window.ilcConsent.reset();
+    try{localStorage.removeItem('theme')}catch(e){}
+    refresh(); say('Preferenze azzerate. Il banner ricomparirà alla prossima pagina.');
+  });
+})();
+</script>
+
+<script>
+/* ── EMAIL DI CONTATTO — unico punto da modificare ───────────────────
+   L'indirizzo viene composto dal browser: i raccoglitori di spam, che
+   di norma non eseguono JavaScript, leggono solo due pezzi separati.  */
+window.ILC_MAIL = { u: 'ilComasco.admin', d: 'gmail.com' };
+(function(){
+  var a = window.ILC_MAIL.u + String.fromCharCode(64) + window.ILC_MAIL.d;
+  Array.prototype.forEach.call(document.querySelectorAll('.mail'), function(el){
+    var link = document.createElement('a');
+    link.href = 'mailto:' + a; link.textContent = a;
+    el.textContent = ''; el.appendChild(link);
+  });
+})();
+</script>
+<script src="/js/consent.js" defer></script>
+</body>
+</html>

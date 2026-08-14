@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     PRIVACY POLICY — ilComasco
+     Contatto pubblicato: indirizzo composto via JavaScript nel blocco
+     window.ILC_MAIL in fondo al file (per non esporlo agli spam bot).
+     ID Google Analytics: si imposta in js/consent.js
+     Ultimo aggiornamento del testo: 14 agosto 2026
+     ============================================================ -->
+<html lang="it" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — ilComasco</title>
+<meta name="description" content="Come ilComasco tratta i dati dei visitatori: dati di navigazione, preferenze locali, commenti e servizi di terze parti. Sito indipendente non ufficiale.">
+<meta name="theme-color" content="#062f63">
+<link rel="canonical" href="https://il-comasco.vercel.app/privacy.html">
+<style>
+  :root{--azzurro:#0a4da2;--azzurro-chiaro:#2e86ff;--azzurro-scuro:#062f63;--lago:#12b5c9;
+    --bg:#eef4fc;--card:#fff;--ink:#0b1220;--ink-soft:#5b6b82;--border:#e4edfa;--footer:#0b1220;
+    --shadow:0 18px 45px rgba(6,47,99,.14);--radius:18px}
+  [data-theme="dark"]{--bg:#0a1526;--card:#12233f;--ink:#eaf2ff;--ink-soft:#93a7c6;
+    --border:#1d3355;--footer:#04081a;--shadow:0 18px 45px rgba(0,0,0,.5)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;transition:background .4s,color .4s}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{line-height:1.15;font-weight:800;letter-spacing:-.02em}
+  .nav{background:var(--azzurro-scuro);padding:13px 0}
+  .nav .in{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px;color:#fff;font-size:1.15rem;font-weight:800}
+  .brand .il{opacity:.85;font-weight:600}
+  .brand svg{width:34px;height:34px}
+  .icon-btn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.25s}
+  .icon-btn:hover{background:#fff;color:var(--azzurro)}
+  .strip{background:linear-gradient(90deg,var(--azzurro-scuro),var(--azzurro));color:#fff;padding:11px 0}
+  .strip .in{max-width:900px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .back{font-size:.82rem;font-weight:700;opacity:.9}
+  .back:hover{opacity:1;color:var(--lago)}
+  .kicker{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:4px 13px;border-radius:100px;font-size:.66rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+  .sheet{max-width:900px;margin:34px auto 0;padding:0 22px}
+  .art{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:40px 44px 44px;margin-bottom:26px}
+  .art h1{font-size:clamp(1.55rem,3.4vw,2.05rem);margin-bottom:10px}
+  .art .upd{color:var(--ink-soft);font-size:.85rem;padding-bottom:20px;margin-bottom:26px;border-bottom:1px solid var(--border)}
+  .art p{font-size:1.03rem;line-height:1.78;margin-bottom:16px;max-width:70ch}
+  .art h2{font-size:1.22rem;margin:36px 0 12px;padding-top:4px}
+  .art h2:first-of-type{margin-top:0}
+  .art h3{font-size:1.04rem;margin:24px 0 8px;color:var(--azzurro)}
+  .art a{color:var(--azzurro);font-weight:700;text-decoration:underline}
+  .art ul{max-width:70ch;margin:0 0 18px 22px}
+  .art li{font-size:1.03rem;line-height:1.72;margin-bottom:8px;padding-left:4px}
+  .art ul li::marker{color:var(--lago)}
+  .art strong{font-weight:800}
+  /* indice */
+  .toc{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:18px 22px;margin-bottom:8px}
+  .toc h2{font-size:.7rem !important;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 10px !important}
+  .toc ol{margin:0;padding-left:20px;columns:2;column-gap:30px}
+  .toc li{font-size:.9rem;margin-bottom:5px;line-height:1.5;break-inside:avoid}
+  .toc a{color:var(--azzurro);font-weight:600;text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  @media(max-width:620px){.toc ol{columns:1}}
+  /* tabella dati */
+  .tw{overflow-x:auto;margin:0 0 22px;border:1px solid var(--border);border-radius:14px}
+  table.dt{width:100%;border-collapse:collapse;font-size:.88rem;min-width:560px}
+  table.dt th{background:var(--azzurro-scuro);color:#fff;text-align:left;font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;padding:11px 14px;font-weight:800}
+  table.dt td{padding:11px 14px;border-top:1px solid var(--border);vertical-align:top;line-height:1.55}
+  table.dt tr:nth-child(even) td{background:rgba(46,134,255,.045)}
+  table.dt td:first-child{font-weight:700}
+  /* callout */
+  .box{border-left:4px solid var(--lago);background:rgba(18,181,201,.08);border-radius:0 12px 12px 0;padding:16px 20px;margin:0 0 22px}
+  .box p{margin:0;font-size:.96rem;max-width:none}
+  .box.warn{border-left-color:#e03131;background:rgba(224,49,49,.08)}
+  footer{background:var(--footer);color:#9fb2cc;text-align:center;padding:30px 22px;font-size:.85rem}
+  footer strong{color:#fff}
+  footer a{color:#9fb2cc;text-decoration:underline}
+  footer a:hover{color:var(--lago)}
+  footer .disc{max-width:760px;margin:10px auto 0;font-size:.74rem;opacity:.65}
+  @media(max-width:640px){.art{padding:26px 20px}}
+  @media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}html{scroll-behavior:auto}}
+  :focus-visible{outline:3px solid var(--lago);outline-offset:2px;border-radius:4px}
+</style>
+</head>
+<body>
+<header class="nav"><div class="in">
+  <a class="brand" href="index.html">
+    <svg viewBox="0 0 230 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset="1" stop-color="#12b5c9"/></linearGradient></defs>
+      <g fill="none" stroke="url(#lg)" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M128 132 L150 180 L168 228" stroke-width="21"/>
+        <path d="M128 132 L92 148 L50 130" stroke-width="21"/>
+        <path d="M150 60 L128 132" stroke-width="23"/>
+        <path d="M150 74 L185 64 L206 44" stroke-width="14"/>
+        <path d="M150 80 L119 112" stroke-width="14"/>
+      </g>
+      <circle cx="158" cy="44" r="18" fill="url(#lg)"/>
+    </svg>
+    <span><span class="il">il</span>Comasco</span>
+  </a>
+  <button class="icon-btn" id="theme" aria-label="Cambia tema">🌙</button>
+</div></header>
+
+<section class="strip"><div class="in">
+  <a class="back" href="index.html">← Torna al portale</a>
+  <span class="kicker">Informazioni legali</span>
+</div></section>
+
+<div class="sheet">
+  <article class="art">
+    <h1>Privacy Policy</h1>
+    <div class="upd">Ultimo aggiornamento: 14 agosto 2026</div>
+
+    <nav class="toc" aria-label="Indice della pagina">
+      <h2>In questa pagina</h2>
+      <ol>
+        <li><a href="#chi">Chi gestisce il sito</a></li>
+        <li><a href="#dati">Quali dati raccogliamo</a></li>
+        <li><a href="#perche">Perché li trattiamo</a></li>
+        <li><a href="#terze">Servizi di terze parti</a></li>
+        <li><a href="#estero">Trasferimenti fuori dall'UE</a></li>
+        <li><a href="#quanto">Per quanto tempo</a></li>
+        <li><a href="#diritti">I tuoi diritti</a></li>
+        <li><a href="#minori">Minori</a></li>
+        <li><a href="#modifiche">Modifiche</a></li>
+        <li><a href="#disclaimer">Disclaimer</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="chi">1. Chi gestisce il sito</h2>
+    <p><strong>ilComasco</strong> è un progetto personale e senza scopo di lucro, realizzato da tifosi del Calcio Como 1907. Il sito è pubblicato all'indirizzo <a href="https://il-comasco.vercel.app">il-comasco.vercel.app</a>.</p>
+    <p>Il titolare del trattamento è la persona fisica che cura il progetto a titolo personale, senza scopo di lucro. Trattandosi di un'iniziativa amatoriale gestita da un privato, i dati identificativi completi non sono pubblicati sulla pagina, ma vengono comunicati senza indugio a chi ne abbia titolo — un interessato che eserciti i propri diritti, un soggetto che si ritenga leso da un contenuto, un'autorità che li richieda — scrivendo all'indirizzo di contatto.</p>
+<p><strong>Contatto unico per privacy, segnalazioni e rettifiche:</strong> <span class="mail"></span></p>
+<noscript><p>L'indirizzo email di contatto è visibile attivando JavaScript nel browser.</p></noscript>
+
+    <h2 id="dati">2. Quali dati raccogliamo</h2>
+    <div class="box">
+      <p><strong>In breve:</strong> non ti chiediamo di registrarti, non abbiamo moduli o newsletter, non ospitiamo pubblicità e non profiliamo nessuno. L'unico strumento non necessario è Google Analytics, che parte <em>soltanto</em> se lo accetti dal banner: se rifiuti, il sito funziona identico e nessuna statistica viene raccolta.</p>
+    </div>
+    <p>Ecco nel dettaglio i quattro casi in cui dei dati vengono trattati:</p>
+
+    <h3>Dati di navigazione (log del server)</h3>
+    <p>Il sito è ospitato su Vercel. Come ogni server web, Vercel registra automaticamente informazioni tecniche su ogni richiesta: indirizzo IP, data e ora, pagina richiesta, tipo di browser e sistema operativo, eventuale sito di provenienza. Questi dati servono a far funzionare il sito, a proteggerlo da abusi e a capire se qualcosa si è rotto. Non li usiamo per identificare i singoli visitatori e non li incrociamo con altre informazioni.</p>
+
+    <h3>Preferenze salvate sul tuo dispositivo</h3>
+    <p>Il sito non installa cookie propri. Salva due informazioni nella memoria locale del tuo browser (<em>localStorage</em>), che restano sul tuo dispositivo e non vengono inviate a noi né a nessun altro:</p>
+    <div class="tw">
+      <table class="dt">
+        <thead><tr><th>Nome</th><th>Cosa contiene</th><th>A cosa serve</th><th>Durata</th></tr></thead>
+        <tbody>
+          <tr><td>theme</td><td>light oppure dark</td><td>Ricordare se preferisci il tema chiaro o scuro</td><td>Finché non svuoti i dati del browser</td></tr>
+          <tr><td>cookie</td><td>all oppure essential</td><td>Ricordare la scelta fatta sul banner, per non riproporlo a ogni visita</td><td>Finché non svuoti i dati del browser</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>I dettagli su come cancellarle o cambiare idea sono nella <a href="cookie-policy.html">Cookie Policy</a>.</p>
+
+    <h3>Statistiche di utilizzo — solo con il tuo consenso</h3>
+    <p>Se scegli <em>Accetta tutti</em> sul banner, il sito carica <strong>Google Analytics 4</strong>, che installa cookie propri e raccoglie dati aggregati sulla navigazione: pagine viste, durata della visita, tipo di dispositivo, provenienza approssimativa (paese o città), sito di riferimento. L'indirizzo IP viene troncato da Google prima della registrazione e non viene mai conservato in forma completa.</p>
+    <p>Ci serve per una cosa sola: capire quali sezioni del portale vengono lette, così da dedicarci alle cose che interessano ai tifosi. Non usiamo Analytics per pubblicità, non attiviamo i segnali di Google (<em>Google signals</em>) né la pubblicità personalizzata, non incrociamo i dati con altri servizi e non condividiamo nulla con terzi.</p>
+    <p>Se scegli <em>Solo essenziali</em>, o se non scegli nulla, lo script di Analytics non viene nemmeno scaricato. Puoi cambiare idea in qualsiasi momento dalla <a href="cookie-policy.html#gestire">Cookie Policy</a>: revocando il consenso i cookie già presenti vengono eliminati.</p>
+
+    <h3>Commenti nel forum e sotto le notizie</h3>
+    <p>Gli spazi di discussione sono gestiti da <strong>Giscus</strong>, un servizio che appoggia i commenti sulle <em>Discussions</em> del repository GitHub del sito. Per scrivere serve un account GitHub e autorizzare l'app Giscus: da quel momento il tuo nome utente, la tua immagine di profilo e il testo del commento diventano pubblici su GitHub, e li vediamo come li vede chiunque altro. Non riceviamo la tua email né altri dati del tuo account.</p>
+    <p>I commenti restano di tua proprietà: puoi modificarli o cancellarli in qualsiasi momento direttamente da GitHub. Possiamo rimuovere contenuti offensivi, diffamatori o fuori tema.</p>
+
+    <h2 id="perche">3. Perché li trattiamo</h2>
+    <div class="tw">
+      <table class="dt">
+        <thead><tr><th>Trattamento</th><th>Finalità</th><th>Base giuridica (GDPR)</th></tr></thead>
+        <tbody>
+          <tr><td>Log del server</td><td>Erogare il sito, sicurezza, diagnostica</td><td>Legittimo interesse — art. 6.1.f</td></tr>
+          <tr><td>Preferenza tema</td><td>Mostrarti il sito come lo hai impostato</td><td>Esecuzione di una tua richiesta — art. 6.1.b / tecnico</td></tr>
+          <tr><td>Memoria del consenso</td><td>Non riproporti il banner ogni volta</td><td>Obbligo legale — art. 6.1.c</td></tr>
+          <tr><td>Contenuti di terze parti (bandiere, stemmi, immagini)</td><td>Mostrare correttamente le pagine</td><td>Legittimo interesse — art. 6.1.f</td></tr>
+          <tr><td>Google Analytics 4</td><td>Statistiche aggregate di lettura del sito</td><td>Consenso — art. 6.1.a (revocabile)</td></tr>
+          <tr><td>Commenti via Giscus/GitHub</td><td>Permettere la discussione tra tifosi</td><td>Consenso — art. 6.1.a (scegli tu se accedere)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Non prendiamo decisioni automatizzate e non facciamo profilazione. Non vendiamo, cediamo o scambiamo dati con nessuno.</p>
+
+    <h2 id="terze">4. Servizi di terze parti</h2>
+    <p>Per funzionare il sito carica risorse da alcuni fornitori esterni. Quando il tuo browser le scarica, quei fornitori vedono necessariamente il tuo indirizzo IP e le informazioni tecniche della richiesta. Ecco l'elenco completo:</p>
+    <div class="tw">
+      <table class="dt">
+        <thead><tr><th>Fornitore</th><th>Ruolo sul sito</th><th>Informativa</th></tr></thead>
+        <tbody>
+          <tr><td>Vercel</td><td>Hosting del sito e log tecnici</td><td><a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">vercel.com/legal/privacy-policy</a></td></tr>
+          <tr><td>GitHub / Giscus</td><td>Commenti e discussioni</td><td><a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">docs.github.com</a></td></tr>
+          <tr><td>Google Ireland Ltd.</td><td>Google Analytics 4, solo dopo consenso</td><td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a></td></tr>
+          <tr><td>Unsplash</td><td>Immagini di sfondo della homepage</td><td><a href="https://unsplash.com/privacy" target="_blank" rel="noopener noreferrer">unsplash.com/privacy</a></td></tr>
+          <tr><td>flagcdn.com</td><td>Bandiere nelle schede giocatori</td><td><a href="https://flagcdn.com" target="_blank" rel="noopener noreferrer">flagcdn.com</a></td></tr>
+          <tr><td>football-data.org</td><td>Dati e stemmi delle classifiche</td><td><a href="https://www.football-data.org" target="_blank" rel="noopener noreferrer">football-data.org</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>L'area di redazione, usata solo da chi aggiorna i contenuti, si appoggia a un accesso tramite account GitHub. Per i visitatori non svolge alcuna funzione e non raccoglie dati.</p>
+
+    <h2 id="estero">5. Trasferimenti fuori dall'Unione Europea</h2>
+    <p>Vercel, GitHub e Unsplash sono società con sede negli Stati Uniti e i dati tecnici possono essere trattati sui loro server extra-UE. Il trasferimento avviene sulla base delle clausole contrattuali standard approvate dalla Commissione Europea e degli altri strumenti previsti dal Capo V del GDPR, secondo quanto dichiarato dai rispettivi fornitori nelle informative linkate sopra.</p>
+<p>Per Google Analytics il titolare del trattamento in Europa è Google Ireland Limited. Il trasferimento di dati verso gli Stati Uniti si fonda sul <em>EU-U.S. Data Privacy Framework</em>, il quadro adottato dalla Commissione Europea con decisione di adeguatezza del 10 luglio 2023, al quale Google LLC aderisce, integrato dalle clausole contrattuali standard. Le impostazioni della proprietà sono configurate per non attivare né i segnali di Google né la condivisione dei dati con altri prodotti Google.</p>
+
+    <h2 id="quanto">6. Per quanto tempo conserviamo i dati</h2>
+    <ul>
+      <li><strong>Log del server:</strong> secondo i tempi di conservazione di Vercel, tipicamente pochi giorni o settimane. Non li scarichiamo né li archiviamo altrove.</li>
+      <li><strong>Preferenze locali:</strong> restano sul tuo dispositivo finché non le cancelli tu.</li>
+      <li><strong>Dati di Analytics:</strong> conservati per il periodo impostato nella proprietà Google Analytics, attualmente 14 mesi, dopodiché vengono eliminati automaticamente.</li>
+      <li><strong>Commenti:</strong> restano pubblicati finché non li rimuovi tu da GitHub o finché non li rimuoviamo noi per violazione delle regole di convivenza.</li>
+    </ul>
+
+    <h2 id="diritti">7. I tuoi diritti</h2>
+    <p>Il GDPR ti riconosce il diritto di chiedere l'accesso ai tuoi dati, la loro rettifica o cancellazione, la limitazione del trattamento, la portabilità, e di opporti a un trattamento basato sul legittimo interesse. Dove il trattamento si fonda sul consenso, puoi revocarlo in qualsiasi momento senza dover motivare la scelta.</p>
+    <p>Per esercitarli scrivi a <span class="mail"></span>: rispondiamo entro un mese. Tieni presente che, non avendo un tuo account né un tuo profilo, nella maggior parte dei casi non siamo materialmente in grado di collegare un dato tecnico alla tua persona — in quei casi te lo diremo chiaramente indicandoti a chi rivolgerti (di norma direttamente il fornitore, ad esempio GitHub per i commenti).</p>
+    <p>Se ritieni che il trattamento violi la normativa, puoi presentare reclamo al <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener noreferrer">Garante per la protezione dei dati personali</a> o rivolgerti all'autorità giudiziaria.</p>
+
+    <h2 id="minori">8. Minori</h2>
+    <p>Il sito ha contenuti adatti a tutti, ma non è pensato per raccogliere dati da minori di 14 anni. Per commentare serve un account GitHub, che ha requisiti di età propri. Se ti accorgi che un minore ha pubblicato dati personali attraverso questo sito, scrivici e provvediamo a rimuoverli.</p>
+
+    <h2 id="modifiche">9. Modifiche a questa policy</h2>
+    <p>Se cambiamo gli strumenti che il sito utilizza, aggiorniamo questa pagina e la data in alto. Le modifiche sostanziali vengono segnalate nella homepage. Qualunque nuovo strumento non strettamente necessario seguirà la stessa regola già applicata ad Analytics: nessun caricamento prima di un tuo consenso esplicito, e revoca sempre disponibile.</p>
+
+    <h2 id="disclaimer">10. Disclaimer</h2>
+    <div class="box warn">
+      <p><strong>ilComasco è un sito non ufficiale.</strong> È un progetto indipendente realizzato da tifosi e non è affiliato, associato, autorizzato, sponsorizzato né in alcun modo approvato dal Como 1907 S.r.l. o da altre società, leghe o federazioni calcistiche.</p>
+    </div>
+    <p><strong>Marchi e loghi.</strong> Denominazioni, marchi, stemmi e loghi delle società calcistiche citate appartengono ai rispettivi titolari e sono usati esclusivamente a fini identificativi e descrittivi, nei limiti del diritto di citazione. Nessun elemento del sito va inteso come rivendicazione di diritti su tali segni.</p>
+    <p><strong>Contenuti e accuratezza.</strong> Notizie, voci di mercato, statistiche e calendari sono raccolti in buona fede da fonti pubbliche, tra cui <a href="https://www.football-data.org" target="_blank" rel="noopener noreferrer">football-data.org</a> per classifiche e stemmi. Non garantiamo che siano completi, aggiornati o esenti da errori: le informazioni ufficiali restano quelle pubblicate dal club sui propri canali. Le voci di calciomercato sono indicate come tali e non costituiscono conferme.</p>
+    <p><strong>Opinioni.</strong> Commenti e valutazioni sono opinioni personali di chi scrive, espresse nell'esercizio della libertà di manifestazione del pensiero, e non hanno intento diffamatorio verso persone o società. Chi ritenga che un contenuto lo riguardi in modo scorretto può scrivere a <span class="mail"></span>: valutiamo ogni segnalazione e correggiamo o rimuoviamo tempestivamente ciò che risulta inesatto.</p>
+    <p><strong>Link esterni.</strong> Il sito rimanda a siti di terzi, compresi i canali ufficiali del club, sui cui contenuti e sulle cui pratiche di privacy non abbiamo alcun controllo né responsabilità.</p>
+    <p><strong>Immagini.</strong> Le fotografie di sfondo provengono da banche immagini con licenza d'uso gratuito. Se ritieni che un'immagine pubblicata violi un tuo diritto d'autore, segnalacelo e la rimuoviamo senza discussione.</p>
+    <p><strong>Nessuna finalità commerciale.</strong> Il sito non vende prodotti né servizi, non ospita pubblicità e non genera ricavi. Non è una testata giornalistica registrata ai sensi della legge 62/2001, essendo aggiornato senza periodicità predeterminata.</p>
+  </article>
+</div>
+
+<footer>
+  <p><strong>ilComasco</strong> — Forza Como sempre 💙</p>
+  <p style="margin-top:8px"><a href="index.html">Home</a> · <a href="cookie-policy.html">Cookie Policy</a> · <a href="#disclaimer">Disclaimer</a></p>
+  <p class="disc">Sito non ufficiale, realizzato da tifosi. Non affiliato al Como 1907 S.r.l.</p>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('theme');
+  function apply(t){document.documentElement.setAttribute('data-theme',t);btn.textContent=t==='dark'?'☀️':'🌙'}
+  var saved='light';try{saved=localStorage.getItem('theme')||'light'}catch(e){}
+  apply(saved);
+  btn.addEventListener('click',function(){
+    var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+    apply(t);try{localStorage.setItem('theme',t)}catch(e){}
+  });
+})();
+</script>
+
+<script>
+/* ── EMAIL DI CONTATTO — unico punto da modificare ───────────────────
+   L'indirizzo viene composto dal browser: i raccoglitori di spam, che
+   di norma non eseguono JavaScript, leggono solo due pezzi separati.  */
+window.ILC_MAIL = { u: 'ilComasco.admin', d: 'gmail.com' };
+(function(){
+  var a = window.ILC_MAIL.u + String.fromCharCode(64) + window.ILC_MAIL.d;
+  Array.prototype.forEach.call(document.querySelectorAll('.mail'), function(el){
+    var link = document.createElement('a');
+    link.href = 'mailto:' + a; link.textContent = a;
+    el.textContent = ''; el.appendChild(link);
+  });
+})();
+</script>
+<script src="/js/consent.js" defer></script>
+</body>
+</html>

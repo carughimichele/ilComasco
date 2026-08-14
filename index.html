@@ -12,7 +12,8 @@
 <meta property="og:title" content="ilComasco — Portale dei tifosi Lariani">
 <meta property="og:description" content="Il punto di riferimento indipendente per i tifosi azzurri del Calcio Como 1907.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://ilcomasco.netlify.app">
+<meta property="og:url" content="https://il-comasco.vercel.app">
+<link rel="canonical" href="https://il-comasco.vercel.app/">
 <meta property="og:image" content="https://images.unsplash.com/photo-1667375152478-5c4d62eb9ecb?auto=format&fit=crop&w=1200&q=80">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ilComasco — Portale dei tifosi Lariani">
@@ -177,12 +178,6 @@
   #toTop.show{opacity:1;pointer-events:auto}
   #toTop:hover{background:var(--azzurro-chiaro);transform:translateY(-3px)}
 
-  #cookie{position:fixed;bottom:18px;left:18px;right:18px;max-width:680px;margin:0 auto;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:16px;padding:20px 22px;z-index:200;display:none}
-  #cookie p{font-size:.9rem;color:var(--ink-soft);margin-bottom:14px}
-  #cookie .row{display:flex;gap:10px;flex-wrap:wrap}
-  #cookie button{padding:11px 22px;border-radius:100px;font-weight:800;border:0;cursor:pointer}
-  #cookie .ok{background:var(--azzurro);color:#fff}
-  #cookie .no{background:var(--bg);color:var(--ink)}
 
   @media(max-width:900px){
     .navlinks{display:none}
@@ -363,7 +358,6 @@
 .player .top{background-size:100% 100% !important}
   
 </style>
-<script async src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
 <script type="application/ld+json">
 {
@@ -371,7 +365,7 @@
   "@type": "WebSite",
   "name": "ilComasco",
   "description": "Il portale indipendente dei tifosi Lariani del Calcio Como 1907",
-  "url": "https://ilcomasco.netlify.app",
+  "url": "https://il-comasco.vercel.app",
   "image": "https://images.unsplash.com/photo-1667375152478-5c4d62eb9ecb?auto=format&fit=crop&w=1200&q=80",
   "sameAs": [
     "https://www.instagram.com/comofootball/",
@@ -575,7 +569,7 @@
       <!-- GISCUS QUI -->
       <div id="disqus_thread"></div>
       <script src="https://giscus.app/client.js"
-          data-repo="carughimichele/ilComasco"
+          data-repo="ilComasco1907/ilComasco"
           data-repo-id="R_kgDOToBMJA"
           data-category="Announcements"
           data-category-id="DIC_kwDOToBMJM4DCS1_"
@@ -605,10 +599,6 @@
 
 <button id="toTop" title="Torna su" aria-label="Torna su">↑</button>
 
-<div id="cookie">
-  <p>Usiamo cookie tecnici necessari al funzionamento del sito e, previo tuo consenso, cookie di analisi. Dettagli nella <a href="cookie-policy.html" style="color:var(--azzurro);font-weight:700">Cookie Policy</a>.</p>
-  <div class="row"><button class="ok" onclick="setCookie('all')">Accetta tutti</button><button class="no" onclick="setCookie('essential')">Solo essenziali</button></div>
-</div>
 
 <script>
 /* =====================================================================
@@ -925,20 +915,11 @@ function emptyState(titolo,lista){
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-// cookie
-function setCookie(v){store.set('cookie',v);document.getElementById('cookie').style.display='none'}
-window.addEventListener('load',()=>{if(!store.get('cookie'))document.getElementById('cookie').style.display='block'});
+// il consenso cookie e Google Analytics sono gestiti da js/consent.js
 </script>
 
-<script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => location.reload());
-      }
-    });
-  }
-</script>
+
+<script src="/js/consent.js" defer></script>
 
 </body>
 </html>

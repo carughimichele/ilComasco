@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /admin
 
-Sitemap: https://ilcomasco.netlify.app/sitemap.xml
+Sitemap: https://il-comasco.vercel.app/sitemap.xml
