@@ -44,10 +44,14 @@
 
   /* filtri */
   .filters{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:26px}
-  .chip{background:var(--card);border:1px solid var(--border);color:var(--ink-soft);padding:8px 18px;border-radius:100px;
+  .chip{--c:var(--azzurro);--tx:color-mix(in srgb,var(--c) 80%,black);
+    background:color-mix(in srgb,var(--c) 10%,transparent);
+    border:1px solid color-mix(in srgb,var(--c) 28%,transparent);
+    color:var(--tx);padding:8px 18px;border-radius:100px;
     font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit;transition:.2s}
-  .chip:hover{border-color:var(--azzurro);color:var(--azzurro)}
-  .chip.on{background:var(--azzurro);border-color:var(--azzurro);color:#fff}
+  [data-theme="dark"] .chip{--tx:color-mix(in srgb,var(--c) 42%,white)}
+  .chip:hover{border-color:color-mix(in srgb,var(--c) 55%,transparent)}
+  .chip.on{background:var(--c);border-color:var(--c);color:#fff}
   .chip .c{opacity:.7;font-size:.76rem;margin-left:4px}
   .count{margin-left:auto;color:var(--ink-soft);font-size:.82rem}
 
@@ -68,7 +72,7 @@
   .news-card{display:flex;flex-direction:column;height:100%}
   .news-card .cover{height:112px;flex-shrink:0;position:relative;background:linear-gradient(150deg,var(--azzurro-chiaro),var(--azzurro))}
   .news-card .cover::after{content:"";position:absolute;inset:0;opacity:.16;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:16px 16px}
-  .news-card .badge{position:absolute;left:16px;bottom:13px;z-index:2;background:rgba(255,255,255,.93);color:var(--azzurro);
+  .news-card .badge{position:absolute;left:16px;bottom:13px;z-index:2;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.16);
     font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:100px}
   .news-card .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px;flex:1}
   .news-card h3{font-size:1.1rem;line-height:1.32;color:var(--ink)}
@@ -98,6 +102,7 @@
   :focus-visible{outline:3px solid var(--lago);outline-offset:2px;border-radius:4px}
   @media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}html{scroll-behavior:auto}}
 </style>
+<script src="/js/categorie.js"></script>
 </head>
 <body>
 
@@ -173,8 +178,9 @@
   function periodo(d){var x=new Date(d);return isNaN(x)?'Senza data':MESI[x.getMonth()]+' '+x.getFullYear()}
 
   function card(n){
+    var c=window.CAT.info(n.cat);
     return '<a class="card news-card" href="news.html?id='+encodeURIComponent(n.slug||'')+'">'
-      +'<div class="cover"><span class="badge">'+esc(n.cat||'Como')+'</span></div>'
+      +'<div class="cover" style="background:'+c.gradiente+'"><span class="badge" style="color:'+c.base+'">'+c.emoji+' '+esc(n.cat||c.nome)+'</span></div>'
       +'<div class="body"><h3>'+esc(n.title)+'</h3><p>'+esc(n.summary||'')+'</p>'
       +'<div class="foot"><span class="date">'+fmt(n.date)+'</span><span class="read">Leggi &rarr;</span></div>'
       +'</div></a>';
@@ -206,7 +212,8 @@
     if(keys.length<2){fbar.hidden=true;return}
     fbar.hidden=false;
     fbar.innerHTML='<button type="button" class="chip on" data-c="*">Tutte<span class="c">'+all.length+'</span></button>'
-      +keys.map(function(k){return '<button type="button" class="chip" data-c="'+esc(k)+'">'+esc(k)+'<span class="c">'+cats[k]+'</span></button>'}).join('')
+      +keys.map(function(k){var i=window.CAT.info(k);
+        return '<button type="button" class="chip" data-c="'+esc(k)+'" style="--c:'+i.base+'">'+i.emoji+' '+esc(k)+'<span class="c">'+cats[k]+'</span></button>'}).join('')
       +'<span class="count" id="cnt"></span>';
     fbar.addEventListener('click',function(ev){
       var b=ev.target.closest('.chip'); if(!b)return;

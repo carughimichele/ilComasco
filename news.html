@@ -60,6 +60,7 @@
   .cload .note{display:block;margin-top:14px;font-size:.78rem;color:var(--ink-soft)}
   .cload .note a{color:var(--lago,#12b5c9);font-weight:700;text-decoration:underline}
 </style>
+<script src="/js/categorie.js"></script>
 </head>
 <body>
 <header class="nav"><div class="in">
@@ -154,7 +155,8 @@
     document.title=n.title+' — ilComasco';
     var m=document.getElementById('metaDesc');
     if(m)m.setAttribute('content',String(n.summary||n.title).slice(0,155));
-    document.getElementById('kicker').innerHTML='<span class="kicker">'+esc(n.cat||'Como')+'</span>';
+    var ci=window.CAT.info(n.cat);
+    document.getElementById('kicker').innerHTML='<span class="kicker" style="background:#fff;border-color:#fff;color:'+ci.base+'">'+ci.emoji+' '+esc(n.cat||ci.nome)+'</span>';
     document.getElementById('title').textContent=n.title;
     document.getElementById('date').textContent=fmt(n.date);
     document.getElementById('body').innerHTML=render(n.body||n.summary||'');
