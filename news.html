@@ -1,199 +1,22 @@
 <!DOCTYPE html>
-<html lang="it" data-theme="light">
+<html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Notizia — ilComasco</title>
-<meta name="description" id="metaDesc" content="Notizie sul Calcio Como 1907 da ilComasco.">
-<meta name="theme-color" content="#062f63">
-<style>
-  :root{--azzurro:#0a4da2;--azzurro-chiaro:#2e86ff;--azzurro-scuro:#062f63;--lago:#12b5c9;
-    --bg:#eef4fc;--card:#fff;--ink:#0b1220;--ink-soft:#5b6b82;--border:#e4edfa;--footer:#0b1220;
-    --shadow:0 18px 45px rgba(6,47,99,.14);--radius:18px}
-  [data-theme="dark"]{--bg:#0a1526;--card:#12233f;--ink:#eaf2ff;--ink-soft:#93a7c6;
-    --border:#1d3355;--footer:#04081a;--shadow:0 18px 45px rgba(0,0,0,.5)}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;transition:background .4s,color .4s}
-  a{color:inherit;text-decoration:none}
-  h1,h2,h3{line-height:1.15;font-weight:800;letter-spacing:-.02em}
-  .nav{background:var(--azzurro-scuro);padding:13px 0}
-  .nav .in{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between}
-  .brand{display:flex;align-items:center;gap:10px;color:#fff;font-size:1.15rem;font-weight:800}
-  .brand .il{opacity:.85;font-weight:600}
-  .brand svg{width:34px;height:34px}
-  .icon-btn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.25s}
-  .icon-btn:hover{background:#fff;color:var(--azzurro)}
-  .strip{background:linear-gradient(90deg,var(--azzurro-scuro),var(--azzurro));color:#fff;padding:11px 0}
-  .strip .in{max-width:820px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
-  .back{font-size:.82rem;font-weight:700;opacity:.9}
-  .back:hover{opacity:1;color:var(--lago)}
-  .kicker{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:4px 13px;border-radius:100px;font-size:.66rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
-  .sheet{max-width:820px;margin:34px auto 0;padding:0 22px}
-  .art{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:40px 44px 44px}
-  .art h1{font-size:clamp(1.55rem,3.4vw,2.05rem);margin-bottom:10px}
-  .art .date{color:var(--ink-soft);font-size:.85rem;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--border)}
-  .art p{font-size:1.07rem;line-height:1.78;margin-bottom:18px;max-width:66ch}
-  .art p:last-child{margin-bottom:0}
-  .art a{color:var(--azzurro);font-weight:700;text-decoration:underline}
-  .art strong{font-weight:800}
-  .art h2{font-size:1.32rem;margin:34px 0 12px;letter-spacing:-.01em}
-  .art h3{font-size:1.12rem;margin:26px 0 10px;color:var(--azzurro)}
-  .art h2:first-child,.art h3:first-child{margin-top:0}
-  .art ul,.art ol{max-width:66ch;margin:0 0 18px 22px}
-  .art li{font-size:1.07rem;line-height:1.72;margin-bottom:7px;padding-left:4px}
-  .art ul li::marker{color:var(--lago)}
-  .art ol li::marker{color:var(--azzurro);font-weight:800}
-  .comments{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 24px rgba(6,47,99,.08);padding:28px 30px;margin:26px 0 60px}
-  .comments h2{font-size:1.1rem;margin-bottom:4px}
-  .comments .sub{color:var(--ink-soft);font-size:.88rem;margin-bottom:18px}
-  footer{background:var(--footer);color:#9fb2cc;text-align:center;padding:30px 22px;font-size:.85rem}
-  footer strong{color:#fff}
-  footer .disc{max-width:760px;margin:10px auto 0;font-size:.74rem;opacity:.65}
-  @media(max-width:640px){.art{padding:26px 20px}.comments{padding:22px 18px}}
-
-  /* ===== CARICAMENTO COMMENTI SU RICHIESTA ===== */
-  .cload{text-align:center;padding:6px 0}
-  .cload p{color:var(--ink-soft);font-size:.92rem;line-height:1.6;max-width:54ch;margin:0 auto 18px}
-  .cload button{padding:13px 30px;border-radius:100px;border:0;background:var(--azzurro,#0a4da2);color:#fff;font-weight:800;font-size:.95rem;cursor:pointer;font-family:inherit;transition:.22s}
-  .cload button:hover{background:var(--azzurro-chiaro,#2e86ff);transform:translateY(-2px)}
-  .cload button:focus-visible{outline:3px solid var(--lago,#12b5c9);outline-offset:3px}
-  .cload .note{display:block;margin-top:14px;font-size:.78rem;color:var(--ink-soft)}
-  .cload .note a{color:var(--lago,#12b5c9);font-weight:700;text-decoration:underline}
-</style>
-<script src="/js/categorie.js"></script>
-</head>
-<body>
-<header class="nav"><div class="in">
-  <a class="brand" href="index.html">
-    <svg viewBox="0 0 230 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset="1" stop-color="#12b5c9"/></linearGradient></defs>
-      <g fill="none" stroke="url(#lg)" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M128 132 L150 180 L168 228" stroke-width="21"/>
-        <path d="M128 132 L92 148 L50 130" stroke-width="21"/>
-        <path d="M150 60 L128 132" stroke-width="23"/>
-        <path d="M150 74 L185 64 L206 44" stroke-width="14"/>
-        <path d="M150 80 L119 112" stroke-width="14"/>
-      </g>
-      <circle cx="158" cy="44" r="18" fill="url(#lg)"/>
-    </svg>
-    <span><span class="il">il</span>Comasco</span>
-  </a>
-  <button class="icon-btn" id="theme" aria-label="Cambia tema">🌙</button>
-</div></header>
-
-<section class="strip"><div class="in">
-  <a class="back" href="index.html#news">← Tutte le notizie</a>
-  <div id="kicker"></div>
-</div></section>
-
-<div class="sheet">
-  <article class="art">
-    <h1 id="title">Caricamento…</h1>
-    <div class="date" id="date"></div>
-    <div id="body"></div>
-  </article>
-  <div class="comments" id="commentsBox" style="display:none">
-    <h2>💬 Dì la tua</h2>
-    <div class="sub">Commenta questa notizia con il tuo account GitHub.</div>
-    <div id="giscus"></div>
-  </div>
-</div>
-
-<footer>
-  <p><strong>ilComasco</strong> — Forza Como sempre 💙</p>
-  <p style="margin-top:8px"><a href="index.html" style="color:#9fb2cc;text-decoration:underline">Home</a> · <a href="notizie.html" style="color:#9fb2cc;text-decoration:underline">Tutte le notizie</a> · <a href="privacy.html" style="color:#9fb2cc;text-decoration:underline">Privacy Policy</a> · <a href="cookie-policy.html" style="color:#9fb2cc;text-decoration:underline">Cookie Policy</a></p>
-  <p class="disc">Sito non ufficiale, realizzato da tifosi. Non affiliato al Como 1907 S.r.l.</p>
-</footer>
-
+<meta name="robots" content="noindex,follow">
+<title>ilComasco</title>
+<!-- =====================================================================
+     Vecchio indirizzo delle notizie (news.html?id=...).
+     Da agosto 2026 ogni notizia ha una pagina sua: /notizia/<indirizzo>.
+     In produzione ci pensa il rimando 301 scritto in vercel.json; questo
+     file resta come rete di sicurezza per i link aperti senza passare
+     dal server, per esempio in anteprima o in locale.
+     ===================================================================== -->
 <script>
 (function(){
-  var btn=document.getElementById('theme');
-  function apply(t){document.documentElement.setAttribute('data-theme',t);btn.textContent=t==='dark'?'☀️':'🌙'}
-  var saved='light';try{saved=localStorage.getItem('theme')||'light'}catch(e){}
-  apply(saved);
-  btn.addEventListener('click',function(){
-    var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
-    apply(t);try{localStorage.setItem('theme',t)}catch(e){}
-  });
-})();
-
-(function(){
   var id=new URLSearchParams(location.search).get('id');
-
-  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-
-  function fmt(d){var x=new Date(d);return isNaN(x)?esc(d):x.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'})}
-
-  function rich(t){return esc(t)
-    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
-    .replace(/(^|[^*])\*([^*]+)\*/g,'$1<em>$2</em>')
-    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');}
-
-  function render(t){
-    var out='',list=null;
-    String(t||'').split(/\r?\n/).forEach(function(line){
-      var s=line.trim();
-      if(!s){if(list){out+='</'+list+'>';list=null}return}
-      var ul=s.match(/^[-*]\s+(.*)$/), ol=s.match(/^\d+[.)]\s+(.*)$/), h=s.match(/^(#{2,3})\s+(.*)$/);
-      if(ul){if(list!=='ul'){if(list)out+='</'+list+'>';out+='<ul>';list='ul'}out+='<li>'+rich(ul[1])+'</li>';return}
-      if(ol){if(list!=='ol'){if(list)out+='</'+list+'>';out+='<ol>';list='ol'}out+='<li>'+rich(ol[1])+'</li>';return}
-      if(list){out+='</'+list+'>';list=null}
-      if(h){var lv=h[1].length===2?'h2':'h3';out+='<'+lv+'>'+rich(h[2])+'</'+lv+'>';return}
-      out+='<p>'+rich(s)+'</p>';
-    });
-    if(list)out+='</'+list+'>';
-    return out;
-  }
-
-  fetch('/data/news.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(data){
-    var n=(data.news||[]).filter(function(x){return x.slug===id})[0];
-    if(!n){
-      document.getElementById('title').textContent='Notizia non trovata';
-      document.getElementById('body').innerHTML='<p>Il link potrebbe essere sbagliato o la notizia è stata rimossa. Torna alle <a href="index.html#news">ultime notizie</a>.</p>';
-      return;
-    }
-    document.title=n.title+' — ilComasco';
-    var m=document.getElementById('metaDesc');
-    if(m)m.setAttribute('content',String(n.summary||n.title).slice(0,155));
-    var ci=window.CAT.info(n.cat);
-    document.getElementById('kicker').innerHTML='<span class="kicker" style="background:#fff;border-color:#fff;color:'+ci.base+'">'+ci.icona+''+esc(n.cat||ci.nome)+'</span>';
-    document.getElementById('title').textContent=n.title;
-    document.getElementById('date').textContent=fmt(n.date);
-    document.getElementById('body').innerHTML=render(n.body||n.summary||'');
-    document.getElementById('commentsBox').style.display='block';
-
-    var mount=document.getElementById('giscus');
-    var box=document.createElement('div');
-    box.className='cload';
-    box.innerHTML='<p>I commenti sono ospitati su <strong>Giscus</strong> e funzionano con un account GitHub. Caricandoli, il tuo browser si collega a giscus.app e a GitHub, che possono installare cookie propri.</p>'
-      +'<button type="button">💬 Carica i commenti</button>'
-      +'<span class="note">Nessun collegamento avviene prima del tuo clic · <a href="cookie-policy.html">Cookie Policy</a></span>';
-    mount.appendChild(box);
-    box.querySelector('button').addEventListener('click',function(){
-      var b=this; b.disabled=true; b.textContent='Caricamento…';
-      var dark=document.documentElement.getAttribute('data-theme')==='dark';
-      var s=document.createElement('script');
-      s.src='https://giscus.app/client.js';
-      s.setAttribute('data-repo','ilComasco1907/ilComasco');
-      s.setAttribute('data-repo-id','R_kgDOToBMJA');
-      s.setAttribute('data-category','Announcements');
-      s.setAttribute('data-category-id','DIC_kwDOToBMJM4DCS1_');
-      s.setAttribute('data-mapping','specific');
-      s.setAttribute('data-term','news-'+n.slug);
-      s.setAttribute('data-reactions-enabled','1');
-      s.setAttribute('data-input-position','bottom');
-      s.setAttribute('data-theme',dark?'dark':'light');
-      s.setAttribute('data-lang','it');
-      s.crossOrigin='anonymous'; s.async=true;
-      s.onload=function(){ box.remove() };
-      s.onerror=function(){ b.disabled=false; b.textContent='💬 Riprova'; };
-      mount.appendChild(s);
-    });
-  }).catch(function(){
-    document.getElementById('title').textContent='Errore di caricamento';
-  });
+  location.replace(id?'/notizia/'+encodeURI(id):'/notizie.html');
 })();
 </script>
-<script src="/js/consent.js" defer></script>
-</body>
+</head>
+<body><p>Un istante, ti porto alla notizia… <a href="/notizie.html">Tutte le notizie</a></p></body>
 </html>

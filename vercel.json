@@ -1,0 +1,23 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "node scripts/build-notizie.mjs",
+  "outputDirectory": ".",
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/news.html",
+      "has": [{ "type": "query", "key": "id", "value": "(?<slug>[^&]+)" }],
+      "destination": "/notizia/:slug",
+      "permanent": true
+    },
+    { "source": "/news.html", "destination": "/notizie.html", "permanent": true },
+    { "source": "/notizie", "destination": "/notizie.html", "permanent": false },
+    { "source": "/feed", "destination": "/rss.xml", "permanent": false }
+  ],
+  "headers": [
+    {
+      "source": "/rss.xml",
+      "headers": [{ "key": "Content-Type", "value": "application/rss+xml; charset=utf-8" }]
+    }
+  ]
+}

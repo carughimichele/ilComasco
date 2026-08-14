@@ -1,0 +1,4 @@
+# generati a ogni build da scripts/build-notizie.mjs
+notizia/
+rss.xml
+sitemap.xml

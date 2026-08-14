@@ -8,6 +8,7 @@
 <meta name="google-site-verification" content="H0SIt3TJg7GXIcNDVF13ZMEh4n1DW652wVRLfem_rUo" />
   <meta name="keywords" content="Como 1907, Calcio Como, Lariani, Serie A, notizie Como calcio, calciomercato Como">
 <meta name="theme-color" content="#062f63">
+<link rel="alternate" type="application/rss+xml" title="ilComasco — Notizie" href="/rss.xml">
 <meta name="author" content="ilComasco">
 <meta property="og:title" content="ilComasco — Portale dei tifosi Lariani">
 <meta property="og:description" content="Il punto di riferimento indipendente per i tifosi azzurri del Calcio Como 1907.">
@@ -881,7 +882,7 @@ function emptyState(titolo,lista){
       .map(x=>x.n);
     if(!list.length){el.innerHTML=emptyState('Ancora nessuna notizia','data/news.json');return}
     el.classList.add('g3');
-    el.innerHTML=list.slice(0,HOME).map(n=>{const c=window.CAT.info(n.cat);return `<a class="card news-card" href="news.html?id=${encodeURIComponent(n.slug||'')}">
+    el.innerHTML=list.slice(0,HOME).map(n=>{const c=window.CAT.info(n.cat);return `<a class="card news-card" href="/notizia/${encodeURI(n.slug||'')}">
       <div class="cover" style="background:${c.gradiente}"><span class="badge" style="color:${c.base}">${c.icona}${esc(n.cat||c.nome)}</span></div>
       <div class="body">
         <h4>${esc(n.title)}</h4>
