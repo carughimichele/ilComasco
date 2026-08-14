@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- =====================================================================
+     ilComasco — Modello della pagina notizia
+     ---------------------------------------------------------------------
+     QUESTO E' IL FILE DA MODIFICARE per cambiare grafica o struttura
+     delle pagine degli articoli. Le parti fra doppie graffe vengono
+     riempite da scripts/build-notizie.mjs a ogni pubblicazione: lasciale
+     dove sono, tutto il resto e' modificabile liberamente.
+     ===================================================================== -->
+{{META}}
+<meta name="theme-color" content="#062f63">
+<meta name="author" content="ilComasco">
+<link rel="alternate" type="application/rss+xml" title="ilComasco — Notizie" href="/rss.xml">
+<style>
+  :root{--azzurro:#0a4da2;--azzurro-chiaro:#2e86ff;--azzurro-scuro:#062f63;--lago:#12b5c9;
+    --bg:#eef4fc;--card:#fff;--ink:#0b1220;--ink-soft:#5b6b82;--border:#e4edfa;--footer:#0b1220;
+    --shadow:0 18px 45px rgba(6,47,99,.14);--radius:18px}
+  [data-theme="dark"]{--bg:#0a1526;--card:#12233f;--ink:#eaf2ff;--ink-soft:#93a7c6;
+    --border:#1d3355;--footer:#04081a;--shadow:0 18px 45px rgba(0,0,0,.5)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;transition:background .4s,color .4s}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{line-height:1.15;font-weight:800;letter-spacing:-.02em}
+  .nav{background:var(--azzurro-scuro);padding:13px 0}
+  .nav .in{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px;color:#fff;font-size:1.15rem;font-weight:800}
+  .brand .il{opacity:.85;font-weight:600}
+  .brand svg{width:34px;height:34px}
+  .icon-btn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.25s}
+  .icon-btn:hover{background:#fff;color:var(--azzurro)}
+  .strip{background:linear-gradient(90deg,var(--azzurro-scuro),var(--azzurro));color:#fff;padding:11px 0}
+  .strip .in{max-width:820px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .back{font-size:.82rem;font-weight:700;opacity:.9}
+  .back:hover{opacity:1;color:var(--lago)}
+  .kicker{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:4px 13px;border-radius:100px;font-size:.66rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+  .sheet{max-width:820px;margin:34px auto 0;padding:0 22px}
+  .art{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:40px 44px 44px}
+  .art h1{font-size:clamp(1.55rem,3.4vw,2.05rem);margin-bottom:10px}
+  .art .date{color:var(--ink-soft);font-size:.85rem;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--border)}
+  .art p{font-size:1.07rem;line-height:1.78;margin-bottom:18px;max-width:66ch}
+  .art p:last-child{margin-bottom:0}
+  .art a{color:var(--azzurro);font-weight:700;text-decoration:underline}
+  [data-theme="dark"] .art a{color:#8fd8ff}
+  .art strong{font-weight:800}
+  .art h2{font-size:1.32rem;margin:34px 0 12px;letter-spacing:-.01em}
+  .art h3{font-size:1.12rem;margin:26px 0 10px;color:var(--azzurro)}
+  [data-theme="dark"] .art h3{color:#8fd8ff}
+  .art h2:first-child,.art h3:first-child{margin-top:0}
+  .art ul,.art ol{max-width:66ch;margin:0 0 18px 22px}
+  .art li{font-size:1.07rem;line-height:1.72;margin-bottom:7px;padding-left:4px}
+  .art ul li::marker{color:var(--lago)}
+  .art ol li::marker{color:var(--azzurro);font-weight:800}
+  .art figure{margin:0 0 26px}
+  .art figure img{width:100%;height:auto;border-radius:12px;display:block}
+  .art figcaption{color:var(--ink-soft);font-size:.8rem;margin-top:8px}
+
+  /* precedente / successivo */
+  .pn{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+  .pn a{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;transition:.25s;box-shadow:0 6px 16px rgba(6,47,99,.05)}
+  .pn a:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .pn .l{display:block;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--lago);margin-bottom:5px}
+  .pn .t{font-weight:700;font-size:.95rem;line-height:1.4;color:var(--ink)}
+  .pn a.next{text-align:right}
+  @media(max-width:600px){.pn{grid-template-columns:1fr}.pn a.next{text-align:left}}
+
+  .comments{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 24px rgba(6,47,99,.08);padding:28px 30px;margin:26px 0 60px}
+  .comments h2{font-size:1.1rem;margin-bottom:4px}
+  .comments .sub{color:var(--ink-soft);font-size:.88rem;margin-bottom:18px}
+  footer{background:var(--footer);color:#9fb2cc;text-align:center;padding:30px 22px;font-size:.85rem}
+  footer strong{color:#fff}
+  footer a{color:#9fb2cc;text-decoration:underline}
+  footer a:hover{color:var(--lago)}
+  footer .disc{max-width:760px;margin:10px auto 0;font-size:.74rem;opacity:.65}
+  :focus-visible{outline:3px solid var(--lago);outline-offset:2px;border-radius:4px}
+  @media(max-width:640px){.art{padding:26px 20px}.comments{padding:22px 18px}}
+  @media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="in">
+  <a class="brand" href="/">
+    <svg viewBox="0 0 230 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset="1" stop-color="#12b5c9"/></linearGradient></defs>
+      <g fill="none" stroke="url(#lg)" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M128 132 L150 180 L168 228" stroke-width="21"/>
+        <path d="M128 132 L92 148 L50 130" stroke-width="21"/>
+        <path d="M150 60 L128 132" stroke-width="23"/>
+        <path d="M150 74 L185 64 L206 44" stroke-width="14"/>
+        <path d="M150 80 L119 112" stroke-width="14"/>
+      </g>
+      <circle cx="158" cy="44" r="18" fill="url(#lg)"/>
+    </svg>
+    <span><span class="il">il</span>Comasco</span>
+  </a>
+  <button class="icon-btn" id="theme" aria-label="Cambia tema">🌙</button>
+</div></header>
+
+<section class="strip"><div class="in">
+  <a class="back" href="/notizie.html">← Tutte le notizie</a>
+  {{KICKER}}
+</div></section>
+
+<div class="sheet">
+  <article class="art">
+    <h1>{{TITOLO}}</h1>
+    <div class="date"><time datetime="{{DATA_ISO}}">{{DATA_TESTO}}</time></div>
+    {{CORPO}}
+  </article>
+
+  {{PRECEDENTE_SUCCESSIVO}}
+
+  <div class="comments">
+    <h2>💬 Dì la tua</h2>
+    <div class="sub">Commenta questa notizia con il tuo account GitHub.</div>
+    <div id="giscus" data-term="news-{{SLUG}}"></div>
+  </div>
+</div>
+
+<footer>
+  <p><strong>ilComasco</strong> — Forza Como sempre 💙</p>
+  <p style="margin-top:8px"><a href="/">Home</a> · <a href="/notizie.html">Tutte le notizie</a> · <a href="/privacy.html">Privacy Policy</a> · <a href="/cookie-policy.html">Cookie Policy</a></p>
+  <p class="disc">Sito non ufficiale, realizzato da tifosi. Non affiliato al Como 1907 S.r.l.</p>
+</footer>
+
+<script>
+/* tema scelto dal tifoso, applicato subito */
+(function(){
+  var btn=document.getElementById('theme');
+  function apply(t){document.documentElement.setAttribute('data-theme',t);btn.textContent=t==='dark'?'☀️':'🌙'}
+  var saved='light';try{saved=localStorage.getItem('theme')||'light'}catch(e){}
+  apply(saved);
+  btn.addEventListener('click',function(){
+    var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+    apply(t);try{localStorage.setItem('theme',t)}catch(e){}
+  });
+})();
+</script>
+<script src="/js/giscus.js" defer></script>
+<script src="/js/consent.js" defer></script>
+</body>
+</html>
