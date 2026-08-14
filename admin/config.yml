@@ -24,7 +24,8 @@ collections:
               - label: Indirizzo (non cambiarlo dopo)
                 name: slug
                 widget: string
-                hint: "solo minuscole e trattini, es. nasce-ilcomasco"
+                hint: "solo minuscole, numeri e trattini — niente barre, spazi o accenti. Es. nasce-ilcomasco"
+                pattern: ['^[a-z0-9]+(-[a-z0-9]+)*$', "Usa solo minuscole, numeri e trattini: niente barre / spazi o accenti"]
               - label: Titolo
                 name: title
                 widget: string
@@ -41,15 +42,26 @@ collections:
                   - Champions League
                   - Coppa Italia
                   - Extra
-              - label: Data
+              - label: Data e ora
                 name: date
                 widget: datetime
                 date_format: "DD/MM/YYYY"
-                time_format: false
-                format: "YYYY-MM-DD"
+                time_format: "HH:mm"
+                format: "YYYY-MM-DDTHH:mm"
+                hint: "l'ora serve a mettere in fila due notizie dello stesso giorno"
               - label: Sommario (1 riga)
                 name: summary
                 widget: text
+              - label: Immagine di apertura
+                name: image
+                widget: image
+                required: false
+                hint: "esce nell'articolo e nell'anteprima su WhatsApp e Facebook — orizzontale, almeno 1200x675"
+              - label: Descrizione dell'immagine
+                name: imageAlt
+                widget: string
+                required: false
+                hint: "cosa si vede, per chi non puo' vederla"
               - label: Testo completo
                 name: body
                 widget: markdown
