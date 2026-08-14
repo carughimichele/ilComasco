@@ -1,7 +1,7 @@
 {
   "news": [
     {
-      "cat": "Como",
+      "cat": "La squadra",
       "slug": "nasce-ilcomasco",
       "title": "ilComasco, Il Portale dei tifosi Lariani.",
       "date": "2026-08-01",
@@ -18,14 +18,6 @@
     },
     {
       "cat": "Calciomercato",
-      "slug": "trevoh-chalobah-visite-mediche",
-      "title": "Doppio colpo: é arrivato Chalobah.",
-      "date": "2026-08-05",
-      "summary": "Non solo Couto, oggi é anche la giornata del centrale inglese.",
-      "body": "Giornata di arrivi in casa Como: dopo [Yan Couto](https://il-comasco.vercel.app/news.html?id=yan-couto-malpensa) anche **Trevoh Chalobah** é arrivato in Lombardia per le visite mediche di rito.\n\nIl difensore inglese si appresta a lasciare Stamford Bridge e il Chelsea a titolo definitivo, chiudendo una parentesi lunghissima: 19 anni da quando è arrivato nelle giovanili *Blues* nel 2007, anno in cui il Como era intento a battere la Tritium per risalire verso la C2. Altre vite, altri tempi.\n\nL'operazione è di quelle costose, seconda solo a Nico Paz nella storia del Como: 30 milioni di euro base, più 6 milioni di bonus e una percentuale sulla futura rivendita (fonte: [Fabrizio Romano](https://x.com/FabrizioRomano/status/2084279180632428899)). Operazione costosa significa aspettative alte, altissime — come lo stesso Chalobah, che con i suoi 192 centimetri (affiancati ai 195 di Jacobo Ramon) andrá a formare una delle coppie difensive più imponenti della Serie A."
-    },
-    {
-      "cat": "Calciomercato",
       "slug": "yan-couto-malpensa",
       "title": "Yan Couto é atterrato a Malpensa!",
       "date": "2026-08-05",
@@ -34,6 +26,14 @@
     },
     {
       "cat": "Calciomercato",
+      "slug": "trevoh-chalobah-visite-mediche",
+      "title": "Doppio colpo: é arrivato Chalobah.",
+      "date": "2026-08-05",
+      "summary": "Non solo Couto, oggi é anche la giornata del centrale inglese.",
+      "body": "Giornata di arrivi in casa Como: dopo [Yan Couto](https://il-comasco.vercel.app/news.html?id=yan-couto-malpensa) anche **Trevoh Chalobah** é arrivato in Lombardia per le visite mediche di rito.\n\nIl difensore inglese si appresta a lasciare Stamford Bridge e il Chelsea a titolo definitivo, chiudendo una parentesi lunghissima: 19 anni da quando è arrivato nelle giovanili *Blues* nel 2007, anno in cui il Como era intento a battere la Tritium per risalire verso la C2. Altre vite, altri tempi.\n\nL'operazione è di quelle costose, seconda solo a Nico Paz nella storia del Como: 30 milioni di euro base, più 6 milioni di bonus e una percentuale sulla futura rivendita (fonte: [Fabrizio Romano](https://x.com/FabrizioRomano/status/2084279180632428899)). Operazione costosa significa aspettative alte, altissime — come lo stesso Chalobah, che con i suoi 192 centimetri (affiancati ai 195 di Jacobo Ramon) andrá a formare una delle coppie difensive più imponenti della Serie A."
+    },
+    {
+      "cat": "Ufficialità",
       "date": "2026-08-06",
       "summary": "Annunciato l'esterno brasiliano in prestito dal Borussia Dortmund.",
       "title": "Yan Couto é ufficialmente Lariano.",
@@ -41,7 +41,7 @@
       "body": "*\"Como 1907 è lieto di annunciare l’ingaggio in prestito dell’esterno destro della nazionale brasiliana Yan Couto dal Borussia Dortmund per la stagione 2026/27.\"*\n\nDopo settimane, se non mesi, di trattative, è finalmente arrivata [l'ufficialità](https://comofootball.com/como-1907-ingaggia-il-nazionale-brasiliano-yan-couto/): Yan Couto sarà dei nostri, almeno per la prossima stagione.\n\nUn'operazione che, personalmente, ci gasa parecchio: a soli 24 anni vanta già una notevole esperienza tra Germania e Spagna, dove con il [Girona](https://www.youtube.com/watch?v=NVfk2DKM9zc) ha mostrato la versione migliore di sé. Arriva sul Lario con la voglia di rilanciarsi dopo due stagioni non particolarmente scintillanti al BVB. La [formula del prestito](https://il-comasco.vercel.app/news.html?id=yan-couto-malpensa) lascia ampia libertá al club Lariano di fare le proprie valutazioni durante la stagione.\n\nIl brasiliano ha già avuto modo di conoscere i nuovi compagni e di svolgere il suo primo allenamento agli ordini di Fàbregas, iniziando subito a prendere confidenza con il mondo Como.\n\nNota di colore, in tutti i sensi: nel corso degli anni Yan ci ha abituato a cambi di look decisamente appariscenti, passando dall'iconica tinta rosa sfoggiata in Spagna a quella ossigenata attuale. La domanda sorge spontanea: quanto dovremo aspettare prima di vederlo con una tinta azzurra?\n\n**Bem-vindo, Yan! ⚪🔵**"
     },
     {
-      "cat": "Calciomercato",
+      "cat": "Ufficialità",
       "slug": "trevoh-chalobah-ufficiale",
       "title": "Chalobah é BiancoBlú",
       "summary": "Il Como 1907 ingaggia il Nazionale inglese.",
@@ -49,7 +49,7 @@
       "date": "2026-08-09"
     },
     {
-      "cat": "Como",
+      "cat": "La squadra",
       "body": "Diciamolo subito: **questa è roba seria**.\n\nCome da tradizione recente, niente studio fotografico, niente modelli in posa: la maglia è stata svelata [mentre la squadra partiva](https://shop.comofootball.com/en/collections/away-kit-2026-27) per la tournée in Inghilterra, indossata dai giocatori nel viaggio da Milano a Londra. \n\n**Rhuigi Villaseñor**, Chief Brand Officer del club, l'ha spiegata [così](https://comofootball.com/como-1907-e-adidas-presentano-la-nuova-maglia-away-2026-27/): \"Per me, la maglia away significa portare Como con sé\". Retorica? Forse. Però funziona, e a noi che per anni abbiamo visto presentare le divise con un rendering sgranato su Facebook fa ancora un certo effetto. \n\nStessa filosofia della [prima maglia](https://shop.comofootball.com/en/collections/home-kit-2026-27): niente sparate, niente grafiche urlate, solo proporzioni giuste. Fondo bianco pulito, righe verticali appena accennate tono su tono, blu navy a incorniciare colletto e polsini e a correre nelle tre strisce sulle spalle. \n\nE poi il colpo da maestro: il **Trefoil**, il trifoglio Originals, sul petto, dalla parte opposta allo stemma. Un rimando dichiarato al mondo dello sportswear classico, al punto in cui il calcio smette di essere solo calcio e diventa cultura.\n\nIl debutto in campo arriverá nell'amichevole di mercoledí sera contro l'Arsenal, a Londra, mica male come battesimo...",
       "date": "2026-08-09",
       "slug": "presentazione-maglia-away-2026/2027",
