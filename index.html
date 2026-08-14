@@ -285,7 +285,7 @@
 .news-card{display:flex;flex-direction:column;height:100%}
 .news-card .cover{height:118px;flex-shrink:0;position:relative;background:linear-gradient(150deg,var(--azzurro-chiaro),var(--azzurro))}
 .news-card .cover::after{content:"";position:absolute;inset:0;opacity:.16;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:16px 16px}
-.news-card .badge{position:absolute;left:16px;bottom:13px;z-index:2;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.16);font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:100px}
+.news-card .badge{display:inline-flex;align-items:center;gap:5px;position:absolute;left:16px;bottom:13px;z-index:2;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.16);font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:100px}
 .news-card .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px;flex:1}
 .news-card h4{font-size:1.12rem;line-height:1.32;color:var(--ink)}
 .news-card p{color:var(--ink-soft);font-size:.93rem;margin:0}
@@ -882,7 +882,7 @@ function emptyState(titolo,lista){
     if(!list.length){el.innerHTML=emptyState('Ancora nessuna notizia','data/news.json');return}
     el.classList.add('g3');
     el.innerHTML=list.slice(0,HOME).map(n=>{const c=window.CAT.info(n.cat);return `<a class="card news-card" href="news.html?id=${encodeURIComponent(n.slug||'')}">
-      <div class="cover" style="background:${c.gradiente}"><span class="badge" style="color:${c.base}">${c.emoji} ${esc(n.cat||c.nome)}</span></div>
+      <div class="cover" style="background:${c.gradiente}"><span class="badge" style="color:${c.base}">${c.icona}${esc(n.cat||c.nome)}</span></div>
       <div class="body">
         <h4>${esc(n.title)}</h4>
         <p>${esc(n.summary||'')}</p>
