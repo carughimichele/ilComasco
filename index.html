@@ -356,7 +356,15 @@
   .squad-sec .player{align-self:start}
 
 .player .top{background-size:100% 100% !important}
-  
+  /* ===== CARICAMENTO COMMENTI SU RICHIESTA ===== */
+  .cload{text-align:center;padding:6px 0}
+  .cload p{color:var(--ink-soft);font-size:.92rem;line-height:1.6;max-width:54ch;margin:0 auto 18px}
+  .cload button{padding:13px 30px;border-radius:100px;border:0;background:var(--azzurro,#0a4da2);color:#fff;font-weight:800;font-size:.95rem;cursor:pointer;font-family:inherit;transition:.22s}
+  .cload button:hover{background:var(--azzurro-chiaro,#2e86ff);transform:translateY(-2px)}
+  .cload button:focus-visible{outline:3px solid var(--lago,#12b5c9);outline-offset:3px}
+  .cload .note{display:block;margin-top:14px;font-size:.78rem;color:var(--ink-soft)}
+  .cload .note a{color:var(--lago,#12b5c9);font-weight:700;text-decoration:underline}
+
 </style>
 
 <script type="application/ld+json">
@@ -566,22 +574,38 @@
   <div class="wrap">
     <div class="sec-head reveal"><div><div class="tag">Comunità</div><h2>🗣️ Forum Tifosi</h2></div></div>
     <div class="reveal" style="background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:30px;box-shadow:0 8px 24px rgba(6,47,99,.08)">
-      <!-- GISCUS QUI -->
-      <div id="disqus_thread"></div>
-      <script src="https://giscus.app/client.js"
-          data-repo="ilComasco1907/ilComasco"
-          data-repo-id="R_kgDOToBMJA"
-          data-category="Announcements"
-          data-category-id="DIC_kwDOToBMJM4DCS1_"
-          data-mapping="url"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="bottom"
-          data-theme="preferred_color_scheme"
-          data-lang="it"
-          crossorigin="anonymous"
-          async>
+      <div id="giscusBox"></div>
+      <div class="cload" id="giscusLoad">
+        <p>Il forum è ospitato su <strong>Giscus</strong> e funziona con un account GitHub. Caricandolo, il tuo browser si collega a giscus.app e a GitHub, che possono installare cookie propri.</p>
+        <button type="button" id="giscusBtn">💬 Carica il forum</button>
+        <span class="note">Nessun collegamento avviene prima del tuo clic · <a href="cookie-policy.html">Cookie Policy</a></span>
+      </div>
+      <script>
+      (function(){
+        var btn=document.getElementById('giscusBtn'), box=document.getElementById('giscusLoad'),
+            mount=document.getElementById('giscusBox');
+        btn.addEventListener('click',function(){
+          btn.disabled=true; btn.textContent='Caricamento…';
+          var dark=document.documentElement.getAttribute('data-theme')==='dark';
+          var s=document.createElement('script');
+          s.src='https://giscus.app/client.js';
+          s.setAttribute('data-repo','ilComasco1907/ilComasco');
+          s.setAttribute('data-repo-id','R_kgDOToBMJA');
+          s.setAttribute('data-category','Announcements');
+          s.setAttribute('data-category-id','DIC_kwDOToBMJM4DCS1_');
+          s.setAttribute('data-mapping','url');
+          s.setAttribute('data-strict','0');
+          s.setAttribute('data-reactions-enabled','1');
+          s.setAttribute('data-emit-metadata','0');
+          s.setAttribute('data-input-position','bottom');
+          s.setAttribute('data-theme',dark?'dark':'light');
+          s.setAttribute('data-lang','it');
+          s.crossOrigin='anonymous'; s.async=true;
+          s.onload=function(){ box.remove() };
+          s.onerror=function(){ btn.disabled=false; btn.textContent='💬 Riprova'; };
+          mount.appendChild(s);
+        });
+      })();
       </script>
     </div>
   </div>

@@ -50,6 +50,15 @@
   footer strong{color:#fff}
   footer .disc{max-width:760px;margin:10px auto 0;font-size:.74rem;opacity:.65}
   @media(max-width:640px){.art{padding:26px 20px}.comments{padding:22px 18px}}
+
+  /* ===== CARICAMENTO COMMENTI SU RICHIESTA ===== */
+  .cload{text-align:center;padding:6px 0}
+  .cload p{color:var(--ink-soft);font-size:.92rem;line-height:1.6;max-width:54ch;margin:0 auto 18px}
+  .cload button{padding:13px 30px;border-radius:100px;border:0;background:var(--azzurro,#0a4da2);color:#fff;font-weight:800;font-size:.95rem;cursor:pointer;font-family:inherit;transition:.22s}
+  .cload button:hover{background:var(--azzurro-chiaro,#2e86ff);transform:translateY(-2px)}
+  .cload button:focus-visible{outline:3px solid var(--lago,#12b5c9);outline-offset:3px}
+  .cload .note{display:block;margin-top:14px;font-size:.78rem;color:var(--ink-soft)}
+  .cload .note a{color:var(--lago,#12b5c9);font-weight:700;text-decoration:underline}
 </style>
 </head>
 <body>
@@ -151,21 +160,33 @@
     document.getElementById('body').innerHTML=render(n.body||n.summary||'');
     document.getElementById('commentsBox').style.display='block';
 
-    var dark=document.documentElement.getAttribute('data-theme')==='dark';
-    var s=document.createElement('script');
-    s.src='https://giscus.app/client.js';
-    s.setAttribute('data-repo','ilComasco1907/ilComasco');
-    s.setAttribute('data-repo-id','R_kgDOToBMJA');
-    s.setAttribute('data-category','Announcements');
-    s.setAttribute('data-category-id','DIC_kwDOToBMJM4DCS1_');
-    s.setAttribute('data-mapping','specific');
-    s.setAttribute('data-term','news-'+n.slug);
-    s.setAttribute('data-reactions-enabled','1');
-    s.setAttribute('data-input-position','bottom');
-    s.setAttribute('data-theme',dark?'dark':'light');
-    s.setAttribute('data-lang','it');
-    s.crossOrigin='anonymous';s.async=true;
-    document.getElementById('giscus').appendChild(s);
+    var mount=document.getElementById('giscus');
+    var box=document.createElement('div');
+    box.className='cload';
+    box.innerHTML='<p>I commenti sono ospitati su <strong>Giscus</strong> e funzionano con un account GitHub. Caricandoli, il tuo browser si collega a giscus.app e a GitHub, che possono installare cookie propri.</p>'
+      +'<button type="button">💬 Carica i commenti</button>'
+      +'<span class="note">Nessun collegamento avviene prima del tuo clic · <a href="cookie-policy.html">Cookie Policy</a></span>';
+    mount.appendChild(box);
+    box.querySelector('button').addEventListener('click',function(){
+      var b=this; b.disabled=true; b.textContent='Caricamento…';
+      var dark=document.documentElement.getAttribute('data-theme')==='dark';
+      var s=document.createElement('script');
+      s.src='https://giscus.app/client.js';
+      s.setAttribute('data-repo','ilComasco1907/ilComasco');
+      s.setAttribute('data-repo-id','R_kgDOToBMJA');
+      s.setAttribute('data-category','Announcements');
+      s.setAttribute('data-category-id','DIC_kwDOToBMJM4DCS1_');
+      s.setAttribute('data-mapping','specific');
+      s.setAttribute('data-term','news-'+n.slug);
+      s.setAttribute('data-reactions-enabled','1');
+      s.setAttribute('data-input-position','bottom');
+      s.setAttribute('data-theme',dark?'dark':'light');
+      s.setAttribute('data-lang','it');
+      s.crossOrigin='anonymous'; s.async=true;
+      s.onload=function(){ box.remove() };
+      s.onerror=function(){ b.disabled=false; b.textContent='💬 Riprova'; };
+      mount.appendChild(s);
+    });
   }).catch(function(){
     document.getElementById('title').textContent='Errore di caricamento';
   });
