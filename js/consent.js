@@ -6,7 +6,7 @@
    nel formato G-XXXXXXXXXX). Finché resta il valore di esempio,
    Analytics NON viene caricato: il resto del sito funziona comunque.
    ===================================================================== */
-var GA_ID = 'G-XXXXXXXXXX';
+var GA_ID = 'G-069SSZFE3C';
 
 (function () {
   'use strict';
