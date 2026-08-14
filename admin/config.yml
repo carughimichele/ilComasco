@@ -53,3 +53,66 @@ collections:
               - label: Testo completo
                 name: body
                 widget: markdown
+      - name: partite
+        label: Partite
+        file: data/fixtures.json
+        format: json
+        fields:
+          - label: Partite
+            name: fixtures
+            widget: list
+            label_singular: Partita
+            summary: "{{fields.match}} — {{fields.comp}}"
+            fields:
+              - label: Competizione
+                name: comp
+                widget: select
+                default: Serie A
+                options:
+                  - Serie A
+                  - Champions League
+                  - Coppa Italia
+                  - Amichevoli
+              - label: Partita
+                name: match
+                widget: string
+                hint: "es. Udinese — Como 1907"
+              - label: Data e ora
+                name: when
+                widget: datetime
+                date_format: "DD/MM/YYYY"
+                time_format: "HH:mm"
+                format: "YYYY-MM-DDTHH:mm"
+                required: false
+                hint: "il sito scrive da sé Sab 22 ago · 18:30"
+              - label: Data da definire
+                name: whenText
+                widget: string
+                required: false
+                hint: "se compilato sostituisce la data, es. Da definire"
+              - label: Stadio
+                name: where
+                widget: string
+                required: false
+              - label: Dove vederla
+                name: tv
+                widget: string
+                required: false
+                hint: "TV o streaming"
+              - label: Biglietti
+                name: tickets
+                widget: string
+                required: false
+                hint: "nota o indirizzo web"
+              - label: Giornata o fase
+                name: round
+                widget: string
+                required: false
+              - label: Arbitro
+                name: referee
+                widget: string
+                required: false
+              - label: Note
+                name: notes
+                widget: text
+                required: false
