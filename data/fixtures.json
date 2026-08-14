@@ -1,0 +1,40 @@
+{
+  "fixtures": [
+    {
+      "comp": "Serie A",
+      "match": "Udinese — Como 1907",
+      "when": "2026-08-22T18:30",
+      "whenText": "",
+      "where": "Bluenergy Stadium, Udine",
+      "tv": "DAZN",
+      "tickets": "",
+      "round": "1ª giornata",
+      "referee": "",
+      "notes": ""
+    },
+    {
+      "comp": "Serie A",
+      "match": "Napoli — Como 1907",
+      "when": "2026-08-30T18:30",
+      "whenText": "",
+      "where": "Stadio Diego Armando Maradona, Napoli",
+      "tv": "",
+      "tickets": "",
+      "round": "2ª giornata",
+      "referee": "",
+      "notes": ""
+    },
+    {
+      "comp": "Serie A",
+      "match": "Genoa — Como 1907",
+      "when": "2026-09-04T20:45",
+      "whenText": "",
+      "where": "Stadio Luigi Ferraris, Genova",
+      "tv": "",
+      "tickets": "",
+      "round": "3ª giornata",
+      "referee": "",
+      "notes": ""
+    }
+  ]
+}
