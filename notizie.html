@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archivio notizie — ilComasco</title>
+<meta name="description" content="Tutte le notizie di ilComasco sul Calcio Como 1907: calciomercato, partite e vita del club, raccolte in ordine cronologico.">
+<meta name="theme-color" content="#062f63">
+<link rel="canonical" href="https://il-comasco.vercel.app/notizie.html">
+<meta property="og:title" content="Archivio notizie — ilComasco">
+<meta property="og:description" content="Tutte le notizie sul Calcio Como 1907 pubblicate da ilComasco.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://il-comasco.vercel.app/notizie.html">
+<style>
+  :root{--azzurro:#0a4da2;--azzurro-chiaro:#2e86ff;--azzurro-scuro:#062f63;--lago:#12b5c9;
+    --bg:#eef4fc;--bg2:#fff;--card:#fff;--ink:#0b1220;--ink-soft:#5b6b82;--border:#e4edfa;--footer:#0b1220;
+    --shadow:0 18px 45px rgba(6,47,99,.14);--radius:18px}
+  [data-theme="dark"]{--bg:#0a1526;--bg2:#0f1e36;--card:#12233f;--ink:#eaf2ff;--ink-soft:#93a7c6;
+    --border:#1d3355;--footer:#04081a;--shadow:0 18px 45px rgba(0,0,0,.5)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;transition:background .4s,color .4s}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{line-height:1.15;font-weight:800;letter-spacing:-.02em}
+
+  .nav{background:var(--azzurro-scuro);padding:13px 0}
+  .nav .in{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px;color:#fff;font-size:1.15rem;font-weight:800}
+  .brand .il{opacity:.85;font-weight:600}
+  .brand svg{width:34px;height:34px}
+  .icon-btn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.25s}
+  .icon-btn:hover{background:#fff;color:var(--azzurro)}
+
+  .head{background:linear-gradient(135deg,var(--azzurro-scuro),var(--azzurro));color:#fff;padding:44px 0 40px}
+  .head .in{max-width:1180px;margin:0 auto;padding:0 22px}
+  .head .back{font-size:.82rem;font-weight:700;opacity:.85}
+  .head .back:hover{opacity:1;color:#8fd8ff}
+  .head .tag{color:#8fd8ff;font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.74rem;margin-top:18px}
+  .head h1{font-size:clamp(1.9rem,4.4vw,2.7rem);margin-top:8px}
+  .head p{opacity:.9;margin-top:10px;font-size:1.05rem;max-width:56ch}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+  main{padding:30px 0 20px}
+
+  /* filtri */
+  .filters{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:26px}
+  .chip{background:var(--card);border:1px solid var(--border);color:var(--ink-soft);padding:8px 18px;border-radius:100px;
+    font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit;transition:.2s}
+  .chip:hover{border-color:var(--azzurro);color:var(--azzurro)}
+  .chip.on{background:var(--azzurro);border-color:var(--azzurro);color:#fff}
+  .chip .c{opacity:.7;font-size:.76rem;margin-left:4px}
+  .count{margin-left:auto;color:var(--ink-soft);font-size:.82rem}
+
+  /* gruppi per mese */
+  .group{margin-bottom:34px}
+  .group .gh{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .group .gh h2{font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink);white-space:nowrap}
+  .group .gh .ln{flex:1;height:1px;background:var(--border)}
+  .group .gh .n{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+
+  .grid{display:grid;gap:22px;grid-template-columns:repeat(3,1fr)}
+  @media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:660px){.grid{grid-template-columns:1fr}}
+
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:0 8px 24px rgba(6,47,99,.08);
+    border:1px solid var(--border);overflow:hidden;transition:.3s}
+  .card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+  .news-card{display:flex;flex-direction:column;height:100%}
+  .news-card .cover{height:112px;flex-shrink:0;position:relative;background:linear-gradient(150deg,var(--azzurro-chiaro),var(--azzurro))}
+  .news-card .cover::after{content:"";position:absolute;inset:0;opacity:.16;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:16px 16px}
+  .news-card .badge{position:absolute;left:16px;bottom:13px;z-index:2;background:rgba(255,255,255,.93);color:var(--azzurro);
+    font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:100px}
+  .news-card .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .news-card h3{font-size:1.1rem;line-height:1.32;color:var(--ink)}
+  .news-card p{color:var(--ink-soft);font-size:.92rem;margin:0}
+  .news-card .foot{margin-top:auto;padding-top:14px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
+  .news-card .date{color:var(--ink-soft);font-size:.8rem}
+  .news-card .read{color:var(--lago);font-weight:800;font-size:.8rem}
+  .news-card:hover .read{text-decoration:underline}
+
+  .state{border:2px dashed var(--border);background:var(--bg2);border-radius:var(--radius);padding:46px 24px;text-align:center;color:var(--ink-soft)}
+  .state .ico{font-size:2.2rem;margin-bottom:10px;opacity:.6}
+  .state h3{color:var(--ink);font-size:1.05rem;margin-bottom:6px}
+
+  .skel{height:230px;border-radius:var(--radius);border:1px solid var(--border);background:var(--card);opacity:.55;
+    animation:pulse 1.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.35}50%{opacity:.65}}
+
+  footer{background:var(--footer);color:#9fb2cc;text-align:center;padding:30px 22px;font-size:.85rem;margin-top:20px}
+  footer strong{color:#fff}
+  footer a{color:#9fb2cc;text-decoration:underline}
+  footer a:hover{color:var(--lago)}
+  footer .disc{max-width:760px;margin:10px auto 0;font-size:.74rem;opacity:.65}
+
+  #toTop{position:fixed;bottom:22px;right:22px;width:46px;height:46px;border-radius:50%;background:var(--azzurro);color:#fff;
+    border:0;font-size:1.25rem;cursor:pointer;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.3s;z-index:90}
+  #toTop.show{opacity:1;pointer-events:auto}
+  :focus-visible{outline:3px solid var(--lago);outline-offset:2px;border-radius:4px}
+  @media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="in">
+  <a class="brand" href="index.html">
+    <svg viewBox="0 0 230 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset="1" stop-color="#12b5c9"/></linearGradient></defs>
+      <g fill="none" stroke="url(#lg)" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M128 132 L150 180 L168 228" stroke-width="21"/>
+        <path d="M128 132 L92 148 L50 130" stroke-width="21"/>
+        <path d="M150 60 L128 132" stroke-width="23"/>
+        <path d="M150 74 L185 64 L206 44" stroke-width="14"/>
+        <path d="M150 80 L119 112" stroke-width="14"/>
+      </g>
+      <circle cx="158" cy="44" r="18" fill="url(#lg)"/>
+    </svg>
+    <span><span class="il">il</span>Comasco</span>
+  </a>
+  <button class="icon-btn" id="theme" aria-label="Cambia tema">🌙</button>
+</div></header>
+
+<section class="head"><div class="in">
+  <a class="back" href="index.html">← Torna al portale</a>
+  <div class="tag">Archivio</div>
+  <h1>Tutte le notizie</h1>
+  <p>Ogni articolo pubblicato su ilComasco, dal più recente. Filtra per categoria o scorri per mese.</p>
+</div></section>
+
+<main class="wrap">
+  <div class="filters" id="filters" hidden></div>
+  <div id="content">
+    <div class="grid"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+  </div>
+</main>
+
+<footer>
+  <p><strong>ilComasco</strong> — Forza Como sempre 💙</p>
+  <p style="margin-top:8px"><a href="index.html">Home</a> · <a href="privacy.html">Privacy Policy</a> · <a href="cookie-policy.html">Cookie Policy</a></p>
+  <p class="disc">Sito non ufficiale, realizzato da tifosi. Non affiliato al Como 1907 S.r.l.</p>
+</footer>
+
+<button id="toTop" title="Torna su" aria-label="Torna su">↑</button>
+
+<script>
+/* tema */
+(function(){
+  var btn=document.getElementById('theme');
+  function apply(t){document.documentElement.setAttribute('data-theme',t);btn.textContent=t==='dark'?'☀️':'🌙'}
+  var saved='light';try{saved=localStorage.getItem('theme')||'light'}catch(e){}
+  apply(saved);
+  btn.addEventListener('click',function(){
+    var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+    apply(t);try{localStorage.setItem('theme',t)}catch(e){}
+  });
+})();
+
+/* torna su */
+(function(){
+  var b=document.getElementById('toTop');
+  window.addEventListener('scroll',function(){b.classList.toggle('show',window.scrollY>500)});
+  b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+})();
+
+/* archivio */
+(function(){
+  var box=document.getElementById('content'), fbar=document.getElementById('filters');
+  var MESI=['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+  var all=[], filter='*';
+
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function fmt(d){var x=new Date(d);return isNaN(x)?esc(d):x.toLocaleDateString('it-IT',{day:'numeric',month:'short',year:'numeric'})}
+  function periodo(d){var x=new Date(d);return isNaN(x)?'Senza data':MESI[x.getMonth()]+' '+x.getFullYear()}
+
+  function card(n){
+    return '<a class="card news-card" href="news.html?id='+encodeURIComponent(n.slug||'')+'">'
+      +'<div class="cover"><span class="badge">'+esc(n.cat||'Como')+'</span></div>'
+      +'<div class="body"><h3>'+esc(n.title)+'</h3><p>'+esc(n.summary||'')+'</p>'
+      +'<div class="foot"><span class="date">'+fmt(n.date)+'</span><span class="read">Leggi &rarr;</span></div>'
+      +'</div></a>';
+  }
+
+  function draw(){
+    var list=filter==='*'?all:all.filter(function(n){return (n.cat||'Como')===filter});
+    if(!list.length){
+      box.innerHTML='<div class="state"><div class="ico">🔍</div><h3>Nessuna notizia in questa categoria</h3><p>Prova a scegliere un altro filtro.</p></div>';
+      return;
+    }
+    var groups=[], seen={};
+    list.forEach(function(n){
+      var k=periodo(n.date);
+      if(!(k in seen)){seen[k]=groups.length;groups.push({k:k,items:[]})}
+      groups[seen[k]].items.push(n);
+    });
+    box.innerHTML=groups.map(function(g){
+      return '<section class="group"><div class="gh"><h2>'+esc(g.k)+'</h2><span class="ln"></span>'
+        +'<span class="n">'+g.items.length+(g.items.length===1?' articolo':' articoli')+'</span></div>'
+        +'<div class="grid">'+g.items.map(card).join('')+'</div></section>';
+    }).join('');
+  }
+
+  function chips(){
+    var cats={};
+    all.forEach(function(n){var c=n.cat||'Como';cats[c]=(cats[c]||0)+1});
+    var keys=Object.keys(cats).sort();
+    if(keys.length<2){fbar.hidden=true;return}
+    fbar.hidden=false;
+    fbar.innerHTML='<button type="button" class="chip on" data-c="*">Tutte<span class="c">'+all.length+'</span></button>'
+      +keys.map(function(k){return '<button type="button" class="chip" data-c="'+esc(k)+'">'+esc(k)+'<span class="c">'+cats[k]+'</span></button>'}).join('')
+      +'<span class="count" id="cnt"></span>';
+    fbar.addEventListener('click',function(ev){
+      var b=ev.target.closest('.chip'); if(!b)return;
+      filter=b.getAttribute('data-c');
+      Array.prototype.forEach.call(fbar.querySelectorAll('.chip'),function(x){x.classList.toggle('on',x===b)});
+      draw();
+    });
+  }
+
+  fetch('/data/news.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
+    all=(d.news||[]).map(function(n,i){return {n:n,i:i}})
+      .sort(function(a,b){return String(b.n.date).localeCompare(String(a.n.date))||b.i-a.i})
+      .map(function(x){return x.n});
+    if(!all.length){
+      box.innerHTML='<div class="state"><div class="ico">📝</div><h3>Ancora nessuna notizia</h3><p>Torna a trovarci presto.</p></div>';
+      return;
+    }
+    chips(); draw();
+  }).catch(function(){
+    box.innerHTML='<div class="state"><div class="ico">⚠️</div><h3>Notizie non disponibili</h3><p>Ricarica la pagina tra qualche istante.</p></div>';
+  });
+})();
+</script>
+<script src="/js/consent.js" defer></script>
+</body>
+</html>

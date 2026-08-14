@@ -365,6 +365,15 @@
   .cload .note{display:block;margin-top:14px;font-size:.78rem;color:var(--ink-soft)}
   .cload .note a{color:var(--lago,#12b5c9);font-weight:700;text-decoration:underline}
 
+
+  /* ===== PULSANTE ARCHIVIO NOTIZIE ===== */
+  .allnews{text-align:center;margin-top:30px}
+  .allnews a{display:inline-flex;align-items:center;gap:10px;padding:13px 32px;border-radius:100px;
+    background:transparent;border:2px solid var(--azzurro);color:var(--azzurro);
+    font-weight:800;font-size:.95rem;transition:.25s}
+  .allnews a:hover{background:var(--azzurro);color:#fff;transform:translateY(-2px);box-shadow:0 10px 24px rgba(10,77,162,.25)}
+  .allnews a .n{font-size:.78rem;opacity:.75;font-weight:700}
+  .allnews a:hover .n{opacity:.9}
 </style>
 
 <script type="application/ld+json">
@@ -519,6 +528,7 @@
   <div class="wrap">
     <div class="sec-head reveal"><div><div class="tag">Aggiornamenti</div><h2>Ultime notizie</h2></div></div>
     <div class="grid reveal" id="newsGrid"></div>
+    <div class="allnews reveal" id="newsMore"></div>
   </div>
 </section>
 
@@ -614,7 +624,7 @@
 <footer>
   <div class="cols">
     <div><h4>ilComasco</h4><p style="max-width:340px">Il portale indipendente dei tifosi del Calcio Como 1907. Fatto dai tifosi, per i tifosi.</p></div>
-    <div><h4>Sezioni</h4><a href="#news">Notizie</a><a href="#mercato">Calciomercato</a><a href="#calendario">Calendario</a><a href="#classifica">Classifica</a><a href="#eroi">I nostri eroi</a></div>
+    <div><h4>Sezioni</h4><a href="#news">Notizie</a><a href="notizie.html">Archivio notizie</a><a href="#mercato">Calciomercato</a><a href="#calendario">Calendario</a><a href="#classifica">Classifica</a><a href="#eroi">I nostri eroi</a></div>
     <div><h4>Legale</h4><a href="privacy.html">Privacy Policy</a><a href="cookie-policy.html">Cookie Policy</a><a href="privacy.html#disclaimer">Disclaimer</a></div>
   </div>
   <div class="disclaimer">⚠️ Sito non ufficiale. ilComasco è un progetto indipendente realizzato da tifosi e non è affiliato, associato, autorizzato o approvato dal Como 1907 S.r.l. I marchi, i loghi e gli stemmi del club appartengono ai rispettivi proprietari.</div>
@@ -845,23 +855,30 @@ function emptyState(titolo,lista){
   return `<div class="empty"><div class="ico">📝</div><h4>${titolo}</h4><p>Aggiungi contenuti modificando la lista <code>${lista}</code> nel codice.</p></div>`;
 }
 
-// NOTIZIE (lette da data/news.json)
+// NOTIZIE — in home solo le 3 piu recenti (archivio completo in notizie.html)
 (function(){
-  const el=document.getElementById('newsGrid');
+  const el=document.getElementById('newsGrid'), more=document.getElementById('newsMore');
+  const HOME=3;
   const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const fmt=d=>{const x=new Date(d);return isNaN(x)?esc(d):x.toLocaleDateString('it-IT',{day:'numeric',month:'short',year:'numeric'})};
   fetch('/data/news.json',{cache:'no-store'}).then(r=>r.json()).then(data=>{
-    const list=(data.news||[]).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+    // ordina per data; a parita di data vince l'articolo aggiunto per ultimo
+    const list=(data.news||[]).map((n,i)=>({n:n,i:i}))
+      .sort((a,b)=>String(b.n.date).localeCompare(String(a.n.date))||b.i-a.i)
+      .map(x=>x.n);
     if(!list.length){el.innerHTML=emptyState('Ancora nessuna notizia','data/news.json');return}
     el.classList.add('g3');
-    el.innerHTML=list.map(n=>`<a class="card news-card" href="news.html?id=${encodeURIComponent(n.slug||'')}">
+    el.innerHTML=list.slice(0,HOME).map(n=>`<a class="card news-card" href="news.html?id=${encodeURIComponent(n.slug||'')}">
       <div class="cover"><span class="badge">${esc(n.cat||'Como')}</span></div>
       <div class="body">
         <h4>${esc(n.title)}</h4>
         <p>${esc(n.summary||'')}</p>
-        <div class="foot"><span class="date">${fmt(n.date)}</span><span class="read">Leggi →</span></div>
+        <div class="foot"><span class="date">${fmt(n.date)}</span><span class="read">Leggi &rarr;</span></div>
       </div>
     </a>`).join('');
+    if(list.length>HOME){
+      more.innerHTML=`<a href="notizie.html">Tutte le notizie <span class="n">${list.length}</span> &rarr;</a>`;
+    }
   }).catch(()=>{el.innerHTML=emptyState('Notizie non disponibili','data/news.json')});
 })();
 
