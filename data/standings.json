@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-15T07:47:31.685Z",
+  "updated": "2026-08-15T13:46:27.655Z",
   "competitions": [
     {
       "code": "SA",
@@ -12,22 +12,6 @@
       "table": [
         {
           "pos": 1,
-          "team": "Monza",
-          "crest": "https://crests.football-data.org/5911.png",
-          "g": 0,
-          "dr": 0,
-          "pts": 0
-        },
-        {
-          "pos": 1,
-          "team": "Torino",
-          "crest": "https://crests.football-data.org/586.png",
-          "g": 0,
-          "dr": 0,
-          "pts": 0
-        },
-        {
-          "pos": 1,
           "team": "Milan",
           "crest": "https://crests.football-data.org/98.png",
           "g": 0,
@@ -36,24 +20,32 @@
         },
         {
           "pos": 1,
-          "team": "Udinese",
-          "crest": "https://crests.football-data.org/115.png",
+          "team": "Monza",
+          "crest": "https://crests.football-data.org/5911.png",
           "g": 0,
           "dr": 0,
           "pts": 0
         },
         {
           "pos": 1,
-          "team": "Como 1907",
-          "crest": "https://crests.football-data.org/7397.png",
+          "team": "Fiorentina",
+          "crest": "https://crests.football-data.org/99.png",
           "g": 0,
           "dr": 0,
           "pts": 0
         },
         {
           "pos": 1,
-          "team": "Genoa",
-          "crest": "https://crests.football-data.org/107.png",
+          "team": "Roma",
+          "crest": "https://crests.football-data.org/100.png",
+          "g": 0,
+          "dr": 0,
+          "pts": 0
+        },
+        {
+          "pos": 1,
+          "team": "Atalanta",
+          "crest": "https://crests.football-data.org/102.png",
           "g": 0,
           "dr": 0,
           "pts": 0
@@ -68,14 +60,6 @@
         },
         {
           "pos": 1,
-          "team": "Parma",
-          "crest": "https://crests.football-data.org/112.png",
-          "g": 0,
-          "dr": 0,
-          "pts": 0
-        },
-        {
-          "pos": 1,
           "team": "Cagliari",
           "crest": "https://crests.football-data.org/104.png",
           "g": 0,
@@ -84,8 +68,88 @@
         },
         {
           "pos": 1,
-          "team": "Roma",
-          "crest": "https://crests.football-data.org/100.png",
+          "team": "Como 1907",
+          "crest": "https://crests.football-data.org/7397.png",
+          "g": 0,
+          "dr": 0,
+          "pts": 0
+        },
+        {
+          "pos": 1,
+          "team": "Frosinone",
+          "crest": "https://crests.football-data.org/470.png",
+          "g": 0,
+          "dr": 0,
+          "pts": 0
+        },
+        {
+          "pos": 1,
+          "team": "Genoa",
+          "crest": "https://crests.football-data.org/107.png",
+          "g": 0,
+          "dr": 0,
+          "pts": 0
+        },
+        {
+          "pos": 1,
+          "team": "Inter",
+          "crest": "https://crests.football-data.org/108.png",
+          "g": 0,
+          "dr": 0,
+          "pts": 0
+        },
+        {
+          "pos": 1,
+          "team": "Juventus",
+          "crest": "https://crests.football-data.org/109.png",
+          "g": 0,
+          "dr": 0,
+          "pts": 0
+        },
+        {
+          "pos": 1,
+          "team": "Lazio",
+          "crest": "https://crests.football-data.org/110.png",
+          "g": 0,
+          "dr": 0,
+          "pts": 0
+        },
+        {
+          "pos": 1,
+          "team": "Parma",
+          "crest": "https://crests.football-data.org/112.png",
+          "g": 0,
+          "dr": 0,
+          "pts": 0
+        },
+        {
+          "pos": 1,
+          "team": "Sassuolo",
+          "crest": "https://crests.football-data.org/471.png",
+          "g": 0,
+          "dr": 0,
+          "pts": 0
+        },
+        {
+          "pos": 1,
+          "team": "Napoli",
+          "crest": "https://crests.football-data.org/113.png",
+          "g": 0,
+          "dr": 0,
+          "pts": 0
+        },
+        {
+          "pos": 1,
+          "team": "Torino",
+          "crest": "https://crests.football-data.org/586.png",
+          "g": 0,
+          "dr": 0,
+          "pts": 0
+        },
+        {
+          "pos": 1,
+          "team": "Udinese",
+          "crest": "https://crests.football-data.org/115.png",
           "g": 0,
           "dr": 0,
           "pts": 0
@@ -102,70 +166,6 @@
           "pos": 1,
           "team": "Venezia FC",
           "crest": "https://crests.football-data.org/454.png",
-          "g": 0,
-          "dr": 0,
-          "pts": 0
-        },
-        {
-          "pos": 1,
-          "team": "Sassuolo",
-          "crest": "https://crests.football-data.org/471.png",
-          "g": 0,
-          "dr": 0,
-          "pts": 0
-        },
-        {
-          "pos": 1,
-          "team": "Inter",
-          "crest": "https://crests.football-data.org/108.png",
-          "g": 0,
-          "dr": 0,
-          "pts": 0
-        },
-        {
-          "pos": 1,
-          "team": "Napoli",
-          "crest": "https://crests.football-data.org/113.png",
-          "g": 0,
-          "dr": 0,
-          "pts": 0
-        },
-        {
-          "pos": 1,
-          "team": "Atalanta",
-          "crest": "https://crests.football-data.org/102.png",
-          "g": 0,
-          "dr": 0,
-          "pts": 0
-        },
-        {
-          "pos": 1,
-          "team": "Juventus",
-          "crest": "https://crests.football-data.org/109.png",
-          "g": 0,
-          "dr": 0,
-          "pts": 0
-        },
-        {
-          "pos": 1,
-          "team": "Frosinone",
-          "crest": "https://crests.football-data.org/470.png",
-          "g": 0,
-          "dr": 0,
-          "pts": 0
-        },
-        {
-          "pos": 1,
-          "team": "Lazio",
-          "crest": "https://crests.football-data.org/110.png",
-          "g": 0,
-          "dr": 0,
-          "pts": 0
-        },
-        {
-          "pos": 1,
-          "team": "Fiorentina",
-          "crest": "https://crests.football-data.org/99.png",
           "g": 0,
           "dr": 0,
           "pts": 0
