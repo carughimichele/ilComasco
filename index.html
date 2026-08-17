@@ -8,13 +8,11 @@
 <meta name="google-site-verification" content="H0SIt3TJg7GXIcNDVF13ZMEh4n1DW652wVRLfem_rUo" />
   <meta name="keywords" content="Como 1907, Calcio Como, Lariani, Serie A, notizie Como calcio, calciomercato Como">
 <meta name="theme-color" content="#062f63">
-<link rel="alternate" type="application/rss+xml" title="ilComasco — Notizie" href="/rss.xml">
 <meta name="author" content="ilComasco">
 <meta property="og:title" content="ilComasco — Portale dei tifosi Lariani">
 <meta property="og:description" content="Il punto di riferimento indipendente per i tifosi azzurri del Calcio Como 1907.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://il-comasco.vercel.app">
-<link rel="canonical" href="https://il-comasco.vercel.app/">
+<meta property="og:url" content="https://ilcomasco.netlify.app">
 <meta property="og:image" content="https://images.unsplash.com/photo-1667375152478-5c4d62eb9ecb?auto=format&fit=crop&w=1200&q=80">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ilComasco — Portale dei tifosi Lariani">
@@ -52,7 +50,7 @@
   .brand b{font-weight:900;color:#fff}
   .brand .il{opacity:.85;font-weight:600}
   .logo{width:40px;height:40px;flex-shrink:0;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
-  .herologo{width:100%;max-width:680px;margin:2px 0 18px;animation:fadeUp .8s .05s both}
+  .herologo{width:100%;max-width:820px;margin:2px auto 18px;animation:fadeUp .8s .05s both}
   .herologo svg{width:100%;height:auto;display:block}
   @media(max-width:900px){.herologo{max-width:460px}}
   .navwrap{display:flex;align-items:center;gap:20px}
@@ -80,20 +78,20 @@
   .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(160deg,rgba(3,20,45,.84),rgba(6,47,99,.6) 45%,rgba(10,77,162,.5)),linear-gradient(180deg,transparent 42%,rgba(4,15,32,.88))}
   .grain{position:absolute;inset:0;z-index:1;opacity:.05;
     background-image:radial-gradient(#fff 1px,transparent 1px);background-size:22px 22px}
-  .hero-content{z-index:3;max-width:770px}
+  .hero-content{z-index:3;max-width:900px;text-align:center}
   .kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:7px 16px;border-radius:100px;font-weight:700;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;animation:fadeUp .8s both}
   .hero h1{font-size:clamp(2.6rem,6.6vw,4.8rem);margin-bottom:16px;animation:fadeUp .8s .1s both}
   .hero h1 span{background:linear-gradient(90deg,#fff,var(--lago));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .hero p.lead{font-size:1.22rem;opacity:.92;max-width:560px;margin-bottom:32px;animation:fadeUp .8s .2s both}
+  .hero p.lead{font-size:1.22rem;opacity:.92;max-width:560px;margin:0 auto 32px;animation:fadeUp .8s .2s both}
   @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-  .cta{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .8s .3s both}
+  .cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;animation:fadeUp .8s .3s both}
   .btn{padding:14px 30px;border-radius:100px;font-weight:800;cursor:pointer;border:0;transition:.25s;display:inline-block;font-size:1rem}
   .btn-primary{background:#fff;color:var(--azzurro)}
   .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,.3)}
   .btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6)}
   .btn-ghost:hover{background:#fff;color:var(--azzurro)}
 
-  .countdown{margin-top:44px;display:flex;align-items:center;gap:26px;flex-wrap:wrap;animation:fadeUp .8s .4s both}
+  .countdown{margin-top:44px;display:flex;align-items:center;gap:26px;flex-wrap:wrap;justify-content:center;animation:fadeUp .8s .4s both}
   .cd-info .lbl{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;opacity:.85;display:flex;align-items:center;gap:8px}
   .cd-info .lbl .dot{width:9px;height:9px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(224,49,49,.7);animation:pulse 1.6s infinite}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(224,49,49,.7)}70%{box-shadow:0 0 0 12px rgba(224,49,49,0)}100%{box-shadow:0 0 0 0 rgba(224,49,49,0)}}
@@ -179,6 +177,12 @@
   #toTop.show{opacity:1;pointer-events:auto}
   #toTop:hover{background:var(--azzurro-chiaro);transform:translateY(-3px)}
 
+  #cookie{position:fixed;bottom:18px;left:18px;right:18px;max-width:680px;margin:0 auto;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:16px;padding:20px 22px;z-index:200;display:none}
+  #cookie p{font-size:.9rem;color:var(--ink-soft);margin-bottom:14px}
+  #cookie .row{display:flex;gap:10px;flex-wrap:wrap}
+  #cookie button{padding:11px 22px;border-radius:100px;font-weight:800;border:0;cursor:pointer}
+  #cookie .ok{background:var(--azzurro);color:#fff}
+  #cookie .no{background:var(--bg);color:var(--ink)}
 
   @media(max-width:900px){
     .navlinks{display:none}
@@ -286,7 +290,7 @@
 .news-card{display:flex;flex-direction:column;height:100%}
 .news-card .cover{height:118px;flex-shrink:0;position:relative;background:linear-gradient(150deg,var(--azzurro-chiaro),var(--azzurro))}
 .news-card .cover::after{content:"";position:absolute;inset:0;opacity:.16;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:16px 16px}
-.news-card .badge{display:inline-flex;align-items:center;gap:5px;position:absolute;left:16px;bottom:13px;z-index:2;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.16);font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:100px}
+.news-card .badge{position:absolute;left:16px;bottom:13px;z-index:2;background:rgba(255,255,255,.93);color:var(--azzurro);font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:100px}
 .news-card .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px;flex:1}
 .news-card h4{font-size:1.12rem;line-height:1.32;color:var(--ink)}
 .news-card p{color:var(--ink-soft);font-size:.93rem;margin:0}
@@ -357,55 +361,9 @@
   .squad-sec .player{align-self:start}
 
 .player .top{background-size:100% 100% !important}
-  /* ===== CARICAMENTO COMMENTI SU RICHIESTA ===== */
-  .cload{text-align:center;padding:6px 0}
-  .cload p{color:var(--ink-soft);font-size:.92rem;line-height:1.6;max-width:54ch;margin:0 auto 18px}
-  .cload button{padding:13px 30px;border-radius:100px;border:0;background:var(--azzurro,#0a4da2);color:#fff;font-weight:800;font-size:.95rem;cursor:pointer;font-family:inherit;transition:.22s}
-  .cload button:hover{background:var(--azzurro-chiaro,#2e86ff);transform:translateY(-2px)}
-  .cload button:focus-visible{outline:3px solid var(--lago,#12b5c9);outline-offset:3px}
-  .cload .note{display:block;margin-top:14px;font-size:.78rem;color:var(--ink-soft)}
-  .cload .note a{color:var(--lago,#12b5c9);font-weight:700;text-decoration:underline}
-
-
-  /* ===== PULSANTE ARCHIVIO NOTIZIE ===== */
-  .allnews{text-align:center;margin-top:30px}
-  .allnews a{display:inline-flex;align-items:center;gap:10px;padding:13px 32px;border-radius:100px;
-    background:transparent;border:2px solid var(--azzurro);color:var(--azzurro);
-    font-weight:800;font-size:.95rem;transition:.25s}
-  .allnews a:hover{background:var(--azzurro);color:#fff;transform:translateY(-2px);box-shadow:0 10px 24px rgba(10,77,162,.25)}
-  .allnews a .n{font-size:.78rem;opacity:.75;font-weight:700}
-  .allnews a:hover .n{opacity:.9}
-
-  /* ===== CALENDARIO: BADGE COMPETIZIONE + DETTAGLIO ===== */
-  .fix{flex-direction:column;align-items:stretch;gap:0;transition:.25s}
-  .fix.clickable{cursor:pointer}
-  .fix.clickable:hover{border-color:color-mix(in srgb,var(--c,var(--azzurro)) 45%,transparent);transform:translateY(-2px)}
-  .fix .top{display:flex;align-items:center;justify-content:space-between;gap:14px}
-  .fix .cbadge{display:inline-flex;align-items:center;gap:5px;font-size:.68rem;font-weight:800;
-    text-transform:uppercase;letter-spacing:.06em;padding:4px 11px;border-radius:100px;margin-bottom:7px;
-    background:color-mix(in srgb,var(--c) 12%,transparent);color:color-mix(in srgb,var(--c) 82%,black)}
-  [data-theme="dark"] .fix .cbadge{color:color-mix(in srgb,var(--c) 45%,white)}
-  .fix .venue{background:var(--bg);color:var(--azzurro);font-weight:800;font-size:.72rem;
-    padding:5px 12px;border-radius:100px;display:inline-block;margin-top:4px}
-  .fix .tbd{background:color-mix(in srgb,var(--c) 12%,transparent);color:var(--ink-soft);font-weight:800}
-  .fix .hint{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:700;
-    color:var(--lago);margin-top:11px}
-  .fix .hint .chev{transition:transform .3s}
-  .fix.open .hint .chev{transform:rotate(180deg)}
-  .fix .more{max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .3s ease,margin-top .3s ease}
-  .fix.open .more{max-height:420px;opacity:1;margin-top:14px}
-  .fix .more .in{border-top:1px solid var(--border);padding-top:13px;display:grid;gap:9px}
-  .fix .more .r{display:flex;gap:10px;font-size:.88rem;line-height:1.5}
-  .fix .more .k{color:var(--ink-soft);font-weight:700;min-width:112px;flex-shrink:0}
-  .fix .more .v{color:var(--ink)}
-  .fix .more .v a{color:var(--azzurro);font-weight:700;text-decoration:underline}
-  @media(max-width:560px){
-    .fix .top{flex-direction:column;align-items:flex-start;gap:8px}
-    .fix .date{text-align:left}
-    .fix .more .r{flex-direction:column;gap:2px}
-    .fix .more .k{min-width:0}
-  }
+  
 </style>
+<script async src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
 <script type="application/ld+json">
 {
@@ -413,7 +371,7 @@
   "@type": "WebSite",
   "name": "ilComasco",
   "description": "Il portale indipendente dei tifosi Lariani del Calcio Como 1907",
-  "url": "https://il-comasco.vercel.app",
+  "url": "https://ilcomasco.netlify.app",
   "image": "https://images.unsplash.com/photo-1667375152478-5c4d62eb9ecb?auto=format&fit=crop&w=1200&q=80",
   "sameAs": [
     "https://www.instagram.com/comofootball/",
@@ -427,22 +385,14 @@
 }
 </script>
   
-<script src="/js/categorie.js"></script>
 </head>
 <body>
 
 <header class="nav" id="nav">
   <a href="index.html" class="brand">
-    <svg class="logo" viewBox="0 0 230 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs><linearGradient id="navlg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset="1" stop-color="#12b5c9"/></linearGradient></defs>
-      <g fill="none" stroke="url(#navlg)" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M128 132 L150 180 L168 228" stroke-width="21"/>
-        <path d="M128 132 L92 148 L50 130" stroke-width="21"/>
-        <path d="M150 60 L128 132" stroke-width="23"/>
-        <path d="M150 74 L185 64 L206 44" stroke-width="14"/>
-        <path d="M150 80 L119 112" stroke-width="14"/>
-      </g>
-      <circle cx="158" cy="44" r="18" fill="url(#navlg)"/>
+    <svg class="logo" viewBox="0 0 270 594" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs><linearGradient id="navlg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e86ff"/><stop offset="50%" stop-color="#0a4da2"/><stop offset="100%" stop-color="#12b5c9"/></linearGradient></defs>
+      <path d="M 400 68 Q 378 68 368 144 Q 358 220 346 285 Q 333 350 317 375 Q 300 400 280 435 Q 260 470 243 515 Q 225 560 213 600 Q 200 640 208 651 Q 215 662 225 654 Q 235 645 253 600 Q 270 555 288 510 Q 305 465 318 435 Q 330 405 338 395 Q 345 385 350 390 Q 355 395 368 418 Q 380 440 393 460 Q 405 480 415 505 Q 425 530 433 558 Q 440 585 453 593 Q 465 600 460 590 Q 455 580 453 555 Q 450 530 440 505 Q 430 480 420 455 Q 410 430 403 408 Q 395 385 386 368 Q 377 350 390 285 Q 402 220 412 144 Q 422 68 400 68 Z" transform="translate(-190,0)" fill="url(#navlg)" stroke="#062f63" stroke-width="4" stroke-linejoin="round"/>
     </svg>
     <span><span class="il">il</span><b>Comasco</b></span>
   </a>
@@ -469,9 +419,15 @@
     <div class="herologo" aria-label="ilComasco — Portale dei tifosi lariani">
       <svg viewBox="0 0 680 196" role="img" xmlns="http://www.w3.org/2000/svg">
         <title>ilComasco — Portale dei tifosi lariani</title>
-        <defs><linearGradient id="hlg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset="1" stop-color="#12b5c9"/></linearGradient></defs>
-        <g transform="translate(6,20) scale(0.6)">
-          <g id="hKick">
+        <defs>
+          <linearGradient id="hlg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset="1" stop-color="#12b5c9"/></linearGradient>
+          <linearGradient id="lakeGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e86ff"/><stop offset="50%" stop-color="#0a4da2"/><stop offset="100%" stop-color="#12b5c9"/></linearGradient>
+        </defs>
+        <g id="hLake" transform="translate(115,8) scale(0.25)" style="opacity:1">
+          <path d="M 400 68 Q 378 68 368 144 Q 358 220 346 285 Q 333 350 317 375 Q 300 400 280 435 Q 260 470 243 515 Q 225 560 213 600 Q 200 640 208 651 Q 215 662 225 654 Q 235 645 253 600 Q 270 555 288 510 Q 305 465 318 435 Q 330 405 338 395 Q 345 385 350 390 Q 355 395 368 418 Q 380 440 393 460 Q 405 480 415 505 Q 425 530 433 558 Q 440 585 453 593 Q 465 600 460 590 Q 455 580 453 555 Q 450 530 440 505 Q 430 480 420 455 Q 410 430 403 408 Q 395 385 386 368 Q 377 350 390 285 Q 402 220 412 144 Q 422 68 400 68 Z" fill="url(#lakeGrad)" stroke="#062f63" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+        </g>
+        <g transform="translate(126,20) scale(0.6)">
+          <g id="hKick" style="opacity:0">
             <path d="M128 132 L150 180 L168 228" fill="none" stroke="url(#hlg)" stroke-width="21" stroke-linecap="round" stroke-linejoin="round"/>
             <g id="hLeg" style="transform-origin:128px 132px"><path d="M128 132 L92 148 L50 130" fill="none" stroke="url(#hlg)" stroke-width="21" stroke-linecap="round" stroke-linejoin="round"/></g>
             <path d="M150 60 L128 132" fill="none" stroke="url(#hlg)" stroke-width="23" stroke-linecap="round"/>
@@ -492,35 +448,66 @@
         </g>
         <text id="hRef" x="286" y="120" font-family="Segoe UI, Arial, sans-serif" font-size="52" font-weight="800" fill="#12b5c9" opacity="0" aria-hidden="true">ilComasco</text>
         <text x="286" y="120" font-family="Segoe UI, Arial, sans-serif" font-size="52" font-weight="800" fill="#ffffff">il<tspan fill="#8fd8ff">Comasc</tspan></text>
-        <text id="hO" x="0" y="0" font-family="Segoe UI, Arial, sans-serif" font-size="52" font-weight="800" fill="#8fd8ff" style="will-change:transform;opacity:0">o</text>
+        <text id="hO" x="0" y="0" font-family="Segoe UI, Arial, sans-serif" font-size="52" font-weight="800" fill="#8fd8ff" style="will-change:transform;opacity:1">o</text>
         <text x="289" y="150" font-family="Segoe UI, Arial, sans-serif" font-size="14" letter-spacing="3" fill="#cfe4ff">Portale dei tifosi lariani</text>
       </svg>
     </div>
     <script>
     (function(){
-      var oEl=document.getElementById('hO'), kick=document.getElementById('hKick'),
+      var lakeG=document.getElementById('hLake'), oEl=document.getElementById('hO'), kick=document.getElementById('hKick'),
           cele=document.getElementById('hCele'), leg=document.getElementById('hLeg'), hop=document.getElementById('hHop');
       if(!oEl) return;
       var ox=520, oy=120;
       function measure(){ try{ var r=document.getElementById('hRef'); var pt=r.getStartPositionOfChar(r.textContent.length-1); ox=pt.x; oy=pt.y; }catch(e){} }
       measure(); if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(measure); }
-      var CYCLE=10000, ACTION=4200, start=null;
-      function easeOut(t){ return 1-Math.pow(1-t,3); }
       function lerp(a,b,t){ return a+(b-a)*t; }
       function qbez(a,c,b,e){ var m=1-e; return m*m*a+2*m*e*c+e*e*b; }
-      function ball(p){ var x,y,op=1;
-        if(p<0.04){ x=28; y=142; op=p/0.04; }
-        else if(p<0.13){ var f=(p-0.04)/0.09; x=28+16*f; y=142-2*f; }
-        else if(p<0.40){ var e=easeOut((p-0.13)/0.27); x=qbez(44,300,ox,e); y=qbez(140,182,oy,e); }
-        else { x=ox; y=oy; }
-        oEl.style.opacity=op; oEl.style.transform='translate('+x.toFixed(2)+'px,'+y.toFixed(2)+'px)'; }
-      function kickOp(p){ if(p<0.40)return 1; if(p<0.44)return 1-(p-0.40)/0.04; if(p<0.78)return 0; if(p<0.82)return (p-0.78)/0.04; return 1; }
-      function legRot(p){ if(p<0.07)return 14; if(p<0.13)return lerp(14,-26,(p-0.07)/0.06); if(p<0.40)return lerp(-26,-24,(p-0.13)/0.27); if(p<0.82)return lerp(-24,14,(p-0.40)/0.42); return 14; }
-      function hopY(p){ if(p<=0.44||p>=0.82)return 0; var q=(p-0.44)/0.38; return -Math.sin(q*Math.PI)*22; }
-      function frame(ts){ if(start===null)start=ts; var cyc=(ts-start)%CYCLE; var p=Math.min(cyc/ACTION,1);
-        ball(p); var ko=kickOp(p); kick.style.opacity=ko; cele.style.opacity=1-ko;
-        leg.style.transform='rotate('+legRot(p).toFixed(2)+'deg)'; hop.style.transform='translateY('+hopY(p).toFixed(2)+'px)';
-        requestAnimationFrame(frame); }
+      function easeOut(t){ return 1-Math.pow(1-t,3); }
+      function easeInOut(t){ return t<0.5 ? 2*t*t : 1-Math.pow(-2*t+2,2)/2; }
+      var T1=1200,T2=600,T3=900,T4=400,T5=1400,T6=500,T7=1200,T8=8000;
+      var t1=T1,t2=t1+T2,t3=t2+T3,t4=t3+T4,t5=t4+T5,t6=t5+T6,t7=t6+T7;
+      var CYCLE=t7+T8;
+      var REST=14, WOUND=-26;
+      var FOOT_X=148, FOOT_Y=142, ROLL_X=164, ROLL_Y=140, CTRL_X=348, CTRL_Y=182;
+      var start=null;
+      function frame(ts){
+        if(start===null) start=ts;
+        var el=(ts-start)%CYCLE;
+        var lakeOp=0, manOp=0, kickPoseOp=1, celePoseOp=0, legAngle=REST, hopY=0, ballOp=1, ballX=ox, ballY=oy;
+        if(el<t1){
+          var q=el/t1; lakeOp=1-q; manOp=q; ballOp=1; ballX=ox; ballY=oy;
+        } else if(el<t2){
+          var q=(el-t1)/T2; lakeOp=0; manOp=1;
+          legAngle=lerp(REST,WOUND,easeInOut(q));
+          if(q<0.15){ ballOp=q/0.15; ballX=FOOT_X; ballY=FOOT_Y; }
+          else{ ballOp=1; var f=(q-0.15)/0.85; ballX=lerp(FOOT_X,ROLL_X,f); ballY=lerp(FOOT_Y,ROLL_Y,f); }
+        } else if(el<t3){
+          var q=(el-t2)/T3; var e=easeOut(q); lakeOp=0; manOp=1; legAngle=WOUND; ballOp=1;
+          ballX=qbez(ROLL_X,CTRL_X,ox,e); ballY=qbez(ROLL_Y,CTRL_Y,oy,e);
+        } else if(el<t4){
+          var q=(el-t3)/T4; lakeOp=0; manOp=1; legAngle=WOUND; ballOp=1; ballX=ox; ballY=oy;
+          kickPoseOp=1-q; celePoseOp=q;
+        } else if(el<t5){
+          var q=(el-t4)/T5; lakeOp=0; manOp=1; ballOp=1; ballX=ox; ballY=oy;
+          kickPoseOp=0; celePoseOp=1; hopY=-Math.abs(Math.sin(q*Math.PI*2))*22;
+        } else if(el<t6){
+          var q=(el-t5)/T6; lakeOp=0; manOp=1; ballOp=1; ballX=ox; ballY=oy;
+          celePoseOp=1-q; kickPoseOp=q; legAngle=REST;
+        } else if(el<t7){
+          var q=(el-t6)/T7; lakeOp=q; manOp=1-q; kickPoseOp=1; celePoseOp=0; legAngle=REST;
+          ballOp=1; ballX=ox; ballY=oy;
+        } else {
+          lakeOp=1; manOp=0; ballOp=1; ballX=ox; ballY=oy;
+        }
+        lakeG.style.opacity=lakeOp;
+        kick.style.opacity=manOp*kickPoseOp;
+        cele.style.opacity=manOp*celePoseOp;
+        leg.style.transform='rotate('+legAngle.toFixed(2)+'deg)';
+        hop.style.transform='translateY('+hopY.toFixed(2)+'px)';
+        oEl.style.opacity=ballOp;
+        oEl.style.transform='translate('+ballX.toFixed(2)+'px,'+ballY.toFixed(2)+'px)';
+        requestAnimationFrame(frame);
+      }
       requestAnimationFrame(frame);
     })();
     </script>
@@ -560,7 +547,6 @@
   <div class="wrap">
     <div class="sec-head reveal"><div><div class="tag">Aggiornamenti</div><h2>Ultime notizie</h2></div></div>
     <div class="grid reveal" id="newsGrid"></div>
-    <div class="allnews reveal" id="newsMore"></div>
   </div>
 </section>
 
@@ -616,38 +602,22 @@
   <div class="wrap">
     <div class="sec-head reveal"><div><div class="tag">Comunità</div><h2>🗣️ Forum Tifosi</h2></div></div>
     <div class="reveal" style="background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:30px;box-shadow:0 8px 24px rgba(6,47,99,.08)">
-      <div id="giscusBox"></div>
-      <div class="cload" id="giscusLoad">
-        <p>Il forum è ospitato su <strong>Giscus</strong> e funziona con un account GitHub. Caricandolo, il tuo browser si collega a giscus.app e a GitHub, che possono installare cookie propri.</p>
-        <button type="button" id="giscusBtn">💬 Carica il forum</button>
-        <span class="note">Nessun collegamento avviene prima del tuo clic · <a href="cookie-policy.html">Cookie Policy</a></span>
-      </div>
-      <script>
-      (function(){
-        var btn=document.getElementById('giscusBtn'), box=document.getElementById('giscusLoad'),
-            mount=document.getElementById('giscusBox');
-        btn.addEventListener('click',function(){
-          btn.disabled=true; btn.textContent='Caricamento…';
-          var dark=document.documentElement.getAttribute('data-theme')==='dark';
-          var s=document.createElement('script');
-          s.src='https://giscus.app/client.js';
-          s.setAttribute('data-repo','ilComasco1907/ilComasco');
-          s.setAttribute('data-repo-id','R_kgDOToBMJA');
-          s.setAttribute('data-category','Announcements');
-          s.setAttribute('data-category-id','DIC_kwDOToBMJM4DCS1_');
-          s.setAttribute('data-mapping','url');
-          s.setAttribute('data-strict','0');
-          s.setAttribute('data-reactions-enabled','1');
-          s.setAttribute('data-emit-metadata','0');
-          s.setAttribute('data-input-position','bottom');
-          s.setAttribute('data-theme',dark?'dark':'light');
-          s.setAttribute('data-lang','it');
-          s.crossOrigin='anonymous'; s.async=true;
-          s.onload=function(){ box.remove() };
-          s.onerror=function(){ btn.disabled=false; btn.textContent='💬 Riprova'; };
-          mount.appendChild(s);
-        });
-      })();
+      <!-- GISCUS QUI -->
+      <div id="disqus_thread"></div>
+      <script src="https://giscus.app/client.js"
+          data-repo="carughimichele/ilComasco"
+          data-repo-id="R_kgDOToBMJA"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOToBMJM4DCS1_"
+          data-mapping="url"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="preferred_color_scheme"
+          data-lang="it"
+          crossorigin="anonymous"
+          async>
       </script>
     </div>
   </div>
@@ -656,7 +626,7 @@
 <footer>
   <div class="cols">
     <div><h4>ilComasco</h4><p style="max-width:340px">Il portale indipendente dei tifosi del Calcio Como 1907. Fatto dai tifosi, per i tifosi.</p></div>
-    <div><h4>Sezioni</h4><a href="#news">Notizie</a><a href="notizie.html">Archivio notizie</a><a href="#mercato">Calciomercato</a><a href="#calendario">Calendario</a><a href="#classifica">Classifica</a><a href="#eroi">I nostri eroi</a></div>
+    <div><h4>Sezioni</h4><a href="#news">Notizie</a><a href="#mercato">Calciomercato</a><a href="#calendario">Calendario</a><a href="#classifica">Classifica</a><a href="#eroi">I nostri eroi</a></div>
     <div><h4>Legale</h4><a href="privacy.html">Privacy Policy</a><a href="cookie-policy.html">Cookie Policy</a><a href="privacy.html#disclaimer">Disclaimer</a></div>
   </div>
   <div class="disclaimer">⚠️ Sito non ufficiale. ilComasco è un progetto indipendente realizzato da tifosi e non è affiliato, associato, autorizzato o approvato dal Como 1907 S.r.l. I marchi, i loghi e gli stemmi del club appartengono ai rispettivi proprietari.</div>
@@ -665,6 +635,10 @@
 
 <button id="toTop" title="Torna su" aria-label="Torna su">↑</button>
 
+<div id="cookie">
+  <p>Usiamo cookie tecnici necessari al funzionamento del sito e, previo tuo consenso, cookie di analisi. Dettagli nella <a href="cookie-policy.html" style="color:var(--azzurro);font-weight:700">Cookie Policy</a>.</p>
+  <div class="row"><button class="ok" onclick="setCookie('all')">Accetta tutti</button><button class="no" onclick="setCookie('essential')">Solo essenziali</button></div>
+</div>
 
 <script>
 /* =====================================================================
@@ -673,6 +647,13 @@
    mostra automaticamente un messaggio "ancora nessun contenuto".
    ===================================================================== */
 
+// Prossima partita (per il countdown). Data ISO: AAAA-MM-GGThh:mm
+const NEXT_MATCH = {
+  competition: "Serie A",
+  match: "Udinese — Como",
+  venue: "🏟️ Bluenergy Stadium · Udine",
+  dateISO: "2026-08-22T18:30"
+};
    
 // CALCIOMERCATO — type: "in" (entrata) | "out" (uscita) | "rumor" (voce)
 // es: { type:"in", player:"Nome Cognome", detail:"dal Club X · prestito", date:"5 ago 2026" }
@@ -683,6 +664,17 @@ const MERCATO = [
   { type:"rumor", player:"Kean, Couto e Chalobah", detail:"pronti a raggiungere Como?", date:"31 lug 2026" }
 ];
 
+// CALENDARIO — es: { comp:"Serie A", match:"Como — Juventus", date:"Sab 30 ago · 20:45", where:"Casa" }
+const FIXTURES = [
+  { comp:"Serie A", match:"Udinese — Como 1907",     date:"Sab 22 ago · 18:30", where:"Bluenergy Stadium, Udine" },
+  { comp:"Serie A", match:"Napoli — Como 1907",      date:"Dom 30 ago · 18:30", where:"Stadio Diego Armando Maradona, Napoli" },
+  { comp:"Serie A", match:"Genoa — Como 1907",       date:"Ven 4 set · 20:45",  where:"Stadio Luigi Ferraris, Genova" },
+  //{ comp:"Serie A", match:"Como — Parma",       date:"Dom 13 set · 15:00", where:"Casa" },
+  //{ comp:"Serie A", match:"Frosinone — Como",   date:"Dom 20 set · 15:00", where:"Trasferta" },
+  //{ comp:"Serie A", match:"Como — Roma",        date:"Dom 11 ott · 15:00", where:"Casa" },
+  //{ comp:"Serie A", match:"Fiorentina — Como",  date:"Dom 18 ott · 15:00", where:"Trasferta" },
+  //{ comp:"Serie A", match:"Como — Sassuolo",    date:"Dom 25 ott · 15:00", where:"Casa" },
+];
 
 // CLASSIFICHE (lette da data/standings.json)
 (function(){
@@ -869,30 +861,23 @@ function emptyState(titolo,lista){
   return `<div class="empty"><div class="ico">📝</div><h4>${titolo}</h4><p>Aggiungi contenuti modificando la lista <code>${lista}</code> nel codice.</p></div>`;
 }
 
-// NOTIZIE — in home solo le 3 piu recenti (archivio completo in notizie.html)
+// NOTIZIE (lette da data/news.json)
 (function(){
-  const el=document.getElementById('newsGrid'), more=document.getElementById('newsMore');
-  const HOME=3;
+  const el=document.getElementById('newsGrid');
   const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const fmt=d=>{const x=new Date(d);return isNaN(x)?esc(d):x.toLocaleDateString('it-IT',{day:'numeric',month:'short',year:'numeric'})};
   fetch('/data/news.json',{cache:'no-store'}).then(r=>r.json()).then(data=>{
-    // ordina per data; a parita di data vince l'articolo aggiunto per ultimo
-    const list=(data.news||[]).map((n,i)=>({n:n,i:i}))
-      .sort((a,b)=>String(b.n.date).localeCompare(String(a.n.date))||b.i-a.i)
-      .map(x=>x.n);
+    const list=(data.news||[]).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date)));
     if(!list.length){el.innerHTML=emptyState('Ancora nessuna notizia','data/news.json');return}
     el.classList.add('g3');
-    el.innerHTML=list.slice(0,HOME).map(n=>{const c=window.CAT.info(n.cat);return `<a class="card news-card" href="/notizia/${encodeURI(n.slug||'')}">
-      <div class="cover" style="background:${c.gradiente}"><span class="badge" style="color:${c.base}">${c.icona}${esc(n.cat||c.nome)}</span></div>
+    el.innerHTML=list.map(n=>`<a class="card news-card" href="news.html?id=${encodeURIComponent(n.slug||'')}">
+      <div class="cover"><span class="badge">${esc(n.cat||'Como')}</span></div>
       <div class="body">
         <h4>${esc(n.title)}</h4>
         <p>${esc(n.summary||'')}</p>
-        <div class="foot"><span class="date">${fmt(n.date)}</span><span class="read">Leggi &rarr;</span></div>
+        <div class="foot"><span class="date">${fmt(n.date)}</span><span class="read">Leggi →</span></div>
       </div>
-    </a>`}).join('');
-    if(list.length>HOME){
-      more.innerHTML=`<a href="notizie.html">Tutte le notizie <span class="n">${list.length}</span> &rarr;</a>`;
-    }
+    </a>`).join('');
   }).catch(()=>{el.innerHTML=emptyState('Notizie non disponibili','data/news.json')});
 })();
 
@@ -903,122 +888,10 @@ function emptyState(titolo,lista){
   el.innerHTML=MERCATO.map(m=>`<div class="card mk"><span class="badge ${m.type||'rumor'}">${lab[m.type]||'Voce'}</span><h4>${m.player||''}</h4><div class="detail">${m.detail||''}</div><div class="date">${m.date||''}</div></div>`).join('');
 })();
 
-// CALENDARIO + COUNTDOWN (letti da data/fixtures.json)
-(function(){
-  const el=document.getElementById('fixGrid');
-  const GIORNI=['dom','lun','mar','mer','gio','ven','sab'];
-  const MESI=['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
-  const CODA=9000000; // 2 ore e mezza: la partita resta visibile fin qui
-  const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-
-  // "2026-08-22T18:30" -> {ms, testo:"Sab 22 ago · 18:30"}
-  function quando(iso){
-    const m=/^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2}))?/.exec(String(iso||''));
-    if(!m) return null;
-    const d=new Date(+m[1],+m[2]-1,+m[3],+(m[4]||0),+(m[5]||0));
-    if(isNaN(d)) return null;
-    const g=GIORNI[d.getDay()], testo=g.charAt(0).toUpperCase()+g.slice(1)+' '+(+m[3])+' '+MESI[+m[2]-1]
-      +(m[4]?' \u00b7 '+m[4]+':'+m[5]:'');
-    return {ms:d.getTime(), testo:testo};
-  }
-
-  const CAMPI=[
-    ['tv','Dove vederla'],['tickets','Biglietti'],['round','Giornata'],
-    ['referee','Arbitro'],['notes','Note']
-  ];
-  // trasforma un eventuale indirizzo web in link cliccabile
-  function valore(t){
-    t=esc(t);
-    return t.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
-  }
-
-  function vuoto(msg){
-    return '<div class="empty"><div class="ico">\ud83d\udcc5</div><h4>'+msg+'</h4>'
-      +'<p>Il calendario viene aggiornato dall\'area di redazione.</p></div>';
-  }
-
-  function card(f){
-    const c=window.CAT.info(f.comp), q=quando(f.when);
-    const data=f.whenText?esc(f.whenText):(q?q.testo:'Da definire');
-    const tbd=!!f.whenText||!q;
-    const righe=CAMPI.filter(x=>String(f[x[0]]||'').trim())
-      .map(x=>'<div class="r"><span class="k">'+x[1]+'</span><span class="v">'+valore(f[x[0]])+'</span></div>').join('');
-    return '<div class="fix'+(righe?' clickable':'')+'" style="--c:'+c.base+'"'
-      +(righe?' tabindex="0" role="button" aria-expanded="false"':'')+'>'
-      +'<div class="top"><div>'
-        +'<span class="cbadge">'+c.icona+esc(f.comp||'')+'</span>'
-        +'<div class="match">'+esc(f.match||'')+'</div>'
-        +(righe?'<span class="hint">Dettagli <span class="chev">\u25be</span></span>':'')
-      +'</div><div class="date">'+(tbd?'<span class="venue tbd">'+data+'</span>':data)
-        +(f.where?'<br><span class="venue">'+esc(f.where)+'</span>':'')
-      +'</div></div>'
-      +(righe?'<div class="more"><div class="in">'+righe+'</div></div>':'')
-      +'</div>';
-  }
-
-  // ---- countdown ----
-  let target=null;
-  function cd(id){return document.getElementById(id)}
-  function spegni(msg){
-    cd('cd-comp').textContent='Calendario';
-    cd('cd-match').textContent=msg;
-    cd('cd-venue').textContent='';
-    ['cd-d','cd-h','cd-m','cd-s'].forEach(i=>cd(i).textContent='--');
-  }
-  const p=n=>String(n).padStart(2,'0');
-  function tick(){
-    if(target===null) return;
-    const diff=target-Date.now();
-    if(diff<=0){
-      cd('cd-match').textContent='\u26bd Si gioca! Forza Como';
-      ['cd-d','cd-h','cd-m','cd-s'].forEach(i=>cd(i).textContent='00');
-      return;
-    }
-    cd('cd-d').textContent=p(Math.floor(diff/86400000));
-    cd('cd-h').textContent=p(Math.floor(diff/3600000%24));
-    cd('cd-m').textContent=p(Math.floor(diff/60000%60));
-    cd('cd-s').textContent=p(Math.floor(diff/1000%60));
-  }
-
-  fetch('/data/fixtures.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{
-    const ora=Date.now();
-    // partite con data: solo quelle non ancora concluse. Senza data: sempre, in coda.
-    const conData=[], senzaData=[];
-    (d.fixtures||[]).forEach(f=>{
-      const q=quando(f.when);
-      if(f.whenText||!q) senzaData.push(f);
-      else if(q.ms+CODA>ora) conData.push({f:f,ms:q.ms});
-    });
-    conData.sort((a,b)=>a.ms-b.ms);
-    const lista=conData.map(x=>x.f).concat(senzaData);
-
-    if(!lista.length){el.innerHTML=vuoto('Nessuna partita in programma');spegni('Nessuna partita in programma');return}
-    el.innerHTML=lista.map(card).join('');
-
-    // apertura del dettaglio, una alla volta
-    el.querySelectorAll('.fix.clickable').forEach(box=>{
-      function toggle(){
-        const apri=!box.classList.contains('open');
-        el.querySelectorAll('.fix.open').forEach(o=>{o.classList.remove('open');o.setAttribute('aria-expanded','false')});
-        box.classList.toggle('open',apri);
-        box.setAttribute('aria-expanded',apri?'true':'false');
-      }
-      box.addEventListener('click',e=>{if(!e.target.closest('a'))toggle()});
-      box.addEventListener('keydown',e=>{
-        if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}
-      });
-    });
-
-    // countdown sulla prima gara futura con data certa
-    const prossima=conData.find(x=>x.ms>ora);
-    if(!prossima){spegni('Nessuna partita in programma');return}
-    const f=prossima.f, q=quando(f.when);
-    cd('cd-comp').textContent=f.comp||'Prossima partita';
-    cd('cd-match').textContent=f.match||'\u2014';
-    cd('cd-venue').textContent=(f.where?'\ud83c\udfdf\ufe0f '+f.where:'')+(q?'  \u00b7  '+q.testo:'');
-    target=prossima.ms;
-    tick(); setInterval(tick,1000);
-  }).catch(()=>{el.innerHTML=vuoto('Calendario non disponibile');spegni('Calendario non disponibile')});
+// CALENDARIO
+(function(){const el=document.getElementById('fixGrid');
+  if(!FIXTURES.length){el.innerHTML=emptyState('Nessuna partita in calendario','FIXTURES');return}
+  el.innerHTML=FIXTURES.map(f=>`<div class="fix"><div><div class="comp">${f.comp||''}</div><div class="match">${f.match||''}</div></div><div class="date">${f.date||''}${f.where?'<br><span style="background:var(--bg);color:var(--azzurro);font-weight:800;font-size:.72rem;padding:5px 12px;border-radius:100px;display:inline-block;margin-top:4px">'+f.where+'</span>':''}</div></div>`).join('');
 })();
 
 // I NOSTRI EROI (divisi per reparto)
@@ -1060,16 +933,42 @@ function emptyState(titolo,lista){
     </section>`).join('');
 })();
 
+// COUNTDOWN
+(function(){
+  document.getElementById('cd-comp').textContent=NEXT_MATCH.competition||'Prossima partita';
+  document.getElementById('cd-match').textContent=NEXT_MATCH.match||'—';
+  document.getElementById('cd-venue').textContent=NEXT_MATCH.venue||'';
+  const target=new Date(NEXT_MATCH.dateISO).getTime();
+  const p=n=>String(n).padStart(2,'0');
+  function tick(){
+    const diff=target-Date.now();
+    if(isNaN(target)){return}
+    if(diff<=0){document.getElementById('cd-match').textContent='⚽ Si gioca! Forza Como';['cd-d','cd-h','cd-m','cd-s'].forEach(i=>document.getElementById(i).textContent='00');return}
+    const d=Math.floor(diff/86400000),h=Math.floor(diff/3600000%24),m=Math.floor(diff/60000%60),s=Math.floor(diff/1000%60);
+    document.getElementById('cd-d').textContent=p(d);document.getElementById('cd-h').textContent=p(h);
+    document.getElementById('cd-m').textContent=p(m);document.getElementById('cd-s').textContent=p(s);
+  }
+  tick();setInterval(tick,1000);
+})();
 
 // reveal
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-// il consenso cookie e Google Analytics sono gestiti da js/consent.js
+// cookie
+function setCookie(v){store.set('cookie',v);document.getElementById('cookie').style.display='none'}
+window.addEventListener('load',()=>{if(!store.get('cookie'))document.getElementById('cookie').style.display='block'});
 </script>
 
-
-<script src="/js/consent.js" defer></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => location.reload());
+      }
+    });
+  }
+</script>
 
 </body>
 </html>
