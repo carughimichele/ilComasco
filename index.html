@@ -55,8 +55,13 @@
   .brand b{font-weight:900;color:#fff}
   .brand .il{opacity:.85;font-weight:600}
   .logo{width:40px;height:40px;flex-shrink:0;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
-  .herologo{width:100%;max-width:820px;margin:2px auto 18px;animation:fadeUp .8s .05s both}
+  /* .herologo e' il titolo principale della home (tag h1): il testo vero e'
+     dentro lo <span class="sr-only">, letto da Google e dai lettori di schermo
+     ma non mostrato, perche' graficamente il titolo e' il logo disegnato. */
+  .herologo{width:100%;max-width:820px;margin:2px auto 18px;animation:fadeUp .8s .05s both;font-size:inherit}
   .herologo svg{width:100%;height:auto;display:block}
+  /* testo presente nella pagina ma invisibile a schermo */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
   @media(max-width:900px){.herologo{max-width:460px}}
   .navwrap{display:flex;align-items:center;gap:20px}
   .navlinks{display:flex;gap:20px}
@@ -87,8 +92,8 @@
     background-image:radial-gradient(#fff 1px,transparent 1px);background-size:22px 22px}
   .hero-content{z-index:3;max-width:900px;text-align:center}
   .kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:7px 16px;border-radius:100px;font-weight:700;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;animation:fadeUp .8s both}
-  .hero h1{font-size:clamp(2.6rem,6.6vw,4.8rem);margin-bottom:16px;animation:fadeUp .8s .1s both}
-  .hero h1 span{background:linear-gradient(90deg,#fff,var(--lago));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  /* (le vecchie regole ".hero h1" sono state tolte: il titolo della home ora e'
+     il logo, che ha gia' il suo stile in ".herologo") */
   .hero p.lead{font-size:1.22rem;opacity:.92;max-width:560px;margin:0 auto 32px;animation:fadeUp .8s .2s both}
   @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
   .cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;animation:fadeUp .8s .3s both}
@@ -464,9 +469,9 @@
   <div class="grain"></div>
   <div class="wrap hero-content">
     <span class="kicker">⚽ Serie A e Champions League · Sul Lago di Como 🌊</span>
-    <div class="herologo" aria-label="ilComasco — Portale dei tifosi lariani">
-      <svg viewBox="0 0 680 196" role="img" xmlns="http://www.w3.org/2000/svg">
-        <title>ilComasco — Portale dei tifosi lariani</title>
+    <h1 class="herologo">
+      <span class="sr-only">ilComasco — notizie e calciomercato del Calcio Como 1907</span>
+      <svg viewBox="0 0 680 196" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="hlg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset="1" stop-color="#12b5c9"/></linearGradient>
           <linearGradient id="lakeGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e86ff"/><stop offset="50%" stop-color="#0a4da2"/><stop offset="100%" stop-color="#12b5c9"/></linearGradient>
@@ -499,7 +504,7 @@
         <text id="hO" x="0" y="0" font-family="Segoe UI, Arial, sans-serif" font-size="52" font-weight="800" fill="#8fd8ff" style="will-change:transform;opacity:1">o</text>
         <text x="289" y="150" font-family="Segoe UI, Arial, sans-serif" font-size="14" letter-spacing="3" fill="#cfe4ff">Portale dei tifosi lariani</text>
       </svg>
-    </div>
+    </h1>
     <script>
     (function(){
       var lakeG=document.getElementById('hLake'), oEl=document.getElementById('hO'), kick=document.getElementById('hKick'),
