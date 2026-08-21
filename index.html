@@ -15,6 +15,9 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://il-comasco.vercel.app">
 <link rel="canonical" href="https://il-comasco.vercel.app/">
+<!-- prepara in anticipo il collegamento al server delle foto e scarica subito la prima -->
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link rel="preload" as="image" fetchpriority="high" href="https://images.unsplash.com/photo-1667375152478-5c4d62eb9ecb?auto=format&fit=crop&w=1600&q=68">
 <meta property="og:image" content="https://images.unsplash.com/photo-1667375152478-5c4d62eb9ecb?auto=format&fit=crop&w=1200&q=80">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ilComasco — Portale dei tifosi Lariani">
@@ -73,9 +76,11 @@
   /* ======= SFONDO A ROTAZIONE (slideshow) — per cambiare foto, modifica gli URL nelle .slide qui sotto ======= */
   .hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
   .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.02);animation:slides 21s ease-in-out infinite}
-  .slide:nth-child(1){background-image:url('https://images.unsplash.com/photo-1667375152478-5c4d62eb9ecb?auto=format&fit=crop&w=2000&q=80');animation-delay:0s}
-  .slide:nth-child(2){background-image:url('https://images.unsplash.com/photo-1758551314785-451ea7fff42c?auto=format&fit=crop&w=2000&q=80');animation-delay:7s}
-  .slide:nth-child(3){background-image:url('https://images.unsplash.com/photo-1614632537190-23e4146777db?auto=format&fit=crop&w=2000&q=80');animation-delay:14s}
+  /* Solo la PRIMA foto viene scaricata subito. La seconda e la terza arrivano
+     dopo, a pagina gia' pronta (vedi lo script "SFONDO HERO" a fondo pagina). */
+  .slide:nth-child(1){background-image:url('https://images.unsplash.com/photo-1667375152478-5c4d62eb9ecb?auto=format&fit=crop&w=1600&q=68');animation-delay:0s}
+  .slide:nth-child(2){animation-delay:7s}
+  .slide:nth-child(3){animation-delay:14s}
   @keyframes slides{0%{opacity:0}3%{opacity:1}30%{opacity:1}34%{opacity:0}100%{opacity:0}}
   .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(160deg,rgba(3,20,45,.84),rgba(6,47,99,.6) 45%,rgba(10,77,162,.5)),linear-gradient(180deg,transparent 42%,rgba(4,15,32,.88))}
   .grain{position:absolute;inset:0;z-index:1;opacity:.05;
@@ -1091,6 +1096,22 @@ function emptyState(titolo,lista){
     </section>`).join('');
 })();
 
+
+// SFONDO HERO — la 2a e la 3a foto vengono scaricate solo dopo che la pagina
+// e' pronta, cosi' l'apertura del sito resta leggera. Per cambiarle basta
+// sostituire i due indirizzi qui sotto.
+(function(){
+  const ALTRE=[
+    "https://images.unsplash.com/photo-1758551314785-451ea7fff42c?auto=format&fit=crop&w=1600&q=68",
+    "https://images.unsplash.com/photo-1614632537190-23e4146777db?auto=format&fit=crop&w=1600&q=68"
+  ];
+  function carica(){
+    const s=document.querySelectorAll('.hero-bg .slide');
+    ALTRE.forEach((url,i)=>{ if(s[i+1]) s[i+1].style.backgroundImage="url('"+url+"')"; });
+  }
+  if(document.readyState==='complete') setTimeout(carica,1500);
+  else window.addEventListener('load',()=>setTimeout(carica,1500));
+})();
 
 // reveal
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.12});
