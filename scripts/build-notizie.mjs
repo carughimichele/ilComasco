@@ -39,6 +39,11 @@ const dati = JSON.parse(readFileSync(P('data', 'news.json'), 'utf8'));
 
 const assoluto = u => (!u ? '' : /^https?:\/\//.test(u) ? u : SITO + (u[0] === '/' ? '' : '/') + u);
 
+/* Un disegno .svg (per esempio il logo) non e' una foto di apertura: WhatsApp
+   e Facebook non sanno mostrarlo e a tutta larghezza sta male. In quel caso
+   l'articolo prende la copertina colorata automatica. */
+const fotoVera = u => (u && !/\.svgz?($|[?#])/i.test(String(u)) ? u : '');
+
 /* ------------------------------------------------------------------ */
 /* 1. lettura e controllo delle notizie                                */
 /* ------------------------------------------------------------------ */
@@ -75,7 +80,7 @@ function testa(n) {
   const url = SITO + n.percorso;
   const titolo = `${n.title} — ilComasco`;
   const descrizione = n.sommario.slice(0, 155);
-  const immagine = assoluto(n.image) || IMMAGINE_DI_SCORTA;
+  const immagine = assoluto(fotoVera(n.image)) || IMMAGINE_DI_SCORTA;
 
   const dattiloscritto = {
     '@context': 'https://schema.org',
@@ -167,9 +172,10 @@ function misura(percorso) {
 
 function pagina(n, prima, dopo) {
   const c = CAT.info(n.cat);
+  const foto = fotoVera(n.image);
   /* la categoria compare nella fascia blu solo se l'articolo ha una foto:
      senza foto la mostra gia' la copertina colorata, non serve due volte */
-  const kicker = n.image
+  const kicker = foto
     ? `<div><span class="kicker" style="background:#fff;border-color:#fff;color:${c.base}">`
       + `${c.icona}${esc(n.cat || c.nome)}</span></div>`
     : '';
@@ -181,7 +187,7 @@ function pagina(n, prima, dopo) {
   const dataIso = n.d ? n.d.iso : '';
   const tempo = `<time datetime="${dataIso}">${dataTesto}</time>`;
 
-  const testata = n.image
+  const testata = foto
     ? `<h1>${esc(n.title)}</h1>\n    <div class="date">${tempo}</div>`
     : `<header class="cover" style="--c:${c.base};--c2:${c.chiaro}">`
       + `<span class="cat">${c.icona}${esc(n.cat || c.nome)}</span>`
@@ -190,11 +196,11 @@ function pagina(n, prima, dopo) {
       + `</header>`;
 
   /* foto di apertura: descrizione per chi non vede, crediti visibili sotto */
-  const dim = misura(n.image);
+  const dim = misura(foto);
   const didascalia = String(n.imageCredit || '').trim()
     ? `<figcaption>${esc(n.imageCredit)}</figcaption>` : '';
-  const copertina = n.image
-    ? `<figure><img src="${esc(n.image)}" alt="${esc(n.imageAlt || n.title)}"${dim}>${didascalia}</figure>`
+  const copertina = foto
+    ? `<figure><img src="${esc(foto)}" alt="${esc(n.imageAlt || n.title)}"${dim}>${didascalia}</figure>`
     : '';
 
   const scheda = (n2, verso) => n2
