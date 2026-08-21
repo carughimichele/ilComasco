@@ -64,6 +64,20 @@
   .art figure{margin:0 0 26px}
   .art figure img{width:100%;height:auto;border-radius:12px;display:block}
   .art figcaption{color:var(--ink-soft);font-size:.8rem;margin-top:8px}
+  /* ===== COPERTINA AUTOMATICA (articoli senza foto) =====
+     La fascia colorata in cima all'articolo. Il colore arriva dalla categoria
+     della notizia: si cambia in js/categorie.js, non qui. */
+  .art .cover{position:relative;overflow:hidden;margin:-40px -44px 28px;padding:26px 30px 24px;
+    background:linear-gradient(150deg,var(--c2,#2e86ff),var(--c,#0a4da2));
+    border-radius:var(--radius) var(--radius) 0 0}
+  .art .cover::after{content:"";position:absolute;inset:0;opacity:.14;pointer-events:none;
+    background-image:radial-gradient(#fff 1.5px,transparent 1.5px);background-size:18px 18px}
+  .art .cover>*{position:relative;z-index:1}
+  .art .cover .cat{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.94);
+    color:var(--c,#0a4da2);font-size:.66rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+    padding:5px 13px;border-radius:100px;margin-bottom:18px}
+  .art .cover h1{color:#fff;margin:0 0 10px;max-width:24ch}
+  .art .cover .meta{color:rgba(255,255,255,.82);font-size:.82rem}
 
   /* precedente / successivo */
   .pn{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
@@ -83,7 +97,8 @@
   footer a:hover{color:var(--lago)}
   footer .disc{max-width:760px;margin:10px auto 0;font-size:.74rem;opacity:.65}
   :focus-visible{outline:3px solid var(--lago);outline-offset:2px;border-radius:4px}
-  @media(max-width:640px){.art{padding:26px 20px}.comments{padding:22px 18px}}
+  @media(max-width:640px){.art{padding:26px 20px}.comments{padding:22px 18px}
+    .art .cover{margin:-26px -20px 22px;padding:20px 20px 18px}}
   @media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -113,8 +128,7 @@
 
 <div class="sheet">
   <article class="art">
-    <h1>{{TITOLO}}</h1>
-    <div class="date"><time datetime="{{DATA_ISO}}">{{DATA_TESTO}}</time></div>
+    {{TESTATA}}
     {{CORPO}}
   </article>
 
