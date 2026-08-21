@@ -22,7 +22,7 @@ const RADICE = join(dirname(fileURLToPath(import.meta.url)), '..');
 const P = (...x) => join(RADICE, ...x);
 
 const IMMAGINE_DI_SCORTA =
-  'https://images.unsplash.com/photo-1667375152478-5c4d62eb9ecb?auto=format&fit=crop&w=1200&q=80';
+  SITO + '/og-default.png';
 
 /* pagine fisse del sito, per la sitemap */
 const PAGINE = [
@@ -128,13 +128,73 @@ function testa(n) {
 /* ------------------------------------------------------------------ */
 /* 3. una pagina                                                       */
 /* ------------------------------------------------------------------ */
+
+/* Legge larghezza e altezza vere di una foto salvata nel sito (png, jpg,
+   webp) e le scrive nella pagina: cosi' il browser le riserva lo spazio
+   giusto e il testo non balla mentre la foto carica. Se non ci riesce non
+   scrive nulla: la pagina funziona lo stesso. */
+function misura(percorso) {
+  try {
+    if (!percorso || /^https?:\/\//.test(percorso)) return '';
+    const file = P(...percorso.replace(/^\//, '').split('/'));
+    if (!existsSync(file)) return '';
+    const b = readFileSync(file);
+    let w = 0, h = 0;
+    if (b.length > 24 && b.toString('ascii', 1, 4) === 'PNG') {
+      w = b.readUInt32BE(16); h = b.readUInt32BE(20);
+    } else if (b.length > 30 && b.toString('ascii', 0, 4) === 'RIFF' && b.toString('ascii', 8, 12) === 'WEBP') {
+      const tipo = b.toString('ascii', 12, 16);
+      if (tipo === 'VP8X') { w = 1 + b.readUIntLE(24, 3); h = 1 + b.readUIntLE(27, 3); }
+      else if (tipo === 'VP8 ') { w = b.readUInt16LE(26) & 0x3fff; h = b.readUInt16LE(28) & 0x3fff; }
+      else if (tipo === 'VP8L') {
+        const v = b.readUInt32LE(21);
+        w = 1 + (v & 0x3fff); h = 1 + ((v >> 14) & 0x3fff);
+      }
+    } else if (b[0] === 0xff && b[1] === 0xd8) {
+      let i = 2;
+      while (i < b.length - 9) {
+        if (b[i] !== 0xff) { i++; continue; }
+        const marcatore = b[i + 1];
+        if (marcatore >= 0xc0 && marcatore <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marcatore)) {
+          h = b.readUInt16BE(i + 5); w = b.readUInt16BE(i + 7); break;
+        }
+        i += 2 + b.readUInt16BE(i + 2);
+      }
+    }
+    return (w > 0 && h > 0) ? ` width="${w}" height="${h}"` : '';
+  } catch (e) { return ''; }
+}
+
 function pagina(n, prima, dopo) {
   const c = CAT.info(n.cat);
-  const kicker = `<div><span class="kicker" style="background:#fff;border-color:#fff;color:${c.base}">`
-    + `${c.icona}${esc(n.cat || c.nome)}</span></div>`;
+  /* la categoria compare nella fascia blu solo se l'articolo ha una foto:
+     senza foto la mostra gia' la copertina colorata, non serve due volte */
+  const kicker = n.image
+    ? `<div><span class="kicker" style="background:#fff;border-color:#fff;color:${c.base}">`
+      + `${c.icona}${esc(n.cat || c.nome)}</span></div>`
+    : '';
 
+  /* Testata dell'articolo.
+     - senza foto: fascia colorata con categoria, titolo e data (copertina automatica)
+     - con foto:   titolo e data come sempre, la foto resta sopra il testo */
+  const dataTesto = n.d ? n.d.testo : '';
+  const dataIso = n.d ? n.d.iso : '';
+  const tempo = `<time datetime="${dataIso}">${dataTesto}</time>`;
+
+  const testata = n.image
+    ? `<h1>${esc(n.title)}</h1>\n    <div class="date">${tempo}</div>`
+    : `<header class="cover" style="--c:${c.base};--c2:${c.chiaro}">`
+      + `<span class="cat">${c.icona}${esc(n.cat || c.nome)}</span>`
+      + `<h1>${esc(n.title)}</h1>`
+      + `<div class="meta">ilComasco · ${tempo}</div>`
+      + `</header>`;
+
+  /* foto di apertura: descrizione per chi non vede, crediti visibili sotto */
+  const dim = misura(n.image);
+  const didascalia = String(n.imageCredit || '').trim()
+    ? `<figcaption>${esc(n.imageCredit)}</figcaption>` : '';
   const copertina = n.image
-    ? `<figure><img src="${esc(n.image)}" alt="${esc(n.imageAlt || n.title)}" width="1200" height="675"></figure>`
+    ? `<figure><img src="${esc(n.image)}" alt="${esc(n.imageAlt || n.title)}"${dim}>${didascalia}</figure>`
     : '';
 
   const scheda = (n2, verso) => n2
@@ -149,9 +209,7 @@ function pagina(n, prima, dopo) {
   return modello
     .replace('{{META}}', testa(n))
     .replace('{{KICKER}}', kicker)
-    .replace('{{TITOLO}}', esc(n.title))
-    .replace('{{DATA_ISO}}', n.d ? n.d.iso : '')
-    .replace('{{DATA_TESTO}}', n.d ? n.d.testo : '')
+    .replace('{{TESTATA}}', testata)
     .replace('{{CORPO}}', copertina + render(n.body || n.summary || ''))
     .replace('{{PRECEDENTE_SUCCESSIVO}}', pn)
     .replace(/\{\{SLUG\}\}/g, n.slug);
