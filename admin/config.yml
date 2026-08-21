@@ -61,7 +61,12 @@ collections:
                 name: imageAlt
                 widget: string
                 required: false
-                hint: "cosa si vede, per chi non puo' vederla"
+                hint: "cosa si vede nella foto, per chi non puo' vederla. Non i crediti: quelli vanno nel campo qui sotto"
+              - label: Crediti della foto
+                name: imageCredit
+                widget: string
+                required: false
+                hint: "compare scritto sotto la foto, es. Foto: Michele Carughi"
               - label: Testo completo
                 name: body
                 widget: markdown
